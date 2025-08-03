@@ -1,0 +1,10 @@
+F:\Dev\VS\C#\Windows Forms\Residence Management\Presentation-Layer\bin\Debug\Presentation-Layer.exe.config
+F:\Dev\VS\C#\Windows Forms\Residence Management\Presentation-Layer\bin\Debug\Presentation-Layer.exe
+F:\Dev\VS\C#\Windows Forms\Residence Management\Presentation-Layer\bin\Debug\Presentation-Layer.pdb
+F:\Dev\VS\C#\Windows Forms\Residence Management\Presentation-Layer\obj\Debug\Presentation-Layer.csproj.AssemblyReference.cache
+F:\Dev\VS\C#\Windows Forms\Residence Management\Presentation-Layer\obj\Debug\Presentation_Layer.Form1.resources
+F:\Dev\VS\C#\Windows Forms\Residence Management\Presentation-Layer\obj\Debug\Presentation_Layer.Properties.Resources.resources
+F:\Dev\VS\C#\Windows Forms\Residence Management\Presentation-Layer\obj\Debug\Presentation-Layer.csproj.GenerateResource.cache
+F:\Dev\VS\C#\Windows Forms\Residence Management\Presentation-Layer\obj\Debug\Presentation-Layer.csproj.CoreCompileInputs.cache
+F:\Dev\VS\C#\Windows Forms\Residence Management\Presentation-Layer\obj\Debug\Presentation-Layer.exe
+F:\Dev\VS\C#\Windows Forms\Residence Management\Presentation-Layer\obj\Debug\Presentation-Layer.pdb

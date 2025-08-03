@@ -1,0 +1,6 @@
+F:\Dev\VS\C#\Windows Forms\Residence Management\Shared-Layer\bin\Debug\Shared-Layer.dll
+F:\Dev\VS\C#\Windows Forms\Residence Management\Shared-Layer\bin\Debug\Shared-Layer.pdb
+F:\Dev\VS\C#\Windows Forms\Residence Management\Shared-Layer\obj\Debug\Shared-Layer.csproj.AssemblyReference.cache
+F:\Dev\VS\C#\Windows Forms\Residence Management\Shared-Layer\obj\Debug\Shared-Layer.csproj.CoreCompileInputs.cache
+F:\Dev\VS\C#\Windows Forms\Residence Management\Shared-Layer\obj\Debug\Shared-Layer.dll
+F:\Dev\VS\C#\Windows Forms\Residence Management\Shared-Layer\obj\Debug\Shared-Layer.pdb

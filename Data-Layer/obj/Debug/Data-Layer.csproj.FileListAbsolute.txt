@@ -1,0 +1,6 @@
+F:\Dev\VS\C#\Windows Forms\Residence Management\Data-Layer\obj\Debug\Data-Layer.csproj.AssemblyReference.cache
+F:\Dev\VS\C#\Windows Forms\Residence Management\Data-Layer\obj\Debug\Data-Layer.csproj.CoreCompileInputs.cache
+F:\Dev\VS\C#\Windows Forms\Residence Management\Data-Layer\bin\Debug\Data-Layer.dll
+F:\Dev\VS\C#\Windows Forms\Residence Management\Data-Layer\bin\Debug\Data-Layer.pdb
+F:\Dev\VS\C#\Windows Forms\Residence Management\Data-Layer\obj\Debug\Data-Layer.dll
+F:\Dev\VS\C#\Windows Forms\Residence Management\Data-Layer\obj\Debug\Data-Layer.pdb
