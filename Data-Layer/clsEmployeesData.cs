@@ -89,7 +89,7 @@ namespace Data_Layer
             }
             return IsFound;
         }
-        public static int AddNewEmployee(int PersonID, string Job)
+        public static int AddNewEmployee(int PersonID, string Job, int SponsorPersonID)
         {
             int EmployeeID = -1;
             try
@@ -97,13 +97,14 @@ namespace Data_Layer
                 using (SqlConnection Connection = new SqlConnection(clsDataAccessSettings.ConnectionString))
                 {
                     Connection.Open();
-                    string Query = @"INSERT INTO Employees (PersonID, Job) 
-                                     VALUES (@PersonID, @Job);
+                    string Query = @"INSERT INTO Employees (PersonID, Job, SponsorPersonID) 
+                                     VALUES (@PersonID, @Job, @SponsorPersonID);
                                      SELECT SCOPE_IDENTITY();";
                     using (SqlCommand Command = new SqlCommand(Query, Connection))
                     {
                         Command.Parameters.AddWithValue("@PersonID", PersonID);
                         Command.Parameters.AddWithValue("@Job", Job);
+                        Command.Parameters.AddWithValue("@SponsorPersonID", SponsorPersonID);
                         object Result = Command.ExecuteScalar();
                         if (Result != null && int.TryParse(Result.ToString(), out int ID))
                             EmployeeID = ID;
