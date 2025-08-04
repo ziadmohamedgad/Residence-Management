@@ -15,11 +15,10 @@ using System.Xml.Schema;
 using static System.Net.Mime.MediaTypeNames;
 namespace Data_Layer
 {
-    public class clsResidenceData
+    public class clsResidencesData
     {
-        //ID, ResidenceNumber, ResidencePeriod, IssueDate, ExpirationDate, ImageName, IsActive
         public static bool GetResidenceInfoByID(int ResidenceId, ref string ResidenceNumber, ref byte ResidencePeriod,
-            ref DateTime IssueDate, ref DateTime ExpirationDate, ref string ImageName, ref bool IsActive, ref string Notes)
+            ref DateTime IssueDate, ref DateTime ExpirationDate, ref string ImageName, ref bool IsActive, ref string Notes, ref int EmployeeID)
         {
             bool IsFound = false;
             try
@@ -27,7 +26,7 @@ namespace Data_Layer
                 using (SqlConnection Connection = new SqlConnection(clsDataAccessSettings.ConnectionString))
                 {
                     Connection.Open();
-                    string Query = @"SELECT * FROM Residence WHERE Residence.ID = @ResidenceID";
+                    string Query = @"SELECT * FROM Residences WHERE Residences.ResidenceID = @ResidenceID";
                     using (SqlCommand Command = new SqlCommand(Query, Connection))
                     {
                         Command.Parameters.AddWithValue("@ResidenceID", ResidenceId);
@@ -43,6 +42,7 @@ namespace Data_Layer
                                 ImageName = Reader["ImageName"] == DBNull.Value ? "" : (string)Reader["ImageName"];
                                 IsActive = (bool)Reader["IsActive"];
                                 Notes = Reader["Notes"] == DBNull.Value ? "" : (string)Reader["Notes"];
+                                EmployeeID = (int)Reader["EmployeeID"];
                             }
                         }
                     }
@@ -63,7 +63,7 @@ namespace Data_Layer
             return IsFound;
         }
         public static int AddNewResidence(string ResidenceNumber, byte ResidencePeriod, DateTime IssueDate, DateTime ExpirationDate,
-            string ImageName, bool IsActive, string Notes)
+            string ImageName, bool IsActive, string Notes, int EmployeeID)
         {
             int ResidenceID = -1;
             try
@@ -71,9 +71,9 @@ namespace Data_Layer
                 using (SqlConnection Connection = new SqlConnection(clsDataAccessSettings.ConnectionString))
                 {
                     Connection.Open();
-                    string Query = @"INSERT INTO Residence (ResidenceNumber, ResidencePeriod, IssueDate, ExpirationDate, ImageName,
-                                     IsActive, Notes)
-                                     VALUES (@ResidenceNumber, @ResidencePeriod, @IssueDate, @ExpirationDate, @ImageName, @Notes);
+                    string Query = @"INSERT INTO Residences (ResidenceNumber, ResidencePeriod, IssueDate, ExpirationDate, ImageName,
+                                     IsActive, Notes, EmployeeID)
+                                     VALUES (@ResidenceNumber, @ResidencePeriod, @IssueDate, @ExpirationDate, @ImageName, @Notes, @EmployeeID);
                                      SELECT SCOPE_IDENTITY();";
                     using (SqlCommand Command = new SqlCommand(Query, Connection))
                     {
@@ -90,6 +90,8 @@ namespace Data_Layer
                             Command.Parameters.AddWithValue("@Notes", Notes);
                         else
                             Command.Parameters.AddWithValue("@Notes", DBNull.Value);
+
+                        Command.Parameters.AddWithValue("@EmployeeID", EmployeeID);
                         object Result = Command.ExecuteScalar();
                         if (Result != null && int.TryParse(Result.ToString(), out int ID))
                             ResidenceID = ID;
@@ -111,7 +113,7 @@ namespace Data_Layer
             return ResidenceID;
         }
         public static bool UpdateResidence(int ResidenceID, string ResidenceNumber, byte ResidencePeriod, DateTime IssueDate,
-            DateTime ExpirationDate, string ImageName, bool IsActive, string Notes)
+            DateTime ExpirationDate, string ImageName, bool IsActive, string Notes, int EmployeeID)
         {
             int RowsAffected = 0;
             try
@@ -119,7 +121,7 @@ namespace Data_Layer
                 using (SqlConnection Connection = new SqlConnection(clsDataAccessSettings.ConnectionString))
                 {
                     Connection.Open();
-                    string Query = @"UPDATE Residence 
+                    string Query = @"UPDATE Residences 
                                      SET ResidenceNumber = @ResidenceNumber, 
                                          ResidencePeriod = @ResidencePeriod,
                                          IssueDate = @IssueDate,
@@ -127,7 +129,8 @@ namespace Data_Layer
                                          ImageName = @ImageName,
                                          IsActive = @IsActive,
                                          Notes = @Notes 
-                                      WHERE Residence.ID = @ResidenceID";
+                                         EmployeeID = @EmployeeID 
+                                      WHERE Residences.ResidenceID = @ResidenceID";
                     using (SqlCommand Command = new SqlCommand(Query, Connection))
                     {
                         Command.Parameters.AddWithValue("@ResidenceNumber", ResidenceNumber);
@@ -143,6 +146,7 @@ namespace Data_Layer
                             Command.Parameters.AddWithValue("@Notes", Notes);
                         else
                             Command.Parameters.AddWithValue("@Notes", DBNull.Value);
+                        Command.Parameters.AddWithValue("@EmployeeID", EmployeeID);
                         RowsAffected = Command.ExecuteNonQuery();
                     }
                 }
@@ -169,10 +173,10 @@ namespace Data_Layer
                 using (SqlConnection Connection = new SqlConnection(clsDataAccessSettings.ConnectionString))
                 {
                     Connection.Open();
-                    string Query = @"SELECT Residence.ID FROM Residence INNER JOIN Employee ON 
-                                              Residence.ID = Employee.ResidenceID 
-                                              WHERE Employee.PersonID = @PersonID 
-                                              AND Residence.IsActive = 1";
+                    string Query = @"SELECT Residences.ResidenceID FROM Residences INNER JOIN Employees ON 
+                                              Residences.EmployeeID = Employees.EmployeeID 
+                                              WHERE Employees.PersonID = @PersonID 
+                                              AND Residences.IsActive = 1";
                     using (SqlCommand Command = new SqlCommand(Query, Connection))
                     {
                         Command.Parameters.AddWithValue("@PersonID", PersonID);
@@ -196,6 +200,40 @@ namespace Data_Layer
             }
             return ResidenceID;
         }
+        public static int GetActiveResidenceIDByEmployeeID(int EmployeeID)
+        {
+            int ResidenceID = -1;
+            try
+            {
+                using (SqlConnection Connection = new SqlConnection(clsDataAccessSettings.ConnectionString))
+                {
+                    Connection.Open();
+                    string Query = @"SELECT Residences.ResidenceID FROM Residences INNER JOIN Employees ON 
+                                              Residences.EmployeeID = Employees.EmployeeID
+                                              WHERE Employees.EmployeeID = @EmployeeID AND Residences.IsActive = 1";
+                    using (SqlCommand Command = new SqlCommand(Query, Connection))
+                    {
+                        Command.Parameters.AddWithValue("@EmployeeID", EmployeeID);
+                        object Result = Command.ExecuteScalar();
+                        if (Result != null && int.TryParse(Result.ToString(), out int ID))
+                            ResidenceID = ID;
+                    }
+                }
+            }
+            catch (SqlException ex)
+            {
+                ResidenceID = -1;
+                clsEventLogger.SaveLog("Application", $"{ex.Message}: failed through fetching " +
+                    $"active residence for employee ID {EmployeeID}.", EventLogEntryType.Error);
+            }
+            catch (Exception ex)
+            {
+                ResidenceID = -1;
+                clsEventLogger.SaveLog("Application", $"{ex.Message}: failed through fetching " +
+                    $"active residence for employee ID {EmployeeID}.", EventLogEntryType.Error);
+            }
+            return ResidenceID;
+        }
         public static bool DeactivateResidence(int ResidenceID)
         {
             int RowsAffected = 0;
@@ -204,7 +242,7 @@ namespace Data_Layer
                 using (SqlConnection Connection = new SqlConnection(clsDataAccessSettings.ConnectionString))
                 {
                     Connection.Open();
-                    string Query = @"UPDATE Residence SET IsActive = 0 WHERE Residence.ID = @ResidenceID";
+                    string Query = @"UPDATE Residences SET IsActive = 0 WHERE Residences.ResidenceID = @ResidenceID";
                     using (SqlCommand Command = new SqlCommand(Query, Connection))
                     {
                         Command.Parameters.AddWithValue("@ResidenceID", ResidenceID);
@@ -226,39 +264,35 @@ namespace Data_Layer
             }
             return RowsAffected > 0;
         }
-        public static int GetActiveResidenceIDByEmployeeID(int EmployeeID)
+        public static bool DeleteResidence(int ResidenceID)
         {
-            int ResidenceID = -1;
+            int RowsAffected = 0;
             try
             {
                 using (SqlConnection Connection = new SqlConnection(clsDataAccessSettings.ConnectionString))
                 {
                     Connection.Open();
-                    string Query = @"SELECT Residence.ID FROM Residence INNER JOIN Employee ON 
-                                              Residence.ID = Employee.ResidenceID
-                                              WHERE Employee.ID = @EmployeeID AND Residence.IsActive = 1";
+                    string Query = @"DELETE Residences WHERE Residences.ResidenceID = @ResidenceID";
                     using (SqlCommand Command = new SqlCommand(Query, Connection))
                     {
-                        Command.Parameters.AddWithValue("@Employee", EmployeeID);
-                        object Result = Command.ExecuteScalar();
-                        if (Result != null && int.TryParse(Result.ToString(), out int ID))
-                            ResidenceID = ID;
+                        Command.Parameters.AddWithValue("@ResidenceID", ResidenceID);
+                        RowsAffected = Command.ExecuteNonQuery();
                     }
                 }
             }
             catch (SqlException ex)
             {
-                ResidenceID = -1;
-                clsEventLogger.SaveLog("Application", $"{ex.Message}: failed through fetching " +
-                    $"active residence for employee ID {EmployeeID}.", EventLogEntryType.Error);
+                RowsAffected = 0;
+                clsEventLogger.SaveLog("Application", $"{ex.Message}: failed through deleting" +
+                    $"residence with ID = {ResidenceID}.", EventLogEntryType.Error);
             }
             catch (Exception ex)
             {
-                ResidenceID = -1;
-                clsEventLogger.SaveLog("Application", $"{ex.Message}: failed through fetching " +
-                    $"active residence for employee ID {EmployeeID}.", EventLogEntryType.Error);
+                RowsAffected = 0;
+                clsEventLogger.SaveLog("Application", $"{ex.Message}: failed through deleting" +
+                    $"residence with ID = {ResidenceID}.", EventLogEntryType.Error);
             }
-            return ResidenceID;
+            return RowsAffected > 0;
         }
         public static DataTable GetAllResidences()
         {
@@ -268,7 +302,7 @@ namespace Data_Layer
                 using (SqlConnection Connection = new SqlConnection(clsDataAccessSettings.ConnectionString))
                 {
                     Connection.Open();
-                    string Query = @"SELECT * FROM Residence";
+                    string Query = @"SELECT * FROM Residences";
                     using (SqlCommand Command = new SqlCommand(Query, Connection))
                     {
                         using (SqlDataReader Reader = Command.ExecuteReader())

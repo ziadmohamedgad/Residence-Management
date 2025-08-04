@@ -21,7 +21,7 @@ namespace Data_Layer
                 using (SqlConnection Connection = new SqlConnection(clsDataAccessSettings.ConnectionString))
                 {
                     Connection.Open();
-                    string Query = @"SELECT * FROM People WHERE People.ID = @PersonID";
+                    string Query = @"SELECT * FROM People WHERE People.PersonID = @PersonID";
                     {
                         using (SqlCommand Command = new SqlCommand(Query, Connection))
                         {
@@ -111,7 +111,7 @@ namespace Data_Layer
                                          ThirdName = @ThirdName,
                                          LastName = @LastName,
                                          Phone = @Phone 
-                                         WHERE People.ID = @PersonID";
+                                         WHERE People.PersonID = @PersonID";
                     using (SqlCommand Command = new SqlCommand(Query, Connection))
                     {
                         Command.Parameters.AddWithValue("@FirstName", FirstName);
@@ -182,7 +182,7 @@ namespace Data_Layer
                 using (SqlConnection Connection = new SqlConnection(clsDataAccessSettings.ConnectionString))
                 {
                     Connection.Open();
-                    string Query = @"SELECT FOUND = 1 FROM People WHERE People.ID = @PersonID";
+                    string Query = @"SELECT FOUND = 1 FROM People WHERE People.PersonID = @PersonID";
                     using (SqlCommand Command = new SqlCommand(Query, Connection))
                     {
                         Command.Parameters.AddWithValue("@PersonID", PersonID);
@@ -215,7 +215,7 @@ namespace Data_Layer
                 using (SqlConnection Connection = new SqlConnection(clsDataAccessSettings.ConnectionString))
                 {
                     Connection.Open();
-                    string Query = @"DELETE People WHERE People.ID = @PersonID";
+                    string Query = @"DELETE People WHERE People.PersonID = @PersonID";
                     using (SqlCommand Command = new SqlCommand(Query, Connection))
                     {
                         Command.Parameters.AddWithValue("@PersonID", PersonID);
