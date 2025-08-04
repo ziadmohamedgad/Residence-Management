@@ -232,7 +232,7 @@ namespace Data_Layer
             {
                 RowsAffected = 0;
                 clsEventLogger.SaveLog("Application", $"{ex.Message}: failed through deleting" +
-                    $"person with ID = {PersonID}.", EventLogEntryType.Error);
+                    $"person with ID = {PersonID}.", EventLogEntryType.Error);//
             }
             return RowsAffected > 0;
         }
