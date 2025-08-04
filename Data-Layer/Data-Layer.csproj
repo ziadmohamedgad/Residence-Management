@@ -43,7 +43,9 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="clsDataAccessSettings.cs" />
+    <Compile Include="clsEmployeeData.cs" />
     <Compile Include="clsPersonData.cs" />
+    <Compile Include="clsResidenceData.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

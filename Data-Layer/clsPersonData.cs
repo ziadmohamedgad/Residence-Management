@@ -12,8 +12,8 @@ namespace Data_Layer
 {
     public class clsPersonData
     {
-        public static bool GetPersonInfoByID(int PersonID, string FirstName, string SecondName, string ThirdName,
-            string LastName, string Phone)
+        public static bool GetPersonInfoByID(int PersonID, ref string FirstName, ref string SecondName, ref string ThirdName,
+            ref string LastName, ref string Phone)
         {
             bool IsFound = false;
             try
@@ -34,6 +34,7 @@ namespace Data_Layer
                                     FirstName = (string)Reader["FirstName"];
                                     SecondName = (string)Reader["SecondName"];
                                     ThirdName = Reader["ThirdName"] == DBNull.Value ? "" : (string)Reader["ThirdName"];
+                                    Phone = (string)Reader["Phone"];
                                 }
                             }
                         }
@@ -232,7 +233,7 @@ namespace Data_Layer
             {
                 RowsAffected = 0;
                 clsEventLogger.SaveLog("Application", $"{ex.Message}: failed through deleting" +
-                    $"person with ID = {PersonID}.", EventLogEntryType.Error);//
+                    $"person with ID = {PersonID}.", EventLogEntryType.Error);
             }
             return RowsAffected > 0;
         }
