@@ -1,5 +1,20 @@
 Database/Database.drawio
-# Ignore common build folders and IDE files in all subdirectories
+# Ignore build results
+bin/
+obj/
+
+# Ignore Visual Studio files
+.vs/
+*.user
+*.suo
+*.vsidx
+*.VC.db
+*.opendb
+*.db-shm
+*.db-wal
+CopilotIndices/
+
+# For all sub-projects too
 **/bin/
 **/obj/
 **/.vs/
