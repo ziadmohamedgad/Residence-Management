@@ -1,1 +1,9 @@
 Database/Database.drawio
+# Ignore common build folders and IDE files in all subdirectories
+**/bin/
+**/obj/
+**/.vs/
+**/*.user
+**/*.suo
+**/*.vsidx
+**/CopilotIndices/

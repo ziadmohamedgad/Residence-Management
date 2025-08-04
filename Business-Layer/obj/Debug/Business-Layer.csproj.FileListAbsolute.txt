@@ -1,6 +1,0 @@
-F:\Dev\VS\C#\Windows Forms\Residence Management\Business-Layer\bin\Debug\Business-Layer.dll
-F:\Dev\VS\C#\Windows Forms\Residence Management\Business-Layer\bin\Debug\Business-Layer.pdb
-F:\Dev\VS\C#\Windows Forms\Residence Management\Business-Layer\obj\Debug\Business-Layer.csproj.AssemblyReference.cache
-F:\Dev\VS\C#\Windows Forms\Residence Management\Business-Layer\obj\Debug\Business-Layer.csproj.CoreCompileInputs.cache
-F:\Dev\VS\C#\Windows Forms\Residence Management\Business-Layer\obj\Debug\Business-Layer.dll
-F:\Dev\VS\C#\Windows Forms\Residence Management\Business-Layer\obj\Debug\Business-Layer.pdb

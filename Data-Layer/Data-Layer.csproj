@@ -46,5 +46,11 @@
     <Compile Include="clsPersonData.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Shared-Layer\Shared-Layer.csproj">
+      <Project>{0d694f84-c5e8-4ab3-8fed-f6b127762ec7}</Project>
+      <Name>Shared-Layer</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
