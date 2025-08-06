@@ -159,6 +159,7 @@
             this.dgvPeople.MultiSelect = false;
             this.dgvPeople.Name = "dgvPeople";
             this.dgvPeople.ReadOnly = true;
+            this.dgvPeople.RowTemplate.Height = 25;
             this.dgvPeople.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dgvPeople.Size = new System.Drawing.Size(854, 349);
             this.dgvPeople.TabIndex = 0;
@@ -214,10 +215,9 @@
             // 
             // btnAddPerson
             // 
-            this.btnAddPerson.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnAddPerson.Image = ((System.Drawing.Image)(resources.GetObject("btnAddPerson.Image")));
             this.btnAddPerson.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.btnAddPerson.Location = new System.Drawing.Point(15, 261);
+            this.btnAddPerson.Location = new System.Drawing.Point(14, 261);
             this.btnAddPerson.Name = "btnAddPerson";
             this.btnAddPerson.Size = new System.Drawing.Size(107, 54);
             this.btnAddPerson.TabIndex = 22;
@@ -226,8 +226,6 @@
             // 
             // btnClose
             // 
-            this.btnClose.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-            this.btnClose.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnClose.Font = new System.Drawing.Font("Segoe UI Semibold", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnClose.Image = global::Presentation_Layer.Properties.Resources.Close;
             this.btnClose.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
@@ -242,9 +240,12 @@
             // 
             // frmListPeople
             // 
+            this.AcceptButton = this.btnAddPerson;
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 21F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.AutoValidate = System.Windows.Forms.AutoValidate.EnableAllowFocusChange;
             this.BackColor = System.Drawing.Color.White;
+            this.CancelButton = this.btnClose;
             this.ClientSize = new System.Drawing.Size(884, 734);
             this.Controls.Add(this.btnClose);
             this.Controls.Add(this.btnAddPerson);

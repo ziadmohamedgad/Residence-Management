@@ -159,6 +159,7 @@ namespace Data_Layer
                             Command.Parameters.AddWithValue("@ThirdName", DBNull.Value);
                         Command.Parameters.AddWithValue("@LastName", LastName);
                         Command.Parameters.AddWithValue("@Phone", Phone);
+                        Command.Parameters.AddWithValue("@PersonID", PersonID);
                         RowsAffected = Command.ExecuteNonQuery();
                     }
                 }
@@ -166,14 +167,14 @@ namespace Data_Layer
             catch (SqlException ex)
             {
                 RowsAffected = 0;
-                //clsEventLogger.SaveLog("Application", $"{ex.Message}: failed through updating " +
-                //    $"person with person ID = {PersonID}.", EventLogEntryType.Error);
+                clsEventLogger.SaveLog("Application", $"{ex.Message}: failed through updating " +
+                    $"person with person ID = {PersonID}.", EventLogEntryType.Error);
             }
             catch (Exception ex)
             {
                 RowsAffected = 0;
-                //clsEventLogger.SaveLog("Application", $"{ex.Message}: failed through updating " +
-                //    $"person with person ID = {PersonID}.", EventLogEntryType.Error);
+                clsEventLogger.SaveLog("Application", $"{ex.Message}: failed through updating " +
+                    $"person with person ID = {PersonID}.", EventLogEntryType.Error);
             }
             return RowsAffected > 0;
         }
@@ -190,10 +191,7 @@ namespace Data_Layer
                     {
                         using (SqlDataReader Reader = Command.ExecuteReader())
                         {
-                            if (Reader.HasRows)
-                            {
-                                dt.Load(Reader);
-                            }
+                            dt.Load(Reader);
                         }
                     }
                 }

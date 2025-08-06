@@ -8,7 +8,6 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-
 namespace Presentation_Layer.People
 {
     public partial class frmAddUpdatePerson : Form
@@ -67,12 +66,6 @@ namespace Presentation_Layer.People
             txtLastName.Text = _Person.LastName;
             txtPhone.Text = _Person.Phone;
         }
-        private void frmAddUpdatePerson_Load(object sender, EventArgs e)
-        {
-            _ResetDefaultValues();
-            if (_Mode == enMode.Update)
-                _LoadData();
-        }
         private void _ValidateEmptyTextBox(object sender, CancelEventArgs e)
         {
             TextBox Temp = (TextBox)sender;
@@ -94,7 +87,7 @@ namespace Presentation_Layer.People
             }
             _Person.FirstName = txtFirstName.Text.Trim();
             _Person.SecondName = txtSecondName.Text.Trim();
-            _Person.ThirdName  = txtThirdName.Text.Trim();
+            _Person.ThirdName = txtThirdName.Text.Trim();
             _Person.LastName = txtLastName.Text.Trim();
             _Person.Phone = txtPhone.Text.Trim();
             if (_Person.Save())
@@ -112,6 +105,12 @@ namespace Presentation_Layer.People
         private void btnClose_Click(object sender, EventArgs e)
         {
             this.Close();
+        }
+        private void frmAddUpdatePerson_Load(object sender, EventArgs e)
+        {
+            _ResetDefaultValues();
+            if (_Mode == enMode.Update)
+                _LoadData();
         }
     }
 }

@@ -93,9 +93,13 @@ namespace Business_Layer
         {
             return clsEmployeesData.DeleteEmployee(EmployeeID);
         }
-        public static DataTable GetAllEmployees(int EmployeeID)
+        public static DataTable GetAllEmployees()
         {
-            return clsEmployeesData.GetEmployeesResidence(EmployeeID);
+            return clsEmployeesData.GetAllEmployees();
+        }
+        public static bool IsThereEmployeeSponsored(int SponsorPersonID)
+        {
+            return clsEmployeesData.IsThereEmployeeSponsored(SponsorPersonID);
         }
     }
 }

@@ -41,7 +41,7 @@ namespace Presentation_Layer.People
             dgvPeople.DataSource = _dtPeople;
             cbFilterBy.SelectedIndex = 0;
             lblRecordsCount.Text = dgvPeople.Rows.Count.ToString();
-            if (dgvPeople.Rows.Count > 0)
+            if (dgvPeople.Rows.Count >= 0)
             {
                 dgvPeople.Columns[0].HeaderText = "الرقم التعريفي";
                 dgvPeople.Columns[0].Width = 130;
@@ -121,6 +121,7 @@ namespace Presentation_Layer.People
         {
             frmShowPersonInfo frm = new frmShowPersonInfo((int)dgvPeople.CurrentRow.Cells[0].Value);
             frm.ShowDialog();
+            _RefreshPeopleList();
         }
         private void editToolStripMenuItem_Click(object sender, EventArgs e)
         {
@@ -131,34 +132,40 @@ namespace Presentation_Layer.People
         private void deleteToolStripMenuItem_Click(object sender, EventArgs e)
         {
             int PersonID = (int)dgvPeople.CurrentRow.Cells[0].Value;
+            if (clsEmployee.IsThereEmployeeSponsored(PersonID))
+            {
+                MessageBox.Show("لا يمكنك مسح شخص وهو يكفل موظف حالي، حاول مسح الموظف أولًا", "لا يمكن المسح", 
+                    MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
             if (MessageBox.Show("هل أنت متأكد أنك تريد مسح الشخص [" + PersonID + "]؟",
                 "تأكيد المسح", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
             {
                 clsEmployee Employee = clsEmployee.FindByPersonID(PersonID);
                 if (Employee != null)
                 {
-                    clsResidence Residence = clsResidence.Find(clsResidence.GetActiveResidenceIDByEmployeeID(Employee.EmployeeID));
+                    clsResidence Residence = clsResidence.FindByEmployeeID(Employee.EmployeeID);
                     if (Residence != null)
                     {
                         if (MessageBox.Show("الشخص المراد مسحه مربوط بموظف رقمه [" + Employee.EmployeeID + "] وإقامة رقمها [" + Residence.ResidenceID + "] فهل أنت متأكد من مسحهم أيضا؟",
                             "تأكيد المسح الكامل", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
                         {
-                            Residence.DeleteResidence();
-                            Employee.DeleteEmployee();
                             if (Residence.DeleteResidence() && Employee.DeleteEmployee() && clsPerson.Delete(PersonID))
                             {
                                 MessageBox.Show("تم الحذف الكامل للإقامة والموظف والشخص", "تمت عملية المسح", MessageBoxButtons.OK,
                                     MessageBoxIcon.Information);
                                 _RefreshPeopleList();
+                                return;
                             }
                             else
                             {
                                 MessageBox.Show("حدث خطأ أثناء عملية المسح!",
                                     "خطأ", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                                return;
                             }
                         }
                     }
-                    else
+                    else //no residence
                     {
                         if (MessageBox.Show("الشخص المراد مسحه مربوط بموظف رقمه [" + Employee.EmployeeID + "] فهل أنت متأكد من مسحه أيضا؟",
                             "تأكيد المسح الكامل", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
@@ -169,11 +176,13 @@ namespace Presentation_Layer.People
                                 MessageBox.Show("تم الحذف الكامل للموظف والشخص", "تمت عملية المسح", MessageBoxButtons.OK,
                                     MessageBoxIcon.Information);
                                 _RefreshPeopleList();
+                                return;
                             }
                             else
                             {
                                 MessageBox.Show("حدث خطأ أثناء عملية المسح!",
                                     "خطأ", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                                return;
                             }
                         }
                     }

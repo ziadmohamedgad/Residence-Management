@@ -17,7 +17,7 @@ namespace Data_Layer
 {
     public class clsResidencesData
     {
-        public static bool GetResidenceInfoByID(int ResidenceId, ref string ResidenceNumber, ref byte ResidencePeriod,
+        public static bool GetResidenceInfoByID(int ResidenceID, ref string ResidenceNumber, ref byte ResidencePeriod,
             ref DateTime IssueDate, ref DateTime ExpirationDate, ref string ImageName, ref bool IsActive, ref string Notes, ref int EmployeeID)
         {
             bool IsFound = false;
@@ -29,7 +29,7 @@ namespace Data_Layer
                     string Query = @"SELECT * FROM Residences WHERE Residences.ResidenceID = @ResidenceID";
                     using (SqlCommand Command = new SqlCommand(Query, Connection))
                     {
-                        Command.Parameters.AddWithValue("@ResidenceID", ResidenceId);
+                        Command.Parameters.AddWithValue("@ResidenceID", ResidenceID);
                         using (SqlDataReader Reader = Command.ExecuteReader())
                         {
                             if (Reader.Read())
@@ -52,13 +52,104 @@ namespace Data_Layer
             {
                 IsFound = false;
                 clsEventLogger.SaveLog("Application", $"{ex.Message}: failed through fetching " +
-                    $"residence info with residence ID = {ResidenceId}.", EventLogEntryType.Error);
+                    $"residence info with residence ID = {ResidenceID}.", EventLogEntryType.Error);
             }
             catch (Exception ex)
             {
                 IsFound = false;
                 clsEventLogger.SaveLog("Application", $"{ex.Message}: failed through fetching " +
-                    $"residence info with residence ID = {ResidenceId}.", EventLogEntryType.Error);
+                    $"residence info with residence ID = {ResidenceID}.", EventLogEntryType.Error);
+            }
+            return IsFound;
+        }
+        public static bool GetResidenceByResidenceNumber(string ResidenceNumber, ref int ResidenceID, ref byte ResidencePeriod,
+            ref DateTime IssueDate, ref DateTime ExpirationDate, ref string ImageName, ref bool IsActive, ref string Notes, ref int EmployeeID)
+        {
+            bool IsFound = false;
+            try
+            {
+                using (SqlConnection Connection = new SqlConnection(clsDataAccessSettings.ConnectionString))
+                {
+                    Connection.Open();
+                    string Query = @"SELECT * FROM Residences WHERE Residences.ResidenceNumber = @ResidenceNumber";
+                    using (SqlCommand Command = new SqlCommand(Query, Connection))
+                    {
+                        Command.Parameters.AddWithValue("@ResidenceNumber", ResidenceNumber);
+                        using (SqlDataReader Reader = Command.ExecuteReader())
+                        {
+                            if (Reader.Read())
+                            {
+                                IsFound = true;
+                                ResidenceID = (int)Reader["ResidenceID"];
+                                ResidencePeriod = (byte)Reader["ResidencePeriod"];
+                                IssueDate = (DateTime)Reader["IssueDate"];
+                                ExpirationDate = (DateTime)Reader["ExpirationDate"];
+                                ImageName = Reader["ImageName"] == DBNull.Value ? "" : (string)Reader["ImageName"];
+                                IsActive = (bool)Reader["IsActive"];
+                                Notes = Reader["Notes"] == DBNull.Value ? "" : (string)Reader["Notes"];
+                                EmployeeID = (int)Reader["EmployeeID"];
+                            }
+                        }
+                    }
+                }
+            }
+            catch (SqlException ex)
+            {
+                IsFound = false;
+                clsEventLogger.SaveLog("Application", $"{ex.Message}: failed through fetching " +
+                    $"residence info with residence Number = {ResidenceNumber}.", EventLogEntryType.Error);
+            }
+            catch (Exception ex)
+            {
+                IsFound = false;
+                clsEventLogger.SaveLog("Application", $"{ex.Message}: failed through fetching " +
+                    $"residence info with residence Number = {ResidenceNumber}.", EventLogEntryType.Error);
+            }
+            return IsFound;
+        }
+        public static bool GetResidenceByEmployeeID(int EmployeeID, ref int ResidenceID, 
+            ref string ResidenceNumber, ref byte ResidencePeriod,  ref DateTime IssueDate, ref DateTime ExpirationDate, 
+            ref string ImageName, ref bool IsActive, ref string Notes)
+        {
+            bool IsFound = false;
+            try
+            {
+                using (SqlConnection Connection = new SqlConnection(clsDataAccessSettings.ConnectionString))
+                {
+                    Connection.Open();
+                    string Query = @"SELECT * FROM Residences WHERE Residences.EmployeeID = @EmployeeID";
+                    using (SqlCommand Command = new SqlCommand(Query, Connection))
+                    {
+                        Command.Parameters.AddWithValue("@EmployeeID", EmployeeID);
+                        using (SqlDataReader Reader = Command.ExecuteReader())
+                        {
+                            if (Reader.Read())
+                            {
+                                IsFound = true;
+                                ResidenceID = (int)Reader["ResidenceID"];
+                                ResidenceNumber = (string)Reader["ResidenceNumber"];
+                                ResidencePeriod = (byte)Reader["ResidencePeriod"];
+                                IssueDate = (DateTime)Reader["IssueDate"];
+                                ExpirationDate = (DateTime)Reader["ExpirationDate"];
+                                ImageName = Reader["ImageName"] == DBNull.Value ? "" : (string)Reader["ImageName"];
+                                IsActive = (bool)Reader["IsActive"];
+                                Notes = Reader["Notes"] == DBNull.Value ? "" : (string)Reader["Notes"];
+                            }
+                        }
+                    }
+                }
+            }
+            catch (SqlException ex)
+            {
+                IsFound = false;
+                clsEventLogger.SaveLog("Application", $"{ex.Message}: failed through fetching " +
+                    $"residence info with employee ID = {EmployeeID}.", EventLogEntryType.Error);
+            }
+            catch (Exception ex)
+            {
+                IsFound = false;
+                clsEventLogger.SaveLog("Application", $"{ex.Message}: failed through fetching " +
+                    $"residence info with employee ID = {EmployeeID}.", EventLogEntryType.Error);
             }
             return IsFound;
         }
@@ -302,12 +393,11 @@ namespace Data_Layer
                 using (SqlConnection Connection = new SqlConnection(clsDataAccessSettings.ConnectionString))
                 {
                     Connection.Open();
-                    string Query = @"SELECT * FROM Residences";
+                    string Query = @"SELECT * FROM Residences_View ORDER BY ExpirationDate ASC";
                     using (SqlCommand Command = new SqlCommand(Query, Connection))
                     {
                         using (SqlDataReader Reader = Command.ExecuteReader())
                         {
-                            if (Reader.HasRows)
                                 dt.Load(Reader);
                         }
                     }
@@ -317,13 +407,13 @@ namespace Data_Layer
             {
                 dt = null;
                 clsEventLogger.SaveLog("Application", $"{ex.Message}: failed through fetching " +
-                    $"all residences.", EventLogEntryType.Error);
+                    $"all employees.", EventLogEntryType.Error);
             }
             catch (Exception ex)
             {
                 dt = null;
                 clsEventLogger.SaveLog("Application", $"{ex.Message}: failed through fetching " +
-                    $"all residences.", EventLogEntryType.Error);
+                    $"all employees.", EventLogEntryType.Error);
             }
             return dt;
         }

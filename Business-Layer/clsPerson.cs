@@ -68,7 +68,7 @@ namespace Business_Layer
             return clsPerson.GetPersonIDwithResidenceNumber(ResidenceNumber);
         }
         public bool Save()
-        {
+        {    
             switch(this.Mode)
             {
                 case enMode.AddNew:

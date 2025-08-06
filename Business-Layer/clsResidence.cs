@@ -64,7 +64,25 @@ namespace Business_Layer
             return clsResidencesData.UpdateResidence(this.ResidenceID, this.ResidenceNumber, (byte)this.ResidencePeriod, this.IssueDate,
                 this.ExpirationDate, this.ImageName, this.IsActive, this.Notes, this.EmployeeID);
         }
-        public static clsResidence Find(int ResidenceID)
+        public bool Save()
+        {
+            switch(this.Mode)
+            {
+                case enMode.AddNew:
+                    {
+                        if (_AddNewResidence())
+                        {
+                            this.Mode = enMode.Update;
+                            return true;
+                        }
+                        return false;
+                    }
+                case enMode.Update:
+                    return _UpdateResidence();
+            }
+            return false;
+        }
+        public static clsResidence FindByResidenceID(int ResidenceID)
         {
             string ResidenceNumber = "", ImageName = "", Notes = "";
             byte ResidencePeriod = 3;
@@ -73,6 +91,36 @@ namespace Business_Layer
             int EmployeeID = -1;
             bool IsFound = clsResidencesData.GetResidenceInfoByID(ResidenceID, ref ResidenceNumber, ref ResidencePeriod,
                 ref IssueDate, ref ExpirationDate, ref ImageName, ref IsActive, ref Notes, ref EmployeeID);
+            if (IsFound)
+                return new clsResidence(ResidenceID, ResidenceNumber, (enResidencePeriod)ResidencePeriod, IssueDate, ExpirationDate,
+                    ImageName, IsActive, Notes, EmployeeID);
+            else
+                return null;
+        }
+        public static clsResidence FindByResidenceNumber(string ResidenceNumber)
+        {
+            string ImageName = "", Notes = "";
+            byte ResidencePeriod = 3;
+            DateTime IssueDate = DateTime.MinValue, ExpirationDate = DateTime.MinValue;
+            bool IsActive = false;
+            int EmployeeID = -1, ResidenceID = -1;
+            bool IsFound = clsResidencesData.GetResidenceByResidenceNumber(ResidenceNumber, ref ResidenceID, ref ResidencePeriod,
+                ref IssueDate, ref ExpirationDate, ref ImageName, ref IsActive, ref Notes, ref EmployeeID);
+            if (IsFound)
+                return new clsResidence(ResidenceID, ResidenceNumber, (enResidencePeriod)ResidencePeriod, IssueDate, ExpirationDate,
+                    ImageName, IsActive, Notes, EmployeeID);
+            else
+                return null;
+        }
+        public static clsResidence FindByEmployeeID(int EmployeeID)
+        {
+            string ResidenceNumber = "", ImageName = "", Notes = "";
+            byte ResidencePeriod = 3;
+            DateTime IssueDate = DateTime.MinValue, ExpirationDate = DateTime.MinValue;
+            bool IsActive = false;
+            int ResidenceID = -1;
+            bool IsFound = clsResidencesData.GetResidenceByEmployeeID(EmployeeID, ref ResidenceID, ref ResidenceNumber, ref ResidencePeriod,
+                ref IssueDate, ref ExpirationDate, ref ImageName, ref IsActive, ref Notes);
             if (IsFound)
                 return new clsResidence(ResidenceID, ResidenceNumber, (enResidencePeriod)ResidencePeriod, IssueDate, ExpirationDate,
                     ImageName, IsActive, Notes, EmployeeID);
