@@ -63,6 +63,10 @@ namespace Business_Layer
             else
                 return null;
         }
+        public static int GetPersonIDwithResidenceNumber(string ResidenceNumber)
+        {
+            return clsPerson.GetPersonIDwithResidenceNumber(ResidenceNumber);
+        }
         public bool Save()
         {
             switch(this.Mode)

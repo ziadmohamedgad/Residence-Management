@@ -91,7 +91,7 @@
             this.MainMenuStrip = this.msMainTabs;
             this.Name = "frmMainScreen";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "Residence Management";
+            this.Text = "اللوحة الرئيسية";
             this.msMainTabs.ResumeLayout(false);
             this.msMainTabs.PerformLayout();
             this.ResumeLayout(false);

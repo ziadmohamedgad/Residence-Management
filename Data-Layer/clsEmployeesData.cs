@@ -192,6 +192,18 @@ namespace Data_Layer
             }
             return RowsAffected > 0;
         }
+        public static bool IsThereEmployeeSponsored(int SponsorPersonID)
+        {
+            bool IsFound = false;
+            try
+            {
+                using (SqlConnection Connection = new SqlConnection(clsDataAccessSettings.ConnectionString))
+                {
+                    Connection.Open();
+
+                }
+            }
+        }
         public static DataTable GetEmployeesResidence(int EmployeeID)
         {
             DataTable dt = new DataTable();

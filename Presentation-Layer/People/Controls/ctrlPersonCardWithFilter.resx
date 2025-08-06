@@ -117,26 +117,33 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
-  <data name="Background" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\Background.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
+  <data name="btnAddNewPerson.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+    <value>
+        iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAABGdBTUEAALGPC/xhBQAAAXVJREFUWEft
+        V8GRgzAMTClXypVCEfFNnumEOacQyjC8mFTA4wrgRtgCsdhgYnPcIzuzM0HYrC3JsnK5vPHGC/j6Nnel
+        60rpule6bpVuSrLhuOy4leZDCPvY0hiclw0b4swK52WB0qbwiAVoCpyfDIrzUijI/F6wybYQCrHF+cnY
+        uYAe5ycjMgEdmxLnJ+P0JCREeiF/AjIiCtFx4hI2HMOxpMQkVn9Siv8Frg/zyb9dOMYzf+g94G7AweVs
+        cwsY487vs4cDE4+9QEIs5jmmeaohilvaQjNfgPeueHKYuG/YFSa/+LS7+QIWY3p6R94iUSKHUeZREB6X
+        Ak3BC/CNlSIyJ1wt2W5cIi6f4ey7Xc08hUlItvnzRgvn21GAwymQtuuj/sHd4QLIO6tVM5BQ0aRvOM8s
+        3pGdw4C6I3BXO9lhkpFdPkd4YDP+a+ywH8AFWO8c0DMQphtz6glkwrnd5++YJNjFXAfItrsOpEIIjv+g
+        Vo/eWfgFC/SUdziFx7UAAAAASUVORK5CYII=
+</value>
   </data>
-  <data name="Close" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\Close.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="btnFind.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+    <value>
+        iVBORw0KGgoAAAANSUhEUgAAAB4AAAAeCAYAAAA7MK6iAAAABGdBTUEAALGPC/xhBQAAAaFJREFUSEvV
+        VjtuAyEQ9VFyiUgpXKRKnSa975CwcZnejW+Adm0px9hbhKXiKIkGGIOHYQNrLMtPevIHmDc/PqvVvWAr
+        1YMY1Kbr1Rd8Aj8O6pnOawYnqKUYpt8MDcyh6y4CRMQIcTRNoxfDNDIiORq6fhEqoj2xSdSuiVLjc4Q1
+        1E41/mmoDLWkdqpRWV/kSO1U486EG6T6Zs11s+0EqE03Xb8Y7jJIBXiqDV2/GO6CmEwqkrDNcRnDi1Oh
+        M9Gt1I8wD6/MZrXORt5Pu1wTXtThIIje40PAHaVAFxlGjTUOkS8oAbn8s6eRzwI7HhqzoOl8SukWOvMa
+        5oTo5w17W6xjFhnBRBjndYP6RuG5Z49PeT7dM6KWWOdoX9unTjzGActF/7coOyTc4R9lZsRtNte9uPa9
+        12s6Vnrhn9Llhe1vv9ZQ8bh0LjNMH7D7kyEYj/dsd/x5+uz1OirTCI4wtxqMv1Fdn44igoOxkzZy0U97
+        L4YOGHDAO4nzjTiql0i0pL5FtNGCPXDCOaIlOW7D2xu+4MSr8KBfqXiU7OsjnPVa/gFAIati4GPHyAAA
+        AABJRU5ErkJggg==
+</value>
   </data>
-  <data name="Employees" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\Employees.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="Main" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\Main.ico;System.Drawing.Icon, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="People" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\People.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="Residences" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\Residences.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="Save32" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\Save32.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
+  <metadata name="errorProvider1.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <value>17, 17</value>
+  </metadata>
 </root>

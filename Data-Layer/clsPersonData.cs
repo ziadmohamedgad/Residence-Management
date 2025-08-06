@@ -34,6 +34,7 @@ namespace Data_Layer
                                     FirstName = (string)Reader["FirstName"];
                                     SecondName = (string)Reader["SecondName"];
                                     ThirdName = Reader["ThirdName"] == DBNull.Value ? "" : (string)Reader["ThirdName"];
+                                    LastName = (string)Reader["LastName"];
                                     Phone = (string)Reader["Phone"];
                                 }
                             }
@@ -55,6 +56,41 @@ namespace Data_Layer
             }
             return IsFound;
         }
+        public static int GetPersonIDByResidenceNumber(string ResidenceNumber)
+        {
+            int PersonID = -1;
+            try
+            {
+                using (SqlConnection Connection = new SqlConnection(clsDataAccessSettings.ConnectionString))
+                {
+                    Connection.Open();
+                    string Query = @"SELECT People.PersonID FROM People INNER JOIN Employees
+                                     ON People.PersonID = Employees.PersonID 
+                                     INNER JOIN Residences ON Employees.EmployeeID = Residences.EmployeeID 
+                                     WHERE Residences.ResidenceNumber = @ResidenceNumber";
+                    using (SqlCommand Command = new SqlCommand(Query, Connection))
+                    {
+                        Command.Parameters.AddWithValue("@ResidenceNumber", ResidenceNumber);
+                        object Result = Command.ExecuteScalar();
+                        if (Result != null && int.TryParse(Result.ToString(), out int ID))
+                            PersonID = ID;
+                    }
+                }
+            }
+            catch (SqlException ex)
+            {
+                PersonID = -1;
+                clsEventLogger.SaveLog("Application", $"{ex.Message}: failed through fetching " +
+                    $"person ID with Residence number = {ResidenceNumber}.", EventLogEntryType.Error);
+            }
+            catch (Exception ex)
+            {
+                PersonID = -1;
+                clsEventLogger.SaveLog("Application", $"{ex.Message}: failed through fetching " +
+                    $"person ID with Residence number = {ResidenceNumber}.", EventLogEntryType.Error);
+            }
+            return PersonID;
+        }
         public static int AddNewPerson(string FirstName, string SecondName, string ThirdName, string LastName, 
             string Phone)
         {
@@ -75,6 +111,7 @@ namespace Data_Layer
                             Command.Parameters.AddWithValue("@ThirdName", ThirdName);
                         else
                             Command.Parameters.AddWithValue("@ThirdName", DBNull.Value);
+                        Command.Parameters.AddWithValue("@LastName", LastName);
                         Command.Parameters.AddWithValue("@Phone", Phone);
                         object Result = Command.ExecuteScalar();
                         if (Result != null && int.TryParse(Result.ToString(), out int ID))
@@ -120,6 +157,7 @@ namespace Data_Layer
                             Command.Parameters.AddWithValue("@ThirdName", ThirdName);
                         else
                             Command.Parameters.AddWithValue("@ThirdName", DBNull.Value);
+                        Command.Parameters.AddWithValue("@LastName", LastName);
                         Command.Parameters.AddWithValue("@Phone", Phone);
                         RowsAffected = Command.ExecuteNonQuery();
                     }
@@ -128,14 +166,14 @@ namespace Data_Layer
             catch (SqlException ex)
             {
                 RowsAffected = 0;
-                clsEventLogger.SaveLog("Application", $"{ex.Message}: failed through updating " +
-                    $"person with person ID = {PersonID}.", EventLogEntryType.Error);
+                //clsEventLogger.SaveLog("Application", $"{ex.Message}: failed through updating " +
+                //    $"person with person ID = {PersonID}.", EventLogEntryType.Error);
             }
             catch (Exception ex)
             {
                 RowsAffected = 0;
-                clsEventLogger.SaveLog("Application", $"{ex.Message}: failed through updating " +
-                    $"person with person ID = {PersonID}.", EventLogEntryType.Error);
+                //clsEventLogger.SaveLog("Application", $"{ex.Message}: failed through updating " +
+                //    $"person with person ID = {PersonID}.", EventLogEntryType.Error);
             }
             return RowsAffected > 0;
         }
