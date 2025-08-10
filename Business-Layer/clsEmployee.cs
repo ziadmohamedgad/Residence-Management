@@ -21,9 +21,10 @@ namespace Business_Layer
         public clsPerson SponsorPersonInfo;
         public clsEmployee()
         {
-            this.EmployeeID = 0;
-            this.PersonID = 0;
+            this.EmployeeID = -1;
+            this.PersonID = -1;
             this.Job = "";
+            this.SponsorPersonID = -1;
             this.PersonInfo = null;
             this.SponsorPersonInfo = null;
             this.Mode = enMode.AddNew;
@@ -33,6 +34,7 @@ namespace Business_Layer
             this.EmployeeID = EmployeeID;
             this.PersonID = PersonID;
             this.Job = Job;
+            this.SponsorPersonID = SponsorPersonID;
             this.PersonInfo = clsPerson.Find(this.PersonID);
             this.SponsorPersonInfo = clsPerson.Find(this.SponsorPersonID);
             this.Mode = enMode.Update;
@@ -96,10 +98,6 @@ namespace Business_Layer
         public static DataTable GetAllEmployees()
         {
             return clsEmployeesData.GetAllEmployees();
-        }
-        public static bool IsThereEmployeeSponsored(int SponsorPersonID)
-        {
-            return clsEmployeesData.IsThereEmployeeSponsored(SponsorPersonID);
         }
     }
 }

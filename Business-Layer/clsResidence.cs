@@ -17,8 +17,8 @@ namespace Business_Layer
         public enum enResidencePeriod : byte 
         { Three = 3, Six = 6, Nine = 9, Twelve = 12, Fifteen = 15, Eighteen = 18, TwentyOne = 21, TwentyFour = 24 }
         public enResidencePeriod ResidencePeriod { get; set; }
-        DateTime IssueDate { get; set; }
-        DateTime ExpirationDate {  get; set; }
+        public DateTime IssueDate { get; set; }
+        public DateTime ExpirationDate {  get; set; }
         public string ImageName { get; set; }
         public bool IsActive { get; set; }
         public string Notes { get; set; }

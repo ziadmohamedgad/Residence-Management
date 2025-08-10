@@ -1,4 +1,5 @@
 ﻿using Business_Layer;
+using Presentation_Layer.Employees;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -132,7 +133,7 @@ namespace Presentation_Layer.People
         private void deleteToolStripMenuItem_Click(object sender, EventArgs e)
         {
             int PersonID = (int)dgvPeople.CurrentRow.Cells[0].Value;
-            if (clsEmployee.IsThereEmployeeSponsored(PersonID))
+            if (clsPerson.IsThereEmployeeSponsored(PersonID))
             {
                 MessageBox.Show("لا يمكنك مسح شخص وهو يكفل موظف حالي، حاول مسح الموظف أولًا", "لا يمكن المسح", 
                     MessageBoxButtons.OK, MessageBoxIcon.Error);
@@ -164,13 +165,14 @@ namespace Presentation_Layer.People
                                 return;
                             }
                         }
+                        else
+                            return;
                     }
                     else //no residence
                     {
                         if (MessageBox.Show("الشخص المراد مسحه مربوط بموظف رقمه [" + Employee.EmployeeID + "] فهل أنت متأكد من مسحه أيضا؟",
                             "تأكيد المسح الكامل", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
                         {
-                            Employee.DeleteEmployee();
                             if (Employee.DeleteEmployee() && clsPerson.Delete(PersonID))
                             {
                                 MessageBox.Show("تم الحذف الكامل للموظف والشخص", "تمت عملية المسح", MessageBoxButtons.OK,
@@ -185,9 +187,11 @@ namespace Presentation_Layer.People
                                 return;
                             }
                         }
+                        else
+                            return;
                     }
                 }
-                if (clsPerson.Delete(PersonID))
+                else if (clsPerson.Delete(PersonID))
                 {
                     MessageBox.Show("تم حذف الشخص بنجاح", "تمت عملية المسح", MessageBoxButtons.OK,
                         MessageBoxIcon.Information);
@@ -200,9 +204,29 @@ namespace Presentation_Layer.People
                 }
             }
         }
+        private void cmsPeople_Opening(object sender, CancelEventArgs e)
+        {
+            employToolStripMenuItem.Enabled = clsEmployee.FindByPersonID((int)dgvPeople.CurrentRow.Cells[0].Value) == null;
+        }
+        private void employToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            frmAddUpdateEmployee frm = new frmAddUpdateEmployee();
+            frm.PersonID = (int)dgvPeople.CurrentRow.Cells[0].Value;
+            frm.Mode = frmAddUpdateEmployee.enMode.EmployeePerson;
+            frm.ShowDialog();
+        }
         private void btnClose_Click(object sender, EventArgs e)
         {
             this.Close();
+        }
+        private void dgvPeople_CellMouseDown(object sender, DataGridViewCellMouseEventArgs e)
+        {
+            if (e.Button == MouseButtons.Right && e.RowIndex >= 0)
+            {
+                dgvPeople.ClearSelection();
+                dgvPeople.Rows[e.RowIndex].Selected = true;
+                dgvPeople.CurrentCell = dgvPeople.Rows[e.RowIndex].Cells[e.ColumnIndex];
+            }
         }
     }
 }

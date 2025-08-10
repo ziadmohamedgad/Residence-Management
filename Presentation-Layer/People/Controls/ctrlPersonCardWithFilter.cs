@@ -46,7 +46,7 @@ namespace Presentation_Layer.People.Controls
                 gbFilters.Enabled = _FilterEnabled;
             }
         }
-        private clsPerson SelectedPersonInfo
+        public clsPerson SelectedPersonInfo
         {
             get
             {
@@ -88,13 +88,14 @@ namespace Presentation_Layer.People.Controls
         private void _FindNow()
         {
             ctrlPersonCard1.LoadPersonInfo(int.Parse(txtFilterValue.Text.Trim()));
+            this._PersonID = ctrlPersonCard1.PersonID;
             if (OnPersonSelected != null && FilterEnabled && ctrlPersonCard1.SelectedPersonInfo != null)
-                PersonSelected(ctrlPersonCard1.PersonID);
+            {
+                PersonSelected(_PersonID);
+            }
         }
         private void btnAddNewPerson_Click(object sender, EventArgs e)
         {
-            // here we will call the add\update new person form in add mode
-            // adn subscribe the databack event with the current databaceevent method then show dialog
             frmAddUpdatePerson frm = new frmAddUpdatePerson();
             frm.DataBack += DataBackEvent;
             frm.ShowDialog();
@@ -104,8 +105,11 @@ namespace Presentation_Layer.People.Controls
             cbFilterBy.SelectedIndex = 0;
             txtFilterValue.Text = PersonID.ToString();
             ctrlPersonCard1.LoadPersonInfo(PersonID);
+            this._PersonID = ctrlPersonCard1.PersonID;
             if (OnPersonSelected != null && ctrlPersonCard1.SelectedPersonInfo != null)
-                PersonSelected(ctrlPersonCard1.PersonID);
+            {
+                PersonSelected(_PersonID);
+            }
         }
         private void btnFind_Click(object sender, EventArgs e)
         {

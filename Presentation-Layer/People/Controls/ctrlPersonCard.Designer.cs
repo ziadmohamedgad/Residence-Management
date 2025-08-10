@@ -30,6 +30,7 @@
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(ctrlPersonCard));
             this.gbPersonCard = new System.Windows.Forms.GroupBox();
+            this.pictureBox3 = new System.Windows.Forms.PictureBox();
             this.llEditPersonInfo = new System.Windows.Forms.LinkLabel();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.pictureBox6 = new System.Windows.Forms.PictureBox();
@@ -40,6 +41,7 @@
             this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.gbPersonCard.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox6)).BeginInit();
             this.SuspendLayout();
@@ -47,6 +49,7 @@
             // gbPersonCard
             // 
             this.gbPersonCard.BackColor = System.Drawing.Color.White;
+            this.gbPersonCard.Controls.Add(this.pictureBox3);
             this.gbPersonCard.Controls.Add(this.llEditPersonInfo);
             this.gbPersonCard.Controls.Add(this.pictureBox1);
             this.gbPersonCard.Controls.Add(this.pictureBox6);
@@ -65,6 +68,16 @@
             this.gbPersonCard.TabStop = false;
             this.gbPersonCard.Text = "معلومات الشخص";
             // 
+            // pictureBox3
+            // 
+            this.pictureBox3.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox3.Image")));
+            this.pictureBox3.Location = new System.Drawing.Point(303, 48);
+            this.pictureBox3.Name = "pictureBox3";
+            this.pictureBox3.Size = new System.Drawing.Size(31, 26);
+            this.pictureBox3.SizeMode = System.Windows.Forms.PictureBoxSizeMode.CenterImage;
+            this.pictureBox3.TabIndex = 26;
+            this.pictureBox3.TabStop = false;
+            // 
             // llEditPersonInfo
             // 
             this.llEditPersonInfo.AutoSize = true;
@@ -75,6 +88,7 @@
             this.llEditPersonInfo.TabIndex = 11;
             this.llEditPersonInfo.TabStop = true;
             this.llEditPersonInfo.Text = "تعديل بيانات الشخص";
+            this.llEditPersonInfo.Visible = false;
             this.llEditPersonInfo.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.llEditPersonInfo_LinkClicked);
             // 
             // pictureBox1
@@ -100,12 +114,12 @@
             // lblPhone
             // 
             this.lblPhone.AutoSize = true;
-            this.lblPhone.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblPhone.Font = new System.Drawing.Font("Segoe UI Semibold", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblPhone.ForeColor = System.Drawing.SystemColors.ControlText;
             this.lblPhone.Location = new System.Drawing.Point(227, 158);
             this.lblPhone.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblPhone.Name = "lblPhone";
-            this.lblPhone.Size = new System.Drawing.Size(53, 20);
+            this.lblPhone.Size = new System.Drawing.Size(52, 21);
             this.lblPhone.TabIndex = 8;
             this.lblPhone.Text = "[؟؟؟؟]";
             // 
@@ -122,23 +136,23 @@
             // lblFullName
             // 
             this.lblFullName.AutoSize = true;
-            this.lblFullName.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblFullName.Font = new System.Drawing.Font("Segoe UI Semibold", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblFullName.ForeColor = System.Drawing.SystemColors.ControlText;
             this.lblFullName.Location = new System.Drawing.Point(227, 101);
             this.lblFullName.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblFullName.Name = "lblFullName";
-            this.lblFullName.Size = new System.Drawing.Size(53, 20);
+            this.lblFullName.Size = new System.Drawing.Size(52, 21);
             this.lblFullName.TabIndex = 6;
             this.lblFullName.Text = "[؟؟؟؟]";
             // 
             // lblPersonID
             // 
             this.lblPersonID.AutoSize = true;
-            this.lblPersonID.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblPersonID.Font = new System.Drawing.Font("Segoe UI Semibold", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblPersonID.Location = new System.Drawing.Point(227, 53);
             this.lblPersonID.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblPersonID.Name = "lblPersonID";
-            this.lblPersonID.Size = new System.Drawing.Size(53, 20);
+            this.lblPersonID.Size = new System.Drawing.Size(52, 21);
             this.lblPersonID.TabIndex = 5;
             this.lblPersonID.Text = "[؟؟؟؟]";
             // 
@@ -176,6 +190,7 @@
             this.Size = new System.Drawing.Size(533, 221);
             this.gbPersonCard.ResumeLayout(false);
             this.gbPersonCard.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox6)).EndInit();
             this.ResumeLayout(false);
@@ -194,5 +209,6 @@
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.PictureBox pictureBox1;
         private System.Windows.Forms.LinkLabel llEditPersonInfo;
+        private System.Windows.Forms.PictureBox pictureBox3;
     }
 }

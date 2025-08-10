@@ -29,7 +29,6 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(ctrlPersonCardWithFilter));
             this.gbFilters = new System.Windows.Forms.GroupBox();
             this.btnAddNewPerson = new System.Windows.Forms.Button();
             this.btnFind = new System.Windows.Forms.Button();
@@ -61,8 +60,7 @@
             // 
             // btnAddNewPerson
             // 
-            this.btnAddNewPerson.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnAddNewPerson.Image = ((System.Drawing.Image)(resources.GetObject("btnAddNewPerson.Image")));
+            this.btnAddNewPerson.Image = global::Presentation_Layer.Properties.Resources.AddPerson;
             this.btnAddNewPerson.ImeMode = System.Windows.Forms.ImeMode.NoControl;
             this.btnAddNewPerson.Location = new System.Drawing.Point(23, 35);
             this.btnAddNewPerson.Name = "btnAddNewPerson";
@@ -73,8 +71,7 @@
             // 
             // btnFind
             // 
-            this.btnFind.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnFind.Image = ((System.Drawing.Image)(resources.GetObject("btnFind.Image")));
+            this.btnFind.Image = global::Presentation_Layer.Properties.Resources.SearchPerson;
             this.btnFind.ImeMode = System.Windows.Forms.ImeMode.NoControl;
             this.btnFind.Location = new System.Drawing.Point(95, 35);
             this.btnFind.Name = "btnFind";

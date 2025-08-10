@@ -117,7 +117,25 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <metadata name="errorProvider1.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>17, 17</value>
-  </metadata>
+  <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
+  <data name="btnEnsureChoice.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+    <value>
+        iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAABGdBTUEAALGPC/xhBQAAAAlwSFlzAAAH
+        XgAAB14BODEn8gAAABl0RVh0U29mdHdhcmUAd3d3Lmlua3NjYXBlLm9yZ5vuPBoAAAMuSURBVFhH7ZZ7
+        bEtRHMerjaFSUqus9mjHNjYZadxEGUWTJsxjC9OYhFhipCTFwkQlk4tkGEqKynqXdNOxl8dExSRj8Rf+
+        8wj/IPGIPySSRfzjET4ygjmsetvMXz7JTW7OOb9vPvfcc+65Gs1/YjD6ApKxgx5TC2/NER6mh9mogSHi
+        uEFh+GWshk56jR1gagFzBDLCYFXYKo4dFPSXqTV0gihgUXj9T2ZhZJS2AQTIP06qOD4WC9dhc7tJEdtj
+        oo+yawCBl/HOgLSeocUeDiys5HlJJWlif0wM50k1dPJYEPiUFaJcHPsn5m0h2+XlZrGHS0vWYxL7Y3MR
+        gz7KohHnyDR2EDC1cMscoS2rkTnWeqZl15Mvlkh78MzYhdx379jOcmcVr1xetmg08c3WD3TdrEjpolcf
+        BcNF7hg72Dj2DLPTmihND9NsUfgwIQh5x2jJDTDse930WlLtNTyY6aPHsY1Hzq1IvybHwzUydN28S+mC
+        rwJ/XgN8FQjAZD87+5fbZTKLfOy1exnVvz1+eijXdYMKgetiRHLcYK0agQI/t8WI5Ohhhq6bjyoEQmJE
+        8lwla+hVJH0Uqe8sGN2OZDqNNK7vakSyKEg5QaRJR5mqaUcnlg8aac14M8LcszZwIjvMcLF/UDG2UmiO
+        8Pn7Kxgf5MrfJJybme/axNkFHna43UnOlKmVaeIamBjgSrYsSjBklo8jjmqeOKt47/LCAg8squRM0hLm
+        CEFxEeb7v0nY9pIn7eaovYamIh84qsFZBf0EKKmgQcxUh4w2PUxI2AUUHqTLVssjaQ/Ya2AggdIKWLo6
+        vnNkYGS0lgZCvwjUga0W4hFYtoqHYqR6ZLQ5JwklKEDZyt8PMvXIaHMDKIkILF9BqRiXGDLagsMoagXc
+        5SwVoxJHRltYh6JGoGwlU8UYVaSdYuSEIPvzAtwt8POssI5eFQJPZRmtmBk3me2MsCjcT3QXlK1ig5ip
+        isww8377DsQpULKGS0k9fR9jmhllUXihVmDxOk4Ve3/+viWFtZ5xOSeoyD3Gjsl+Dk05SKNtH1FpNzen
+        1/C4yMcbRzWfnVU8c23idPEG5ooZ/+nPF7ejm9ufLuSdAAAAAElFTkSuQmCC
+</value>
+  </data>
 </root>

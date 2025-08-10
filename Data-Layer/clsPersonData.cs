@@ -35,7 +35,7 @@ namespace Data_Layer
                                     SecondName = (string)Reader["SecondName"];
                                     ThirdName = Reader["ThirdName"] == DBNull.Value ? "" : (string)Reader["ThirdName"];
                                     LastName = (string)Reader["LastName"];
-                                    Phone = (string)Reader["Phone"];
+                                    Phone = Reader["Phone"] == DBNull.Value ? "" : (string)Reader["Phone"];
                                 }
                             }
                         }
@@ -112,8 +112,11 @@ namespace Data_Layer
                         else
                             Command.Parameters.AddWithValue("@ThirdName", DBNull.Value);
                         Command.Parameters.AddWithValue("@LastName", LastName);
-                        Command.Parameters.AddWithValue("@Phone", Phone);
-                        object Result = Command.ExecuteScalar();
+                        if (Phone != null && Phone != "")
+                            Command.Parameters.AddWithValue("@Phone", Phone);
+                        else
+                            Command.Parameters.AddWithValue("Phone", DBNull.Value);
+                            object Result = Command.ExecuteScalar();
                         if (Result != null && int.TryParse(Result.ToString(), out int ID))
                             PersonID = ID;
                     }
@@ -158,7 +161,10 @@ namespace Data_Layer
                         else
                             Command.Parameters.AddWithValue("@ThirdName", DBNull.Value);
                         Command.Parameters.AddWithValue("@LastName", LastName);
-                        Command.Parameters.AddWithValue("@Phone", Phone);
+                        if (Phone != null && Phone != "")
+                            Command.Parameters.AddWithValue("@Phone", Phone);
+                        else
+                            Command.Parameters.AddWithValue("Phone", DBNull.Value);
                         Command.Parameters.AddWithValue("@PersonID", PersonID);
                         RowsAffected = Command.ExecuteNonQuery();
                     }
@@ -233,13 +239,46 @@ namespace Data_Layer
             {
                 IsFound = false;
                 clsEventLogger.SaveLog("Application", $"{ex.Message}: failed through checking" +
-                    $"if person with ID = {PersonID} exists or not.", EventLogEntryType.Error);
+                    $" if person with ID = {PersonID} exists or not.", EventLogEntryType.Error);
             }
             catch (Exception ex)
             {
                 IsFound = false;
                 clsEventLogger.SaveLog("Application", $"{ex.Message}: failed through checking" +
-                    $"if person with ID = {PersonID} exists or not.", EventLogEntryType.Error);
+                    $" if person with ID = {PersonID} exists or not.", EventLogEntryType.Error);
+            }
+            return IsFound;
+        }
+        public static bool IsThereEmployeeSponsored(int PersonID)
+        {
+            bool IsFound = false;
+            try
+            {
+                using (SqlConnection Connection = new SqlConnection(clsDataAccessSettings.ConnectionString))
+                {
+                    Connection.Open();
+                    string Query = @"SELECT IsFound = 1 FROM Employees WHERE Employees.SponsorPersonID = @PersonID";
+                    using (SqlCommand Command = new SqlCommand(Query, Connection))
+                    {
+                        Command.Parameters.AddWithValue("@PersonID", PersonID);
+                        using (SqlDataReader Reader = Command.ExecuteReader())
+                        {
+                            IsFound = Reader.HasRows;
+                        }
+                    }
+                }
+            }
+            catch (SqlException ex)
+            {
+                IsFound = false;
+                clsEventLogger.SaveLog("Application", $"{ex.Message}: failed through ensuring" +
+                    $"employee sponsor with Sponsort Person ID = {PersonID}.", EventLogEntryType.Error);
+            }
+            catch (Exception ex)
+            {
+                IsFound = false;
+                clsEventLogger.SaveLog("Application", $"{ex.Message}: failed through ensuring" +
+                    $"employee sponsor with Sponsor Person ID = {PersonID}.", EventLogEntryType.Error);
             }
             return IsFound;
         }
@@ -263,13 +302,13 @@ namespace Data_Layer
             {
                 RowsAffected = 0;
                 clsEventLogger.SaveLog("Application", $"{ex.Message}: failed through deleting" +
-                    $"person with ID = {PersonID}.", EventLogEntryType.Error);
+                    $" person with ID = {PersonID}.", EventLogEntryType.Error);
             }
             catch (Exception ex)
             {
                 RowsAffected = 0;
                 clsEventLogger.SaveLog("Application", $"{ex.Message}: failed through deleting" +
-                    $"person with ID = {PersonID}.", EventLogEntryType.Error);
+                    $" person with ID = {PersonID}.", EventLogEntryType.Error);
             }
             return RowsAffected > 0;
         }

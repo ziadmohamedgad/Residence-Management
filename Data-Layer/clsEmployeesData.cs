@@ -192,39 +192,6 @@ namespace Data_Layer
             }
             return RowsAffected > 0;
         }
-        public static bool IsThereEmployeeSponsored(int SponsorPersonID)
-        {
-            bool IsFound = false;
-            try
-            {
-                using (SqlConnection Connection = new SqlConnection(clsDataAccessSettings.ConnectionString))
-                {
-                    Connection.Open();
-                    string Query = @"SELECT IsFound = 1 FROM Employees WHERE Employees.SponsorPersonID = @SponsorPersonID";
-                    using (SqlCommand Command = new SqlCommand(Query, Connection))
-                    {
-                        Command.Parameters.AddWithValue("@SponsorPersonID", SponsorPersonID);
-                        using (SqlDataReader Reader = Command.ExecuteReader())
-                        {
-                            IsFound = Reader.HasRows;
-                        }
-                    }
-                }
-            }
-            catch (SqlException ex)
-            {
-                IsFound = false;
-                clsEventLogger.SaveLog("Application", $"{ex.Message}: failed through ensuring" +
-                    $"employee sponsor with Sponsor ID = {SponsorPersonID}.", EventLogEntryType.Error);
-            }
-            catch (Exception ex)
-            {
-                IsFound = false;
-                clsEventLogger.SaveLog("Application", $"{ex.Message}: failed through ensuring" +
-                    $"employee sponsor with Sponsor ID = {SponsorPersonID}.", EventLogEntryType.Error);
-            }
-            return IsFound;
-        }
         public static DataTable GetAllEmployees()
         {
             DataTable dt = new DataTable();

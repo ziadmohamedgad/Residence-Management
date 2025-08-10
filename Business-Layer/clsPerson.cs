@@ -94,6 +94,10 @@ namespace Business_Layer
         {
             return clsPersonData.IsPersonExist(PersonID);
         }
+        public static bool IsThereEmployeeSponsored(int PersonID)
+        {
+            return clsPersonData.IsThereEmployeeSponsored(PersonID);
+        }
         public static DataTable GetAllPeople()
         {
             return clsPersonData.GetAllPeople();

@@ -44,6 +44,8 @@
             this.editToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
             this.deleteToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripMenuItem1 = new System.Windows.Forms.ToolStripSeparator();
+            this.employToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.btnAddPerson = new System.Windows.Forms.Button();
             this.btnClose = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
@@ -164,58 +166,77 @@
             this.dgvPeople.Size = new System.Drawing.Size(854, 349);
             this.dgvPeople.TabIndex = 0;
             this.dgvPeople.TabStop = false;
+            this.dgvPeople.CellMouseDown += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.dgvPeople_CellMouseDown);
             this.dgvPeople.DoubleClick += new System.EventHandler(this.dgvPeople_DoubleClick);
             // 
             // cmsPeople
             // 
+            this.cmsPeople.BackColor = System.Drawing.Color.White;
+            this.cmsPeople.Font = new System.Drawing.Font("Segoe UI Semibold", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.cmsPeople.ImageScalingSize = new System.Drawing.Size(32, 32);
             this.cmsPeople.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.showDetailsToolStripMenuItem,
             this.toolStripSeparator1,
             this.editToolStripMenuItem,
             this.toolStripSeparator2,
-            this.deleteToolStripMenuItem});
+            this.deleteToolStripMenuItem,
+            this.toolStripMenuItem1,
+            this.employToolStripMenuItem});
             this.cmsPeople.Name = "cmsPeople";
             this.cmsPeople.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
-            this.cmsPeople.Size = new System.Drawing.Size(158, 130);
+            this.cmsPeople.Size = new System.Drawing.Size(166, 174);
+            this.cmsPeople.Opening += new System.ComponentModel.CancelEventHandler(this.cmsPeople_Opening);
             // 
             // showDetailsToolStripMenuItem
             // 
             this.showDetailsToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("showDetailsToolStripMenuItem.Image")));
             this.showDetailsToolStripMenuItem.Name = "showDetailsToolStripMenuItem";
-            this.showDetailsToolStripMenuItem.Size = new System.Drawing.Size(157, 38);
-            this.showDetailsToolStripMenuItem.Text = "Show Details";
+            this.showDetailsToolStripMenuItem.Size = new System.Drawing.Size(165, 38);
+            this.showDetailsToolStripMenuItem.Text = "رؤية البيانات";
             this.showDetailsToolStripMenuItem.Click += new System.EventHandler(this.showDetailsToolStripMenuItem_Click);
             // 
             // toolStripSeparator1
             // 
             this.toolStripSeparator1.Name = "toolStripSeparator1";
-            this.toolStripSeparator1.Size = new System.Drawing.Size(154, 6);
+            this.toolStripSeparator1.Size = new System.Drawing.Size(162, 6);
             // 
             // editToolStripMenuItem
             // 
             this.editToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("editToolStripMenuItem.Image")));
             this.editToolStripMenuItem.Name = "editToolStripMenuItem";
-            this.editToolStripMenuItem.Size = new System.Drawing.Size(157, 38);
-            this.editToolStripMenuItem.Text = "Edit";
+            this.editToolStripMenuItem.Size = new System.Drawing.Size(165, 38);
+            this.editToolStripMenuItem.Text = "تعديل البيانات";
             this.editToolStripMenuItem.Click += new System.EventHandler(this.editToolStripMenuItem_Click);
             // 
             // toolStripSeparator2
             // 
             this.toolStripSeparator2.Name = "toolStripSeparator2";
-            this.toolStripSeparator2.Size = new System.Drawing.Size(154, 6);
+            this.toolStripSeparator2.Size = new System.Drawing.Size(162, 6);
             // 
             // deleteToolStripMenuItem
             // 
             this.deleteToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("deleteToolStripMenuItem.Image")));
             this.deleteToolStripMenuItem.Name = "deleteToolStripMenuItem";
-            this.deleteToolStripMenuItem.Size = new System.Drawing.Size(157, 38);
-            this.deleteToolStripMenuItem.Text = "Delete";
+            this.deleteToolStripMenuItem.Size = new System.Drawing.Size(165, 38);
+            this.deleteToolStripMenuItem.Text = "مسح";
             this.deleteToolStripMenuItem.Click += new System.EventHandler(this.deleteToolStripMenuItem_Click);
+            // 
+            // toolStripMenuItem1
+            // 
+            this.toolStripMenuItem1.Name = "toolStripMenuItem1";
+            this.toolStripMenuItem1.Size = new System.Drawing.Size(162, 6);
+            // 
+            // employToolStripMenuItem
+            // 
+            this.employToolStripMenuItem.Image = global::Presentation_Layer.Properties.Resources.Employ;
+            this.employToolStripMenuItem.Name = "employToolStripMenuItem";
+            this.employToolStripMenuItem.Size = new System.Drawing.Size(165, 38);
+            this.employToolStripMenuItem.Text = "توظيف";
+            this.employToolStripMenuItem.Click += new System.EventHandler(this.employToolStripMenuItem_Click);
             // 
             // btnAddPerson
             // 
-            this.btnAddPerson.Image = ((System.Drawing.Image)(resources.GetObject("btnAddPerson.Image")));
+            this.btnAddPerson.Image = global::Presentation_Layer.Properties.Resources.AddPerson;
             this.btnAddPerson.ImeMode = System.Windows.Forms.ImeMode.NoControl;
             this.btnAddPerson.Location = new System.Drawing.Point(14, 261);
             this.btnAddPerson.Name = "btnAddPerson";
@@ -226,6 +247,7 @@
             // 
             // btnClose
             // 
+            this.btnClose.DialogResult = System.Windows.Forms.DialogResult.Cancel;
             this.btnClose.Font = new System.Drawing.Font("Segoe UI Semibold", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnClose.Image = global::Presentation_Layer.Properties.Resources.Close;
             this.btnClose.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
@@ -292,5 +314,7 @@
         private System.Windows.Forms.Button btnClose;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator2;
+        private System.Windows.Forms.ToolStripSeparator toolStripMenuItem1;
+        private System.Windows.Forms.ToolStripMenuItem employToolStripMenuItem;
     }
 }

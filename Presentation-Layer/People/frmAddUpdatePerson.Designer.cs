@@ -96,6 +96,7 @@
             // 
             // btnClose
             // 
+            this.btnClose.DialogResult = System.Windows.Forms.DialogResult.Cancel;
             this.btnClose.Image = global::Presentation_Layer.Properties.Resources.Close;
             this.btnClose.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.btnClose.Location = new System.Drawing.Point(52, 135);
@@ -138,7 +139,6 @@
             this.txtPhone.Name = "txtPhone";
             this.txtPhone.Size = new System.Drawing.Size(161, 29);
             this.txtPhone.TabIndex = 8;
-            this.txtPhone.Validating += new System.ComponentModel.CancelEventHandler(this._ValidateEmptyTextBox);
             // 
             // txtFirstName
             // 

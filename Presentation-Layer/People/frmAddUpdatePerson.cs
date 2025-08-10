@@ -98,6 +98,8 @@ namespace Presentation_Layer.People
                 _Mode = enMode.Update;
                 MessageBox.Show("تم حفظ البيانات بنجاح.", "تم الحفظ", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 DataBack?.Invoke(_Person.PersonID);
+                this.Close();
+                return;
             }
             else
                 MessageBox.Show("خطأ في حفظ البيانات", "خطأ", MessageBoxButtons.OK, MessageBoxIcon.Error);

@@ -1,4 +1,5 @@
-﻿using Presentation_Layer.People;
+﻿using Presentation_Layer.Employees;
+using Presentation_Layer.People;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -23,7 +24,8 @@ namespace Presentation_Layer
         }
         private void employeesToolStripMenuItem_Click(object sender, EventArgs e)
         {
-
+            frmListEmployees frm = new frmListEmployees();
+            frm.ShowDialog();
         }
         private void residencesToolStripMenuItem_Click(object sender, EventArgs e)
         {
