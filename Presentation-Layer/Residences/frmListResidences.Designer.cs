@@ -67,7 +67,6 @@
             // 
             // btnClose
             // 
-            this.btnClose.DialogResult = System.Windows.Forms.DialogResult.Cancel;
             this.btnClose.Font = new System.Drawing.Font("Segoe UI Semibold", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnClose.Image = global::Presentation_Layer.Properties.Resources.Close;
             this.btnClose.ImageAlign = System.Drawing.ContentAlignment.TopRight;
@@ -83,7 +82,6 @@
             // 
             // btnAddResidence
             // 
-            this.btnAddResidence.DialogResult = System.Windows.Forms.DialogResult.Cancel;
             this.btnAddResidence.Image = global::Presentation_Layer.Properties.Resources.addResidencebutton;
             this.btnAddResidence.ImeMode = System.Windows.Forms.ImeMode.NoControl;
             this.btnAddResidence.Location = new System.Drawing.Point(11, 259);

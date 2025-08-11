@@ -14,6 +14,8 @@ namespace Presentation_Layer.Employees
 {
     public partial class frmAddUpdateEmployee : Form
     {
+        public delegate void DataBackEventHandler(int EmployeeID);
+        public event DataBackEventHandler DataBack;
         public enum enMode { AddNew = 0, Update = 1, EmployeePerson = 2}
         public enMode Mode;
         private int _EmployeeID = -1;
@@ -169,6 +171,7 @@ namespace Presentation_Layer.Employees
                 lblEmployeeID.Text = _Employee.EmployeeID.ToString();
                 Mode = enMode.Update;
                 MessageBox.Show("تم حفظ البيانات بنجاح.", "تم الحفظ", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                DataBack?.Invoke(_Employee.EmployeeID);
             }
             else
                 MessageBox.Show("خطأ في حفظ البيانات", "خطأ", MessageBoxButtons.OK, MessageBoxIcon.Error);

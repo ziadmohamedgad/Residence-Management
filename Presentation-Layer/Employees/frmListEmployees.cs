@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using Business_Layer;
 using Presentation_Layer.People;
+using Presentation_Layer.Residences;
 namespace Presentation_Layer.Employees
 {
     public partial class frmListEmployees : Form
@@ -132,7 +133,9 @@ namespace Presentation_Layer.Employees
         }
         private void showResidenceToolStripMenuItem_Click(object sender, EventArgs e)
         {
-
+            frmShowResidenceInfo frm = new frmShowResidenceInfo(21);
+            frm.ShowDialog();
+            _RefreshEmployeeList();
         }
         private void createResidenceToolStripMenuItem_Click(object sender, EventArgs e)
         {

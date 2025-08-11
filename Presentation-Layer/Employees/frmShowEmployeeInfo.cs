@@ -15,10 +15,7 @@ namespace Presentation_Layer.Employees
         public frmShowEmployeeInfo(int EmployeeID)
         {
             InitializeComponent();
-            clsEmployee Employee = clsEmployee.FindByEmployeeID(EmployeeID);
-            ctrlPersonCard1.LoadPersonInfo(Employee.PersonID);
-            lblJobName.Text = Employee.Job;
-            lblSponsorName.Text = Employee.SponsorPersonInfo.FullName;
+            ctrlEmployeeCard1.LoadEmployeeInfo(EmployeeID);
         }
         private void btnClose_Click(object sender, EventArgs e)
         {
