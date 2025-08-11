@@ -39,16 +39,16 @@
             this.lblManagePeople = new System.Windows.Forms.Label();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.cbFilterBy = new System.Windows.Forms.ComboBox();
-            this.dgvEmployees = new System.Windows.Forms.DataGridView();
+            this.dgvResidences = new System.Windows.Forms.DataGridView();
             this.cmsResidences = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.showDetailsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             this.editToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
             this.deleteToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.comboBox1 = new System.Windows.Forms.ComboBox();
+            this.cbPeriods = new System.Windows.Forms.ComboBox();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.dgvEmployees)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvResidences)).BeginInit();
             this.cmsResidences.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -57,7 +57,7 @@
             this.lblFilterBy.AutoSize = true;
             this.lblFilterBy.Font = new System.Drawing.Font("Segoe UI Semibold", 12F, System.Drawing.FontStyle.Bold);
             this.lblFilterBy.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.lblFilterBy.Location = new System.Drawing.Point(798, 277);
+            this.lblFilterBy.Location = new System.Drawing.Point(838, 279);
             this.lblFilterBy.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblFilterBy.Name = "lblFilterBy";
             this.lblFilterBy.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
@@ -67,6 +67,7 @@
             // 
             // btnClose
             // 
+            this.btnClose.DialogResult = System.Windows.Forms.DialogResult.Cancel;
             this.btnClose.Font = new System.Drawing.Font("Segoe UI Semibold", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnClose.Image = global::Presentation_Layer.Properties.Resources.Close;
             this.btnClose.ImageAlign = System.Drawing.ContentAlignment.TopRight;
@@ -84,7 +85,7 @@
             // 
             this.btnAddResidence.Image = global::Presentation_Layer.Properties.Resources.addResidencebutton;
             this.btnAddResidence.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.btnAddResidence.Location = new System.Drawing.Point(11, 259);
+            this.btnAddResidence.Location = new System.Drawing.Point(12, 260);
             this.btnAddResidence.Name = "btnAddResidence";
             this.btnAddResidence.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
             this.btnAddResidence.Size = new System.Drawing.Size(107, 54);
@@ -97,7 +98,7 @@
             this.lblRecordsCount.AutoSize = true;
             this.lblRecordsCount.Font = new System.Drawing.Font("Segoe UI Semibold", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblRecordsCount.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.lblRecordsCount.Location = new System.Drawing.Point(735, 689);
+            this.lblRecordsCount.Location = new System.Drawing.Point(767, 689);
             this.lblRecordsCount.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblRecordsCount.Name = "lblRecordsCount";
             this.lblRecordsCount.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
@@ -110,7 +111,7 @@
             this.lblRecords.AutoSize = true;
             this.lblRecords.Font = new System.Drawing.Font("Segoe UI Semibold", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblRecords.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.lblRecords.Location = new System.Drawing.Point(767, 689);
+            this.lblRecords.Location = new System.Drawing.Point(813, 689);
             this.lblRecords.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblRecords.Name = "lblRecords";
             this.lblRecords.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
@@ -122,13 +123,12 @@
             // 
             this.txtFilterValue.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.txtFilterValue.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F);
-            this.txtFilterValue.Location = new System.Drawing.Point(171, 275);
+            this.txtFilterValue.Location = new System.Drawing.Point(299, 276);
             this.txtFilterValue.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.txtFilterValue.Name = "txtFilterValue";
             this.txtFilterValue.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
-            this.txtFilterValue.Size = new System.Drawing.Size(356, 26);
+            this.txtFilterValue.Size = new System.Drawing.Size(272, 26);
             this.txtFilterValue.TabIndex = 38;
-            this.txtFilterValue.Visible = false;
             this.txtFilterValue.TextChanged += new System.EventHandler(this.txtFilterValue_TextChanged);
             // 
             // lblManagePeople
@@ -137,7 +137,7 @@
             this.lblManagePeople.Font = new System.Drawing.Font("Segoe UI Semibold", 26.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblManagePeople.ForeColor = System.Drawing.Color.DarkRed;
             this.lblManagePeople.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.lblManagePeople.Location = new System.Drawing.Point(362, 201);
+            this.lblManagePeople.Location = new System.Drawing.Point(378, 204);
             this.lblManagePeople.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblManagePeople.Name = "lblManagePeople";
             this.lblManagePeople.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
@@ -149,7 +149,7 @@
             // 
             this.pictureBox1.Image = global::Presentation_Layer.Properties.Resources.Residences;
             this.pictureBox1.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.pictureBox1.Location = new System.Drawing.Point(257, 12);
+            this.pictureBox1.Location = new System.Drawing.Point(273, 12);
             this.pictureBox1.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.pictureBox1.Name = "pictureBox1";
             this.pictureBox1.Size = new System.Drawing.Size(364, 184);
@@ -160,7 +160,7 @@
             // cbFilterBy
             // 
             this.cbFilterBy.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cbFilterBy.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F);
+            this.cbFilterBy.Font = new System.Drawing.Font("Segoe UI Semibold", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.cbFilterBy.FormattingEnabled = true;
             this.cbFilterBy.Items.AddRange(new object[] {
             "لاشيء",
@@ -169,35 +169,36 @@
             "رقم الإقامة",
             "الوظيفة",
             "المدة"});
-            this.cbFilterBy.Location = new System.Drawing.Point(535, 273);
+            this.cbFilterBy.Location = new System.Drawing.Point(579, 275);
             this.cbFilterBy.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.cbFilterBy.Name = "cbFilterBy";
             this.cbFilterBy.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
-            this.cbFilterBy.Size = new System.Drawing.Size(254, 28);
+            this.cbFilterBy.Size = new System.Drawing.Size(254, 29);
             this.cbFilterBy.TabIndex = 35;
             this.cbFilterBy.SelectedIndexChanged += new System.EventHandler(this.cbFilterBy_SelectedIndexChanged);
             // 
-            // dgvEmployees
+            // dgvResidences
             // 
-            this.dgvEmployees.AllowUserToAddRows = false;
-            this.dgvEmployees.AllowUserToDeleteRows = false;
-            this.dgvEmployees.AllowUserToResizeRows = false;
-            this.dgvEmployees.BackgroundColor = System.Drawing.Color.White;
-            this.dgvEmployees.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgvEmployees.ContextMenuStrip = this.cmsResidences;
-            this.dgvEmployees.EditMode = System.Windows.Forms.DataGridViewEditMode.EditProgrammatically;
-            this.dgvEmployees.Location = new System.Drawing.Point(12, 317);
-            this.dgvEmployees.Margin = new System.Windows.Forms.Padding(6, 8, 6, 8);
-            this.dgvEmployees.MultiSelect = false;
-            this.dgvEmployees.Name = "dgvEmployees";
-            this.dgvEmployees.ReadOnly = true;
-            this.dgvEmployees.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
-            this.dgvEmployees.RowTemplate.Height = 25;
-            this.dgvEmployees.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgvEmployees.Size = new System.Drawing.Size(854, 349);
-            this.dgvEmployees.TabIndex = 34;
-            this.dgvEmployees.TabStop = false;
-            this.dgvEmployees.CellMouseDown += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.dgvEmployees_CellMouseDown);
+            this.dgvResidences.AllowUserToAddRows = false;
+            this.dgvResidences.AllowUserToDeleteRows = false;
+            this.dgvResidences.AllowUserToResizeRows = false;
+            this.dgvResidences.BackgroundColor = System.Drawing.Color.White;
+            this.dgvResidences.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgvResidences.ContextMenuStrip = this.cmsResidences;
+            this.dgvResidences.EditMode = System.Windows.Forms.DataGridViewEditMode.EditProgrammatically;
+            this.dgvResidences.Location = new System.Drawing.Point(12, 317);
+            this.dgvResidences.Margin = new System.Windows.Forms.Padding(6, 8, 6, 8);
+            this.dgvResidences.MultiSelect = false;
+            this.dgvResidences.Name = "dgvResidences";
+            this.dgvResidences.ReadOnly = true;
+            this.dgvResidences.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
+            this.dgvResidences.RowTemplate.Height = 25;
+            this.dgvResidences.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
+            this.dgvResidences.Size = new System.Drawing.Size(895, 349);
+            this.dgvResidences.TabIndex = 34;
+            this.dgvResidences.TabStop = false;
+            this.dgvResidences.CellMouseDown += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.dgvResidences_CellMouseDown);
+            this.dgvResidences.DoubleClick += new System.EventHandler(this.dgvResidences_DoubleClick);
             // 
             // cmsResidences
             // 
@@ -220,6 +221,7 @@
             this.showDetailsToolStripMenuItem.Name = "showDetailsToolStripMenuItem";
             this.showDetailsToolStripMenuItem.Size = new System.Drawing.Size(165, 38);
             this.showDetailsToolStripMenuItem.Text = "رؤية البيانات";
+            this.showDetailsToolStripMenuItem.Click += new System.EventHandler(this.showDetailsToolStripMenuItem_Click);
             // 
             // toolStripSeparator1
             // 
@@ -232,6 +234,7 @@
             this.editToolStripMenuItem.Name = "editToolStripMenuItem";
             this.editToolStripMenuItem.Size = new System.Drawing.Size(165, 38);
             this.editToolStripMenuItem.Text = "تعديل البيانات";
+            this.editToolStripMenuItem.Click += new System.EventHandler(this.editToolStripMenuItem_Click);
             // 
             // toolStripSeparator2
             // 
@@ -244,22 +247,24 @@
             this.deleteToolStripMenuItem.Name = "deleteToolStripMenuItem";
             this.deleteToolStripMenuItem.Size = new System.Drawing.Size(165, 38);
             this.deleteToolStripMenuItem.Text = "مسح";
+            this.deleteToolStripMenuItem.Click += new System.EventHandler(this.deleteToolStripMenuItem_Click);
             // 
-            // comboBox1
+            // cbPeriods
             // 
-            this.comboBox1.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.comboBox1.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F);
-            this.comboBox1.FormattingEnabled = true;
-            this.comboBox1.Items.AddRange(new object[] {
+            this.cbPeriods.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cbPeriods.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F);
+            this.cbPeriods.FormattingEnabled = true;
+            this.cbPeriods.Items.AddRange(new object[] {
             "ثلاثة أشهر فيما أقل",
             "ستة أشهر فيما أقل"});
-            this.comboBox1.Location = new System.Drawing.Point(322, 273);
-            this.comboBox1.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.comboBox1.Name = "comboBox1";
-            this.comboBox1.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
-            this.comboBox1.Size = new System.Drawing.Size(205, 28);
-            this.comboBox1.TabIndex = 35;
-            this.comboBox1.SelectedIndexChanged += new System.EventHandler(this.cbFilterBy_SelectedIndexChanged);
+            this.cbPeriods.Location = new System.Drawing.Point(366, 275);
+            this.cbPeriods.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.cbPeriods.Name = "cbPeriods";
+            this.cbPeriods.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
+            this.cbPeriods.Size = new System.Drawing.Size(205, 28);
+            this.cbPeriods.TabIndex = 35;
+            this.cbPeriods.Visible = false;
+            this.cbPeriods.SelectedIndexChanged += new System.EventHandler(this.cbPeriods_SelectedIndexChanged);
             // 
             // frmListResidences
             // 
@@ -269,18 +274,18 @@
             this.AutoValidate = System.Windows.Forms.AutoValidate.EnableAllowFocusChange;
             this.BackColor = System.Drawing.Color.White;
             this.CancelButton = this.btnClose;
-            this.ClientSize = new System.Drawing.Size(884, 734);
+            this.ClientSize = new System.Drawing.Size(922, 734);
             this.Controls.Add(this.lblFilterBy);
             this.Controls.Add(this.btnClose);
             this.Controls.Add(this.btnAddResidence);
             this.Controls.Add(this.lblRecordsCount);
             this.Controls.Add(this.lblRecords);
-            this.Controls.Add(this.txtFilterValue);
             this.Controls.Add(this.lblManagePeople);
             this.Controls.Add(this.pictureBox1);
-            this.Controls.Add(this.comboBox1);
+            this.Controls.Add(this.cbPeriods);
             this.Controls.Add(this.cbFilterBy);
-            this.Controls.Add(this.dgvEmployees);
+            this.Controls.Add(this.dgvResidences);
+            this.Controls.Add(this.txtFilterValue);
             this.Font = new System.Drawing.Font("Segoe UI Semibold", 12F, System.Drawing.FontStyle.Bold);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
             this.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
@@ -288,10 +293,9 @@
             this.RightToLeftLayout = true;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "لوحة التحكم في الإقامات";
-            this.Activated += new System.EventHandler(this.frmListResidences_Activated);
             this.Load += new System.EventHandler(this.frmListResidences_Load);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.dgvEmployees)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvResidences)).EndInit();
             this.cmsResidences.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -309,13 +313,13 @@
         private System.Windows.Forms.Label lblManagePeople;
         private System.Windows.Forms.PictureBox pictureBox1;
         private System.Windows.Forms.ComboBox cbFilterBy;
-        private System.Windows.Forms.DataGridView dgvEmployees;
+        private System.Windows.Forms.DataGridView dgvResidences;
         private System.Windows.Forms.ContextMenuStrip cmsResidences;
         private System.Windows.Forms.ToolStripMenuItem showDetailsToolStripMenuItem;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
         private System.Windows.Forms.ToolStripMenuItem editToolStripMenuItem;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator2;
         private System.Windows.Forms.ToolStripMenuItem deleteToolStripMenuItem;
-        private System.Windows.Forms.ComboBox comboBox1;
+        private System.Windows.Forms.ComboBox cbPeriods;
     }
 }

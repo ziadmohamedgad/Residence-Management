@@ -34,21 +34,21 @@ namespace Presentation_Layer.Employees
         }
         private void _ResetDefaultValues()
         {
+            if (Mode == enMode.Update)
+            {
+                lblTitle.Text = "تعديل بيانات الموظف";
+                this.Text = "لوحة تعديل بيانات الموظف";
+                llChangeSponsor.Text = "تغيير الكفيل";
+                ctrlPersonCardWithFilter1.FilterEnabled = false;
+                return;
+            }
             if (Mode == enMode.AddNew)
             {
-                lblTitle.Text = "إضافة موظف جديد";
-                lblEmployeeID.Text = "غير معروف";
-                this.Text = "لوحة إضافة بيانات الموظف";
                 ctrlPersonCardWithFilter1.FilterEnabled = true;
-                llChangeSponsor.Text = "اختيار الكفيل";
                 _Employee = new clsEmployee();
             }
             else if (Mode == enMode.EmployeePerson)
             {
-                lblTitle.Text = "إضافة موظف جديد";
-                lblEmployeeID.Text = "غير معروف";
-                this.Text = "لوحة إضافة بيانات الموظف";
-                llChangeSponsor.Text = "اختيار الكفيل";
                 if (clsPerson.Find(PersonID) == null)
                 {
                     MessageBox.Show("الرقم التعريفي " + PersonID + " غير مربوط بشخص بالفعل، تأكد من المعلومات مرة أخرى وأعد المحاولة", "خطأ",
@@ -57,7 +57,7 @@ namespace Presentation_Layer.Employees
                     return;
                 }
                 _Employee = clsEmployee.FindByPersonID(PersonID);
-                if (clsEmployee.FindByPersonID(PersonID) != null)
+                if (_Employee != null)
                 {
                     MessageBox.Show("هذا الشخص موظف بالفعل بالرقم التعريفي " + _Employee.EmployeeID, "موجود بالفعل",
                         MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
@@ -69,13 +69,11 @@ namespace Presentation_Layer.Employees
                 ctrlPersonCardWithFilter1.LoadPersonInfo(_Employee.PersonID);
                 ctrlPersonCardWithFilter1.FilterEnabled = false;
             }
-            else // update mode
-            {
-                lblTitle.Text = "تعديل بيانات الموظف";
-                this.Text = "لوحة تعديل بيانات الموظف";
-                llChangeSponsor.Text = "تغيير الكفيل";
-                ctrlPersonCardWithFilter1.FilterEnabled = false;
-            }
+            lblTitle.Text = "إضافة موظف جديد";
+            lblEmployeeID.Text = "[؟؟؟؟]";
+            this.Text = "لوحة إضافة بيانات الموظف";
+            llChangeSponsor.Text = "اختيار الكفيل";
+            lblSponsorName.Text = "[؟؟؟؟]";
             txtJob.Text = "";
         }
         private void _LoadData()
@@ -155,12 +153,15 @@ namespace Presentation_Layer.Employees
                 _Employee.PersonInfo = clsPerson.Find(_Employee.PersonID);
             }
             _Employee.Job = txtJob.Text;
-            if (clsEmployee.FindByPersonID(_Employee.PersonID) != null && Mode == enMode.AddNew)
+            if (clsEmployee.FindByPersonID(_Employee.PersonID) != null)
             {
-                MessageBox.Show("يجب تغيير الشخص لأنه بالفعل موظف بالرقم التعريفي " + _Employee.PersonID, "موظف بالفعل",
-                    MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
-                ctrlPersonCardWithFilter1.FilterEnabled = true;
-                return;
+                if (Mode == enMode.AddNew || Mode == enMode.EmployeePerson)
+                {
+                    MessageBox.Show("يجب تغيير الشخص لأنه بالفعل موظف بالرقم التعريفي " + _Employee.EmployeeID, "موظف بالفعل",
+                        MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                    ctrlPersonCardWithFilter1.FilterEnabled = true;
+                    return;
+                }
             }
             if (_Employee.Save())
             {

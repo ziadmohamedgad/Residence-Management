@@ -241,6 +241,10 @@
       <Project>{dc0b2eb2-197f-4e23-8605-f29989cbdb9f}</Project>
       <Name>Business-Layer</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Shared-Layer\Shared-Layer.csproj">
+      <Project>{0d694f84-c5e8-4ab3-8fed-f6b127762ec7}</Project>
+      <Name>Shared-Layer</Name>
+    </ProjectReference>
   </ItemGroup>
   <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

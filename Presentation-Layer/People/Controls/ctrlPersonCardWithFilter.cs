@@ -97,10 +97,10 @@ namespace Presentation_Layer.People.Controls
         private void btnAddNewPerson_Click(object sender, EventArgs e)
         {
             frmAddUpdatePerson frm = new frmAddUpdatePerson();
-            frm.DataBack += DataBackEvent;
+            frm.DataBack += _DataBackEvent;
             frm.ShowDialog();
         }
-        private void DataBackEvent(int PersonID)
+        private void _DataBackEvent(int PersonID)
         {
             cbFilterBy.SelectedIndex = 0;
             txtFilterValue.Text = PersonID.ToString();

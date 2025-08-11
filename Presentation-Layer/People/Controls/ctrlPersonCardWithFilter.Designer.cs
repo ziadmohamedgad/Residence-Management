@@ -93,12 +93,13 @@
             // cbFilterBy
             // 
             this.cbFilterBy.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cbFilterBy.Font = new System.Drawing.Font("Segoe UI Semibold", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.cbFilterBy.FormattingEnabled = true;
             this.cbFilterBy.Items.AddRange(new object[] {
-            "الرقم التعريفي"});
+            "الرقم التعريفي للشخص"});
             this.cbFilterBy.Location = new System.Drawing.Point(423, 46);
             this.cbFilterBy.Name = "cbFilterBy";
-            this.cbFilterBy.Size = new System.Drawing.Size(270, 29);
+            this.cbFilterBy.Size = new System.Drawing.Size(270, 25);
             this.cbFilterBy.TabIndex = 1;
             this.cbFilterBy.SelectedIndexChanged += new System.EventHandler(this.cbFilterBy_SelectedIndexChanged);
             // 

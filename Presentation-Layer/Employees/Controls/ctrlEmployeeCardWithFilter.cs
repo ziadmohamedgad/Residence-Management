@@ -75,12 +75,26 @@ namespace Presentation_Layer.Employees.Controls
         }
         private void btnFind_Click(object sender, EventArgs e)
         {
+            if (!this.ValidateChildren())
+            {
+                MessageBox.Show("بعض الحقول فارغة أو بها أخطاء، ضع الفأرة على النقاط الحمراء لكي تتعرف على الخطأ",
+                    "خطأ في الإدخال", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+            _FindNow();
+        }
+        public void LoadEmployeeInfo(int EmployeeID)
+        {
+            cbFilterBy.SelectedIndex = 0;
+            txtFilterValue.Text = EmployeeID.ToString();
+            _FindNow();
+        }
+        private void _FindNow()
+        {
             ctrlEmployeeCard1.LoadEmployeeInfo(int.Parse(txtFilterValue.Text.Trim()));
             this._EmployeeID = ctrlEmployeeCard1.EmployeeID;
             if (OnEmployeeSelected != null && FilterEnabled && ctrlEmployeeCard1.SelectedEmployeeInfo != null)
-            {
                 EmployeeSelected(_EmployeeID);
-            }
         }
         private void btnAddNewEmployee_Click(object sender, EventArgs e)
         {

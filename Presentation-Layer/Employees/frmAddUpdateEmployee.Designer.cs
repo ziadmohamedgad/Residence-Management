@@ -120,9 +120,9 @@
             this.lblEmployeeID.Location = new System.Drawing.Point(215, 64);
             this.lblEmployeeID.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblEmployeeID.Name = "lblEmployeeID";
-            this.lblEmployeeID.Size = new System.Drawing.Size(83, 21);
+            this.lblEmployeeID.Size = new System.Drawing.Size(52, 21);
             this.lblEmployeeID.TabIndex = 43;
-            this.lblEmployeeID.Text = "غير معروف";
+            this.lblEmployeeID.Text = "[؟؟؟؟]";
             // 
             // pictureBox3
             // 
