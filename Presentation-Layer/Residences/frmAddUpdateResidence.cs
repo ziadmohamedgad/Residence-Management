@@ -63,7 +63,7 @@ namespace Presentation_Layer.Residences
                     return;
                 }
                 _Residence = clsResidence.FindByEmployeeID(EmployeeID);
-                if (_Residence == null)
+                if (_Residence != null)
                 {
                     MessageBox.Show("هذا الموظف له إقامة بالفعل بالرقم التعريفي " + _Residence.ResidenceID , "موجود بالفعل",
                         MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
@@ -341,7 +341,7 @@ namespace Presentation_Layer.Residences
                 lblResidenceID.Text = _Residence.ResidenceID.ToString();
                 cbStatus.SelectedIndex = _Residence.ExpirationDate < DateTime.Now ? 2 : _Residence.IsActive ? 0 : 1;
                 Mode = enMode.Update;
-                MessageBox.Show("تم حفظ البيانات بنجاح.", "تم الحفظ", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MessageBox.Show("تم حفظ البيانات بنجاح", "تم الحفظ", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 DataBack?.Invoke(_Residence.ResidenceID);
             }
             else

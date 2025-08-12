@@ -141,16 +141,16 @@ namespace Presentation_Layer.Employees
                     "خطأ في اكتمال البيانات", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
+            if (Mode == enMode.AddNew || Mode == enMode.EmployeePerson)
+            {
+                _Employee.PersonID = ctrlPersonCardWithFilter1.PersonID;
+                _Employee.PersonInfo = clsPerson.Find(_Employee.PersonID);
+            }
             if (_Employee.PersonID == _Employee.SponsorPersonID)
             {
                 MessageBox.Show("عليك تغيير الكفيل، لأن الشخص لا يمكن أن يكفل نفسه", "خطأ في تكامل البيانات",
                     MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
                 return;
-            }
-            if (Mode == enMode.AddNew || Mode == enMode.EmployeePerson)
-            {
-                _Employee.PersonID = ctrlPersonCardWithFilter1.PersonID;
-                _Employee.PersonInfo = clsPerson.Find(_Employee.PersonID);
             }
             _Employee.Job = txtJob.Text;
             clsEmployee TempEmployee = clsEmployee.FindByPersonID(_Employee.PersonID);
@@ -172,7 +172,7 @@ namespace Presentation_Layer.Employees
                 ctrlPersonCardWithFilter1.FilterEnabled = false;
                 lblEmployeeID.Text = _Employee.EmployeeID.ToString();
                 Mode = enMode.Update;
-                MessageBox.Show("تم حفظ البيانات بنجاح.", "تم الحفظ", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MessageBox.Show("تم حفظ البيانات بنجاح", "تم الحفظ", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 DataBack?.Invoke(_Employee.EmployeeID);
             }
             else

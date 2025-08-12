@@ -31,9 +31,8 @@ namespace Presentation_Layer.Employees
         }
         private void frmListDrivers_Load(object sender, EventArgs e)
         {
-            dgvEmployees.DataSource = _dtEmployees;
+            _RefreshEmployeeList();
             cbFilterBy.SelectedIndex = 0;
-            lblRecordsCount.Text = _dtEmployees.Rows.Count.ToString();
             if (dgvEmployees.Rows.Count >= 0)
             {
                 dgvEmployees.Columns[0].HeaderText = "الرقم التعريفي";
@@ -148,19 +147,19 @@ namespace Presentation_Layer.Employees
                             return;
                         }
                     }
+                }
+                else
+                {
+                    if (clsEmployee.DeleteEmployee(EmployeeID))
+                    {
+                        MessageBox.Show("تم حذف الموظف بنجاح", "تمت عملية المسح", MessageBoxButtons.OK,
+                            MessageBoxIcon.Information);
+                        _RefreshEmployeeList();
+                    }
                     else
                     {
-                        if (clsEmployee.DeleteEmployee(EmployeeID))
-                        {
-                            MessageBox.Show("تم حذف الموظف بنجاح", "تمت عملية المسح", MessageBoxButtons.OK,
-                                MessageBoxIcon.Information);
-                            _RefreshEmployeeList();
-                        }
-                        else
-                        {
-                            MessageBox.Show("حدث خطأ أثناء عملية المسح!",
-                                "خطأ", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                        }
+                        MessageBox.Show("حدث خطأ أثناء عملية المسح!",
+                            "خطأ", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     }
                 }
             }
@@ -189,6 +188,8 @@ namespace Presentation_Layer.Employees
         private void createResidenceToolStripMenuItem_Click(object sender, EventArgs e)
         {
             frmAddUpdateResidence frm = new frmAddUpdateResidence();
+            frm.EmployeeID = (int)dgvEmployees.CurrentRow.Cells[0].Value;
+            frm.Mode = frmAddUpdateResidence.enMode.CreateEmployeeResidence;
             frm.ShowDialog();
             _RefreshEmployeeList();
         }
@@ -200,9 +201,8 @@ namespace Presentation_Layer.Employees
         }
         private void editResidenceToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            frmAddUpdateResidence frm = new frmAddUpdateResidence();
-            frm.EmployeeID = (int)dgvEmployees.CurrentRow.Cells[0].Value;
-            frm.Mode = frmAddUpdateResidence.enMode.CreateEmployeeResidence;
+            int ResidenceID = clsResidence.FindByEmployeeID((int)dgvEmployees.CurrentRow.Cells[0].Value).ResidenceID;
+            frmAddUpdateResidence frm = new frmAddUpdateResidence(ResidenceID);
             frm.ShowDialog();
             _RefreshEmployeeList();
         }

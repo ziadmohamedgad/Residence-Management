@@ -96,7 +96,7 @@ namespace Presentation_Layer.People
                 this.Text = "لوحة تعديل بيانات الشخص";
                 lblPersonID.Text = _Person.PersonID.ToString();
                 _Mode = enMode.Update;
-                MessageBox.Show("تم حفظ البيانات بنجاح.", "تم الحفظ", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MessageBox.Show("تم حفظ البيانات بنجاح", "تم الحفظ", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 DataBack?.Invoke(_Person.PersonID);
                 this.Close();
                 return;
