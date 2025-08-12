@@ -181,6 +181,7 @@
             this.dgvEmployees.TabIndex = 24;
             this.dgvEmployees.TabStop = false;
             this.dgvEmployees.CellMouseDown += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.dgvEmployees_CellMouseDown);
+            this.dgvEmployees.DoubleClick += new System.EventHandler(this.dgvEmployees_DoubleClick);
             // 
             // cmsEmployees
             // 

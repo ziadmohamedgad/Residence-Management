@@ -15,6 +15,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using Shared_Layer;
 using System.Runtime.CompilerServices;
+using System.Linq.Expressions;
 namespace Presentation_Layer.Residences
 {
     public partial class frmAddUpdateResidence : Form
@@ -45,7 +46,6 @@ namespace Presentation_Layer.Residences
                 this.Text = "لوحة تعديل بيانات الإقامة";
                 ctrlEmployeeCardWithFilter1.FilterEnabled = false;
                 llAddEditResidencePicture.Text = pbResidenceImage.ImageLocation == null ? "إضافة صورة الإقامة" : "تغيير صورة الإقامة";
-                llRemoveResidenceImage.Visible = pbResidenceImage.ImageLocation != null;
                 return;
             }
             if (Mode == enMode.AddNew)
@@ -81,11 +81,11 @@ namespace Presentation_Layer.Residences
             llRemoveResidenceImage.Visible = false;
             pbResidenceImage.Image = Resources.ResidenceCard;
             lblResidenceID.Text = "[؟؟؟؟]";
-            lblResidenceNumber.Text = "[؟؟؟؟]";
+            txtResidenceNumber.Text = "";
             cbResidencePeriods.SelectedIndex = 0;
             dtpIssueDate.Value = DateTime.Now;
-            dtpExpirationDate.Value = DateTime.Now.AddMonths(3); // the default value of the cbPeriods is 3 months
-            lblStatus.Text = "[؟؟؟؟]";
+            dtpExpirationDate.Value = dtpIssueDate.Value.AddMonths((byte)GetResidencePeriod());
+            cbStatus.SelectedIndex = 0;
             txtNotes.Text = "";
         }
         private void _LoadData()
@@ -110,14 +110,14 @@ namespace Presentation_Layer.Residences
             {
                 pbResidenceImage.ImageLocation = clsUtility.GetDestinationImagesFolderDynamically() + '\\' + _Residence.ImageName;
                 llAddEditResidencePicture.Text = "تغيير صورة الإقامة";
-                llAddEditResidencePicture.Visible = true;
+                llRemoveResidenceImage.Visible = true;
             }
             lblResidenceID.Text = _Residence.ResidenceID.ToString();
-            lblResidenceNumber.Text = _Residence.ResidenceNumber;
+            txtResidenceNumber.Text = _Residence.ResidenceNumber;
             cbResidencePeriods.SelectedIndex = GetCbPeriodsSelectedIndex();
             dtpIssueDate.Value = _Residence.IssueDate;
             dtpExpirationDate.Value = _Residence.ExpirationDate;
-            lblStatus.Text = dtpExpirationDate.Value < DateTime.Now ? "منتهية" : _Residence.IsActive ? "نشطة" : "غير نشطة";
+            cbStatus.SelectedIndex = dtpExpirationDate.Value < DateTime.Now ? 2 : _Residence.IsActive ? 0 : 1;
             txtNotes.Text = _Residence.Notes;
         }
         private byte GetCbPeriodsSelectedIndex()
@@ -189,21 +189,35 @@ namespace Presentation_Layer.Residences
             {
                 // maybe the current Picture Box is null, but there was an a differ with the _Residence.Image,
                 // because there was an old stored image so we just need to delete the old image 
-
                 if (_Residence.ImageName != "") // this means there was an old image, so we need to delete
                 {
                     // we here need to delete the old image, because there is already a cange made
                     if (File.Exists(_ResidenceImagePath))
                     {
-                        string SecuredImagePath = @"C:\Residences Management\Images\" + _Residence.ImageName;
                         try
                         {
                             File.Delete(_ResidenceImagePath);
-                            File.Delete(SecuredImagePath);
                         }
                         catch(IOException iox)
                         {
                             MessageBox.Show("حدث خطأ أثناء مسح الصورة القديمة بالمسار التالي:" + _ResidenceImagePath, "خطأ",
+                                MessageBoxButtons.OK, MessageBoxIcon.Error);
+                            clsEventLogger.SaveLog("Application", $"Error deleting the old phone: {iox.Message}",
+                                System.Diagnostics.EventLogEntryType.Error);
+                            return false;
+                        }
+                    }
+                    string SecuredImagesFolder = @"C:\Residences Management\Images";
+                    string SecuredImagePath = Path.Combine(SecuredImagesFolder, _Residence.ImageName);
+                    if (File.Exists(SecuredImagePath))
+                    {
+                        try
+                        {
+                            File.Delete(SecuredImagePath);
+                        }
+                        catch (IOException iox)
+                        {
+                            MessageBox.Show("حدث خطأ أثناء مسح الصورة القديمة بالمسار التالي:" + SecuredImagePath, "خطأ",
                                 MessageBoxButtons.OK, MessageBoxIcon.Error);
                             clsEventLogger.SaveLog("Application", $"Error deleting the old phone: {iox.Message}",
                                 System.Diagnostics.EventLogEntryType.Error);
@@ -215,7 +229,7 @@ namespace Presentation_Layer.Residences
                 // now we have to proceed to save the new image
                 if (pbResidenceImage.ImageLocation != null)
                 {
-                    string SourceImageFile = pbResidenceImage.ImageLocation.ToString();
+                    string SourceImageFile = pbResidenceImage.ImageLocation.ToString(); //original photo full path
                     if (File.Exists(SourceImageFile)) //extra validating because maybe moved or deleted the new picture after uploading it
                     {
                         if (clsUtility.CopyImageToProjectImagesFolder(ref SourceImageFile))
@@ -266,6 +280,12 @@ namespace Presentation_Layer.Residences
         }
         private void btnSave_Click(object sender, EventArgs e)
         {
+            if (!this.ValidateChildren())
+            {
+                MessageBox.Show("بعض الحقول ليست صحيحة، قم بوضع الفأرة على النقاط الحمراء لكي تتعرف على الخطأ",
+                    "خطأ في التحقق", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
             if (ctrlEmployeeCardWithFilter1.EmployeeID == -1)
             {
                 MessageBox.Show("لم تقم باختيار أو إنشاء موظف","خطأ في اكتمال اليبانات", MessageBoxButtons.OK, MessageBoxIcon.Error);
@@ -283,17 +303,24 @@ namespace Presentation_Layer.Residences
                 _Residence.EmployeeID = ctrlEmployeeCardWithFilter1.EmployeeID;
                 _Residence.EmployeeInfo = clsEmployee.FindByEmployeeID(_Residence.EmployeeID);
             }
-            if (clsResidence.FindByEmployeeID(_Residence.EmployeeID) != null)
+            clsResidence TempResidence = clsResidence.FindByEmployeeID(_Residence.EmployeeID);
+            if (TempResidence != null)
             {
                 if (Mode == enMode.AddNew || Mode == enMode.CreateEmployeeResidence)
                 {
-                    MessageBox.Show("هذا الموظف بالفعل لديه إقامة بالرقم التعريفي " + _Residence.ResidenceID,
+                    MessageBox.Show("هذا الموظف بالفعل لديه إقامة بالرقم التعريفي " + TempResidence.ResidenceID,
                         "الإقامة موجودة بالفعل", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
                     ctrlEmployeeCardWithFilter1.FilterEnabled = true;
                     return;
                 }
             }
-            _Residence.ResidenceNumber = lblResidenceNumber.Text;
+            if (dtpExpirationDate.Value < dtpIssueDate.Value)
+            {
+                MessageBox.Show("لا يمكن أن يكون تاريخ انتهاء الإقامة قبل تاريخ إنشاؤها!، راجع البيانات مرة أخرى",
+                    "يجب تصحيح الإدخال", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                return;
+            }
+            _Residence.ResidenceNumber = txtResidenceNumber.Text;
             _Residence.ResidencePeriod = GetResidencePeriod();
             _Residence.IssueDate = dtpIssueDate.Value;
             _Residence.ExpirationDate = dtpExpirationDate.Value;
@@ -301,7 +328,7 @@ namespace Presentation_Layer.Residences
                 _Residence.ImageName = Path.GetFileName(pbResidenceImage.ImageLocation);
             else
                 _Residence.ImageName = "";
-                _Residence.IsActive = lblStatus.Text == "منتهية" || lblStatus.Text == "غير نشطة" ? false : true;
+            _Residence.IsActive = cbStatus.SelectedIndex == 2 || cbStatus.SelectedIndex == 1 ? false : true;
             _Residence.Notes = txtNotes.Text;
             _Residence.EmployeeID = ctrlEmployeeCardWithFilter1.EmployeeID;
             if (_Residence.Save())
@@ -312,6 +339,7 @@ namespace Presentation_Layer.Residences
                 llAddEditResidencePicture.Text = pbResidenceImage.ImageLocation == null ? "إضافة صورة الإقامة" : "تغيير صورة الإقامة";
                 llRemoveResidenceImage.Visible = pbResidenceImage.ImageLocation != null;
                 lblResidenceID.Text = _Residence.ResidenceID.ToString();
+                cbStatus.SelectedIndex = _Residence.ExpirationDate < DateTime.Now ? 2 : _Residence.IsActive ? 0 : 1;
                 Mode = enMode.Update;
                 MessageBox.Show("تم حفظ البيانات بنجاح.", "تم الحفظ", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 DataBack?.Invoke(_Residence.ResidenceID);
@@ -325,12 +353,52 @@ namespace Presentation_Layer.Residences
         }
         private void frmAddUpdateResidence_Activated(object sender, EventArgs e)
         {
-            if (Mode == enMode.AddNew || Mode == enMode.CreateEmployeeResidence)
+            if (Mode == enMode.AddNew)
                 ctrlEmployeeCardWithFilter1.FilterFocus();
         }
         private void dtpIssueDate_ValueChanged(object sender, EventArgs e)
         {
-            // here we will add the period to the data and calc the expiration data, then we well judge the activation status
+            dtpExpirationDate.Value = dtpIssueDate.Value.AddMonths((byte)GetResidencePeriod());
+            if (dtpExpirationDate.Value < DateTime.Now)
+                cbStatus.SelectedIndex = 2;
+            else
+                cbStatus.SelectedIndex = 0;
+        }
+        private void txtResidenceNumber_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            e.Handled = !char.IsDigit(e.KeyChar) && !char.IsControl(e.KeyChar);
+        }
+        private void txtResidenceNumber_Validating(object sender, CancelEventArgs e)
+        {
+            if (string.IsNullOrEmpty(txtResidenceNumber.Text.Trim()))
+            {
+                e.Cancel = true;
+                errorProvider1.SetError(txtResidenceNumber, "لا يمكن ترك هذا الحقل فارغًا");
+            }
+            else
+                errorProvider1.SetError(txtResidenceNumber, null);
+        }
+        private void cbStatus_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (cbStatus.SelectedIndex == 0 && dtpExpirationDate.Value < DateTime.Now)
+            {
+                MessageBox.Show("لا يمكن أن تكون حالة الإقامة نشطة وتاريخ انتهائها قد مضى، يمكنك تغيير حالة الإقامة إلى غير منتهية إن أردت",
+                    "يجب تصحيح الإدخال", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                cbStatus.SelectedIndex = 2;
+                return;
+            }
+            if (cbStatus.SelectedIndex == 2 && dtpExpirationDate.Value > DateTime.Now)
+            {
+                MessageBox.Show("لا يمكن أن تكون حالة الإقامة منتهية وتاريخ انتهائها مازال في المستقبل، يمكنك تغيير حالة الإقامة إلى غير نشطة إن أردت",
+                    "يجب تصحيح الإدخال", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                cbStatus.SelectedIndex = 0;
+            }
+        }
+        private void cbResidencePeriods_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            dtpExpirationDate.Value = dtpIssueDate.Value.AddMonths((byte)GetResidencePeriod());
+            if (dtpExpirationDate.Value < DateTime.Now)
+                cbStatus.SelectedIndex = 2;
         }
     }
 }

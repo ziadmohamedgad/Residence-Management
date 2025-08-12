@@ -153,11 +153,12 @@ namespace Presentation_Layer.Employees
                 _Employee.PersonInfo = clsPerson.Find(_Employee.PersonID);
             }
             _Employee.Job = txtJob.Text;
-            if (clsEmployee.FindByPersonID(_Employee.PersonID) != null)
+            clsEmployee TempEmployee = clsEmployee.FindByPersonID(_Employee.PersonID);
+            if (TempEmployee != null)
             {
                 if (Mode == enMode.AddNew || Mode == enMode.EmployeePerson)
                 {
-                    MessageBox.Show("يجب تغيير الشخص لأنه بالفعل موظف بالرقم التعريفي " + _Employee.EmployeeID, "موظف بالفعل",
+                    MessageBox.Show("يجب تغيير الشخص لأنه بالفعل موظف بالرقم التعريفي " + TempEmployee.EmployeeID, "موظف بالفعل",
                         MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
                     ctrlPersonCardWithFilter1.FilterEnabled = true;
                     return;

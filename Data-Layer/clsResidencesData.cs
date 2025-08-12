@@ -164,7 +164,7 @@ namespace Data_Layer
                     Connection.Open();
                     string Query = @"INSERT INTO Residences (ResidenceNumber, ResidencePeriod, IssueDate, ExpirationDate, ImageName,
                                      IsActive, Notes, EmployeeID)
-                                     VALUES (@ResidenceNumber, @ResidencePeriod, @IssueDate, @ExpirationDate, @ImageName, @Notes, @EmployeeID);
+                                     VALUES (@ResidenceNumber, @ResidencePeriod, @IssueDate, @ExpirationDate, @ImageName, @IsActive, @Notes, @EmployeeID);
                                      SELECT SCOPE_IDENTITY();";
                     using (SqlCommand Command = new SqlCommand(Query, Connection))
                     {
@@ -181,7 +181,6 @@ namespace Data_Layer
                             Command.Parameters.AddWithValue("@Notes", Notes);
                         else
                             Command.Parameters.AddWithValue("@Notes", DBNull.Value);
-
                         Command.Parameters.AddWithValue("@EmployeeID", EmployeeID);
                         object Result = Command.ExecuteScalar();
                         if (Result != null && int.TryParse(Result.ToString(), out int ID))
@@ -219,11 +218,12 @@ namespace Data_Layer
                                          ExpirationDate = @ExpirationDate,
                                          ImageName = @ImageName,
                                          IsActive = @IsActive,
-                                         Notes = @Notes 
+                                         Notes = @Notes, 
                                          EmployeeID = @EmployeeID 
                                       WHERE Residences.ResidenceID = @ResidenceID";
                     using (SqlCommand Command = new SqlCommand(Query, Connection))
                     {
+                        Command.Parameters.AddWithValue(@"@ResidenceID", ResidenceID);
                         Command.Parameters.AddWithValue("@ResidenceNumber", ResidenceNumber);
                         Command.Parameters.AddWithValue("@ResidencePeriod", ResidencePeriod);
                         Command.Parameters.AddWithValue("@IssueDate", IssueDate);

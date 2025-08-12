@@ -27,14 +27,13 @@ namespace Presentation_Layer.Residences
             _dtAllResidences = clsResidence.GetAllResidences();
             _dtResidences = _dtAllResidences.DefaultView.ToTable(false, "ResidenceID", "EmployeeFullName",
             "Job", "ResidenceNumber", "ExpirationDate", "IsActive");
-            dgvResidences.DataSource = _dtAllResidences;
+            dgvResidences.DataSource = _dtResidences;
             lblRecordsCount.Text = dgvResidences.Rows.Count.ToString();
         }
         private void frmListResidences_Load(object sender, EventArgs e)
         {
-            dgvResidences.DataSource = _dtResidences;
+            _RefreshResidencesList();
             cbFilterBy.SelectedIndex = 0;
-            lblRecordsCount.Text = _dtResidences.Rows.Count.ToString();
             if (dgvResidences.Rows.Count >= 0)
             {
                 dgvResidences.Columns[0].HeaderText = "الرقم التعريفي";
@@ -53,13 +52,6 @@ namespace Presentation_Layer.Residences
         }
         private void txtFilterValue_TextChanged(object sender, EventArgs e)
         {
-            //            لاشيء
-            //الرقم التعريفي
-            //اسم الموظف
-            //رقم الإقامة
-            //الوظيفة
-            //المدة
-            //"ResidenceID", "EmployeeFullName", "Job", "ResidenceNumber", "ExpirationDate", "IsActive"
             string FilterColumn = "";
             switch(cbFilterBy.SelectedIndex)
             {
@@ -75,9 +67,21 @@ namespace Presentation_Layer.Residences
                 case 4:
                     FilterColumn = "Job";
                     break;
-                case 5:
-                    FilterColumn = ""
+                default:
+                    FilterColumn = "None";
+                    break;
             }
+            if (FilterColumn == "None" || txtFilterValue.Text.Trim() == "")
+            {
+                _dtResidences.DefaultView.RowFilter = "";
+                lblRecordsCount.Text = dgvResidences.Rows.Count.ToString();
+                return;
+            }
+            if (FilterColumn == "ResidenceID")
+                _dtResidences.DefaultView.RowFilter = string.Format("[{0}] = {1}", FilterColumn, txtFilterValue.Text.Trim());
+            else
+                _dtResidences.DefaultView.RowFilter = string.Format("[{0}] LIKE '{1}%'", FilterColumn, txtFilterValue.Text.Trim());
+            lblRecordsCount.Text = dgvResidences.Rows.Count.ToString();
         }
         private void btnAddEmployee_Click(object sender, EventArgs e)
         {
@@ -137,7 +141,31 @@ namespace Presentation_Layer.Residences
         }
         private void cbPeriods_SelectedIndexChanged(object sender, EventArgs e)
         {
-
+            int Months = cbPeriods.SelectedIndex == 0 ? 3 : 6;
+            DateTime today = DateTime.Today;
+            DateTime limitDate = today.AddMonths(Months);
+            var filteredRows = _dtResidences.AsEnumerable()
+                .Where(row =>
+                {
+                    if (row.IsNull("ExpirationDate")) return false;
+                    DateTime exp;
+                    try
+                    {
+                        exp = Convert.ToDateTime(row["ExpirationDate"]).Date;
+                    }
+                    catch
+                    {
+                        return false;
+                    }
+                    return exp >= today && exp < limitDate;
+                });
+            DataTable result;
+            if (filteredRows.Any())
+                result = filteredRows.CopyToDataTable();
+            else
+                result = _dtResidences.Clone();
+            dgvResidences.DataSource = result;
+            lblRecordsCount.Text = result.Rows.Count.ToString();
         }
         private void cbFilterBy_SelectedIndexChanged(object sender, EventArgs e)
         {
@@ -150,11 +178,17 @@ namespace Presentation_Layer.Residences
             }
             else
             {
-                txtFilterValue.Visible = (cbFilterBy.Text != "None");
+                txtFilterValue.Visible = cbFilterBy.SelectedIndex != 0;
                 cbPeriods.Visible = false;
                 txtFilterValue.Text = "";
                 txtFilterValue.Focus();
+                dgvResidences.DataSource = _dtResidences;
             }
+        }
+        private void txtFilterValue_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (cbFilterBy.SelectedIndex == 1 || cbFilterBy.SelectedIndex == 3)
+                e.Handled = (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar));
         }
     }
 }

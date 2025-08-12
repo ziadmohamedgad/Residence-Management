@@ -75,6 +75,7 @@
             this.btnClose.TabIndex = 31;
             this.btnClose.Text = "إغلاق";
             this.btnClose.UseVisualStyleBackColor = true;
+            this.btnClose.Click += new System.EventHandler(this.btnClose_Click);
             // 
             // lblEmployeeFullName
             // 
@@ -106,11 +107,11 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(776, 327);
+            this.label2.Location = new System.Drawing.Point(729, 327);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(107, 21);
+            this.label2.Size = new System.Drawing.Size(154, 21);
             this.label2.TabIndex = 33;
-            this.label2.Text = "الرقم التعريفي:";
+            this.label2.Text = "الرقم التعريفي للإقامة:";
             // 
             // label3
             // 
@@ -225,7 +226,7 @@
             this.pbResidence.Image = global::Presentation_Layer.Properties.Resources.ResidenceCard;
             this.pbResidence.Location = new System.Drawing.Point(12, 91);
             this.pbResidence.Name = "pbResidence";
-            this.pbResidence.Size = new System.Drawing.Size(867, 210);
+            this.pbResidence.Size = new System.Drawing.Size(876, 210);
             this.pbResidence.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.pbResidence.TabIndex = 36;
             this.pbResidence.TabStop = false;

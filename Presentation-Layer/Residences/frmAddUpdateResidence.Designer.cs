@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.btnSave = new System.Windows.Forms.Button();
             this.btnClose = new System.Windows.Forms.Button();
             this.lblTitle = new System.Windows.Forms.Label();
@@ -42,15 +43,17 @@
             this.dtpExpirationDate = new System.Windows.Forms.DateTimePicker();
             this.dtpIssueDate = new System.Windows.Forms.DateTimePicker();
             this.cbResidencePeriods = new System.Windows.Forms.ComboBox();
-            this.lblResidenceNumber = new System.Windows.Forms.Label();
             this.label6 = new System.Windows.Forms.Label();
-            this.lblStatus = new System.Windows.Forms.Label();
             this.lblResidenceID = new System.Windows.Forms.Label();
             this.txtNotes = new System.Windows.Forms.TextBox();
             this.llRemoveResidenceImage = new System.Windows.Forms.LinkLabel();
             this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
             this.ctrlEmployeeCardWithFilter1 = new Presentation_Layer.Employees.Controls.ctrlEmployeeCardWithFilter();
+            this.txtResidenceNumber = new System.Windows.Forms.TextBox();
+            this.errorProvider1 = new System.Windows.Forms.ErrorProvider(this.components);
+            this.cbStatus = new System.Windows.Forms.ComboBox();
             ((System.ComponentModel.ISupportInitialize)(this.pbResidenceImage)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).BeginInit();
             this.SuspendLayout();
             // 
             // btnSave
@@ -67,6 +70,7 @@
             // 
             // btnClose
             // 
+            this.btnClose.DialogResult = System.Windows.Forms.DialogResult.Cancel;
             this.btnClose.Image = global::Presentation_Layer.Properties.Resources.Close;
             this.btnClose.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.btnClose.Location = new System.Drawing.Point(15, 670);
@@ -203,15 +207,7 @@
             this.cbResidencePeriods.Name = "cbResidencePeriods";
             this.cbResidencePeriods.Size = new System.Drawing.Size(178, 29);
             this.cbResidencePeriods.TabIndex = 48;
-            // 
-            // lblResidenceNumber
-            // 
-            this.lblResidenceNumber.AutoSize = true;
-            this.lblResidenceNumber.Location = new System.Drawing.Point(79, 397);
-            this.lblResidenceNumber.Name = "lblResidenceNumber";
-            this.lblResidenceNumber.Size = new System.Drawing.Size(52, 21);
-            this.lblResidenceNumber.TabIndex = 42;
-            this.lblResidenceNumber.Text = "[؟؟؟؟]";
+            this.cbResidencePeriods.SelectedIndexChanged += new System.EventHandler(this.cbResidencePeriods_SelectedIndexChanged);
             // 
             // label6
             // 
@@ -221,15 +217,6 @@
             this.label6.Size = new System.Drawing.Size(86, 21);
             this.label6.TabIndex = 41;
             this.label6.Text = "حالة الإقامة:";
-            // 
-            // lblStatus
-            // 
-            this.lblStatus.AutoSize = true;
-            this.lblStatus.Location = new System.Drawing.Point(79, 569);
-            this.lblStatus.Name = "lblStatus";
-            this.lblStatus.Size = new System.Drawing.Size(52, 21);
-            this.lblStatus.TabIndex = 42;
-            this.lblStatus.Text = "[؟؟؟؟]";
             // 
             // lblResidenceID
             // 
@@ -277,17 +264,45 @@
             this.ctrlEmployeeCardWithFilter1.Size = new System.Drawing.Size(543, 538);
             this.ctrlEmployeeCardWithFilter1.TabIndex = 49;
             // 
+            // txtResidenceNumber
+            // 
+            this.txtResidenceNumber.Location = new System.Drawing.Point(14, 393);
+            this.txtResidenceNumber.Name = "txtResidenceNumber";
+            this.txtResidenceNumber.Size = new System.Drawing.Size(178, 29);
+            this.txtResidenceNumber.TabIndex = 50;
+            this.txtResidenceNumber.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.txtResidenceNumber.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtResidenceNumber_KeyPress);
+            this.txtResidenceNumber.Validating += new System.ComponentModel.CancelEventHandler(this.txtResidenceNumber_Validating);
+            // 
+            // errorProvider1
+            // 
+            this.errorProvider1.ContainerControl = this;
+            // 
+            // cbStatus
+            // 
+            this.cbStatus.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cbStatus.FormattingEnabled = true;
+            this.cbStatus.Items.AddRange(new object[] {
+            "نشطة",
+            "غير نشطة",
+            "منتهية"});
+            this.cbStatus.Location = new System.Drawing.Point(16, 565);
+            this.cbStatus.Name = "cbStatus";
+            this.cbStatus.Size = new System.Drawing.Size(178, 29);
+            this.cbStatus.TabIndex = 48;
+            this.cbStatus.SelectedIndexChanged += new System.EventHandler(this.cbStatus_SelectedIndexChanged);
+            // 
             // frmAddUpdateResidence
             // 
-            this.AcceptButton = this.btnSave;
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 21F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoValidate = System.Windows.Forms.AutoValidate.EnableAllowFocusChange;
             this.BackColor = System.Drawing.Color.White;
             this.CancelButton = this.btnClose;
             this.ClientSize = new System.Drawing.Size(960, 722);
+            this.Controls.Add(this.txtResidenceNumber);
             this.Controls.Add(this.llAddEditResidencePicture);
-            this.Controls.Add(this.ctrlEmployeeCardWithFilter1);
+            this.Controls.Add(this.cbStatus);
             this.Controls.Add(this.cbResidencePeriods);
             this.Controls.Add(this.dtpIssueDate);
             this.Controls.Add(this.dtpExpirationDate);
@@ -296,8 +311,6 @@
             this.Controls.Add(this.llRemoveResidenceImage);
             this.Controls.Add(this.txtNotes);
             this.Controls.Add(this.lblResidenceID);
-            this.Controls.Add(this.lblResidenceNumber);
-            this.Controls.Add(this.lblStatus);
             this.Controls.Add(this.label6);
             this.Controls.Add(this.label5);
             this.Controls.Add(this.label3);
@@ -307,6 +320,7 @@
             this.Controls.Add(this.lblTitle);
             this.Controls.Add(this.btnSave);
             this.Controls.Add(this.btnClose);
+            this.Controls.Add(this.ctrlEmployeeCardWithFilter1);
             this.Font = new System.Drawing.Font("Segoe UI Semibold", 12F, System.Drawing.FontStyle.Bold);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
             this.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
@@ -317,6 +331,7 @@
             this.Activated += new System.EventHandler(this.frmAddUpdateResidence_Activated);
             this.Load += new System.EventHandler(this.frmAddUpdateResidence_Load);
             ((System.ComponentModel.ISupportInitialize)(this.pbResidenceImage)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -339,12 +354,13 @@
         private System.Windows.Forms.DateTimePicker dtpIssueDate;
         private System.Windows.Forms.ComboBox cbResidencePeriods;
         private Employees.Controls.ctrlEmployeeCardWithFilter ctrlEmployeeCardWithFilter1;
-        private System.Windows.Forms.Label lblResidenceNumber;
         private System.Windows.Forms.Label label6;
-        private System.Windows.Forms.Label lblStatus;
         private System.Windows.Forms.Label lblResidenceID;
         private System.Windows.Forms.TextBox txtNotes;
         private System.Windows.Forms.LinkLabel llRemoveResidenceImage;
         private System.Windows.Forms.OpenFileDialog openFileDialog1;
+        private System.Windows.Forms.TextBox txtResidenceNumber;
+        private System.Windows.Forms.ErrorProvider errorProvider1;
+        private System.Windows.Forms.ComboBox cbStatus;
     }
 }

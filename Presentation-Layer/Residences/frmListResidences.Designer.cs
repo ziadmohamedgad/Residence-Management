@@ -130,6 +130,7 @@
             this.txtFilterValue.Size = new System.Drawing.Size(272, 26);
             this.txtFilterValue.TabIndex = 38;
             this.txtFilterValue.TextChanged += new System.EventHandler(this.txtFilterValue_TextChanged);
+            this.txtFilterValue.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtFilterValue_KeyPress);
             // 
             // lblManagePeople
             // 

@@ -141,5 +141,9 @@ namespace Presentation_Layer.Employees
         {
 
         }
+        private void dgvEmployees_DoubleClick(object sender, EventArgs e)
+        {
+
+        }
     }
 }

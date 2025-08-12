@@ -39,9 +39,8 @@ namespace Presentation_Layer.People
         }
         private void frmListPeople_Load(object sender, EventArgs e)
         {
-            dgvPeople.DataSource = _dtPeople;
+            _RefreshPeopleList();
             cbFilterBy.SelectedIndex = 0;
-            lblRecordsCount.Text = dgvPeople.Rows.Count.ToString();
             if (dgvPeople.Rows.Count >= 0)
             {
                 dgvPeople.Columns[0].HeaderText = "الرقم التعريفي";

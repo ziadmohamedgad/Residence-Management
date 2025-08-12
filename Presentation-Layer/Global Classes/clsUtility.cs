@@ -25,7 +25,7 @@ namespace Presentation_Layer.Global_Classes
             string extn = fi.Extension;
             return GenerateGUID() + extn;
         }
-        private static bool CreateFolderIfDoesNotExists(string FolderPath, string SecuredImagesFolder = @"C:\Residences Management\Images\")
+        private static bool CreateFolderIfDoesNotExists(string FolderPath, string SecuredImagesFolder = @"C:\Residences Management\Images")
         {
             //Check if the folder exists
             if (!Directory.Exists(FolderPath))
@@ -34,12 +34,26 @@ namespace Presentation_Layer.Global_Classes
                 {
                     //create the folder
                     Directory.CreateDirectory(FolderPath);
-                    if (!Directory.Exists(SecuredImagesFolder))
-                        Directory.CreateDirectory(SecuredImagesFolder);
                 }
                 catch(Exception ex)
                 {
                     MessageBox.Show("خطأ في إنشاء مجلد الصور بالمسار:" + FolderPath, "خطأ في إنشاء المجلد",
+                        MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    clsEventLogger.SaveLog("Application", $"Error creating folder: {ex.Message}",
+                        System.Diagnostics.EventLogEntryType.Error);
+                    return false;
+                }
+            }
+            if (!Directory.Exists(SecuredImagesFolder))
+            {
+                try
+                {
+                    //create the folder
+                    Directory.CreateDirectory(SecuredImagesFolder);
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show("خطأ في إنشاء مجلد الصور بالمسار:" + SecuredImagesFolder, "خطأ في إنشاء المجلد",
                         MessageBoxButtons.OK, MessageBoxIcon.Error);
                     clsEventLogger.SaveLog("Application", $"Error creating folder: {ex.Message}",
                         System.Diagnostics.EventLogEntryType.Error);
@@ -63,12 +77,12 @@ namespace Presentation_Layer.Global_Classes
         {
             //this function will copy the image from it's original place, to the project's images folder, after renaming it with a GUID number
             //with the same extension, then the souce file name will be updated with the new name
-            string SecuredImagesFolder = @"C:\Residences Management\Images\";
-            string DestinationsFolder = GetDestinationImagesFolderDynamically();
-            if (!CreateFolderIfDoesNotExists(DestinationsFolder, SecuredImagesFolder))
+            string SecuredImagesFolder = @"C:\Residences Management\Images";
+            string DestinationFolder = GetDestinationImagesFolderDynamically();
+            if (!CreateFolderIfDoesNotExists(DestinationFolder, SecuredImagesFolder))
                 return false;
-            string GUIDdotExtension = ReplaceFileNameWithGUID(SourceFile);
-            string DestinationFile = Path.Combine(DestinationsFolder, GUIDdotExtension);
+            string GUIDdotExtension = ReplaceFileNameWithGUID(SourceFile); //jsut generates a new guidname with the original photo extension
+            string DestinationFile = Path.Combine(DestinationFolder, GUIDdotExtension); // this copies the photo to folder with the custom created name
             string SecuredDestinationFile = Path.Combine(SecuredImagesFolder, GUIDdotExtension);
             try
             {

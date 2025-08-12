@@ -47,12 +47,16 @@ namespace Presentation_Layer.Residences
             lblEmployeeFullName.Text = _Residence.EmployeeInfo.PersonInfo.FullName;
             lblJob.Text = _Residence.EmployeeInfo.Job;
             lblResidenceNumber.Text = _Residence.ResidenceNumber;
-            lblIssueDate.Text = _Residence.IssueDate.ToString();
-            lblExpirationDate.Text = _Residence.ExpirationDate.ToString();
+            lblIssueDate.Text = _Residence.IssueDate.ToString("yyyy - MM - d");
+            lblExpirationDate.Text = _Residence.ExpirationDate.ToString("yyyy - MM - d");
             lblStatus.Text = _Residence.IsActive ? "نشطة" : "غير نشطة";
             lblNotes.Text = _Residence.Notes;
             if (_Residence.ImageName != "")
                 _LoadImage();      
+        }
+        private void btnClose_Click(object sender, EventArgs e)
+        {
+            this.Close();
         }
     }
 }
