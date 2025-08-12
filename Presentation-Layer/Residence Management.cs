@@ -45,9 +45,9 @@ namespace Presentation_Layer
                 body += $"{row["EmployeeFullName"]} - {row["ResidenceNumber"]} - {Convert.ToDateTime(row["ExpirationDate"]):yyyy-MM-dd}\n";
             }
             clsEmailService.SendEmail(
-                fromEmail: "your_email@gmail.com",
-                password: "your_app_password",
-                toEmail: "recipient_email@example.com",
+                fromEmail: "your_email@gmail.com",///////////////
+                password: "your_app_password",////////////////
+                toEmail: "recipient_email@example.com",/////////
                 subject: "تنبيه: إقامات ستنتهي قريبًا",
                 body: body
             );
