@@ -218,6 +218,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Main.ico" />
+    <None Include="Resources\EditResidence.png" />
     <None Include="Resources\Search.png" />
     <None Include="Resources\ResidenceCard.png" />
     <None Include="Resources\addResidencebutton.png" />

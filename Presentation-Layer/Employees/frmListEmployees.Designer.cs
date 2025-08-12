@@ -47,6 +47,8 @@
             this.deleteToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripMenuItem1 = new System.Windows.Forms.ToolStripSeparator();
             this.showResidenceToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripSeparator3 = new System.Windows.Forms.ToolStripSeparator();
+            this.editResidenceToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripMenuItem2 = new System.Windows.Forms.ToolStripSeparator();
             this.createResidenceToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.lblFilterBy = new System.Windows.Forms.Label();
@@ -196,70 +198,85 @@
             this.deleteToolStripMenuItem,
             this.toolStripMenuItem1,
             this.showResidenceToolStripMenuItem,
+            this.toolStripSeparator3,
+            this.editResidenceToolStripMenuItem,
             this.toolStripMenuItem2,
             this.createResidenceToolStripMenuItem});
             this.cmsEmployees.Name = "cmsPeople";
             this.cmsEmployees.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
-            this.cmsEmployees.Size = new System.Drawing.Size(189, 218);
+            this.cmsEmployees.Size = new System.Drawing.Size(198, 284);
             this.cmsEmployees.Opening += new System.ComponentModel.CancelEventHandler(this.cmsEmployees_Opening);
             // 
             // showDetailsToolStripMenuItem
             // 
             this.showDetailsToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("showDetailsToolStripMenuItem.Image")));
             this.showDetailsToolStripMenuItem.Name = "showDetailsToolStripMenuItem";
-            this.showDetailsToolStripMenuItem.Size = new System.Drawing.Size(188, 38);
+            this.showDetailsToolStripMenuItem.Size = new System.Drawing.Size(197, 38);
             this.showDetailsToolStripMenuItem.Text = "رؤية البيانات";
             this.showDetailsToolStripMenuItem.Click += new System.EventHandler(this.showDetailsToolStripMenuItem_Click);
             // 
             // toolStripSeparator1
             // 
             this.toolStripSeparator1.Name = "toolStripSeparator1";
-            this.toolStripSeparator1.Size = new System.Drawing.Size(185, 6);
+            this.toolStripSeparator1.Size = new System.Drawing.Size(194, 6);
             // 
             // editToolStripMenuItem
             // 
             this.editToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("editToolStripMenuItem.Image")));
             this.editToolStripMenuItem.Name = "editToolStripMenuItem";
-            this.editToolStripMenuItem.Size = new System.Drawing.Size(188, 38);
+            this.editToolStripMenuItem.Size = new System.Drawing.Size(197, 38);
             this.editToolStripMenuItem.Text = "تعديل البيانات";
             this.editToolStripMenuItem.Click += new System.EventHandler(this.editToolStripMenuItem_Click);
             // 
             // toolStripSeparator2
             // 
             this.toolStripSeparator2.Name = "toolStripSeparator2";
-            this.toolStripSeparator2.Size = new System.Drawing.Size(185, 6);
+            this.toolStripSeparator2.Size = new System.Drawing.Size(194, 6);
             // 
             // deleteToolStripMenuItem
             // 
             this.deleteToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("deleteToolStripMenuItem.Image")));
             this.deleteToolStripMenuItem.Name = "deleteToolStripMenuItem";
-            this.deleteToolStripMenuItem.Size = new System.Drawing.Size(188, 38);
+            this.deleteToolStripMenuItem.Size = new System.Drawing.Size(197, 38);
             this.deleteToolStripMenuItem.Text = "مسح";
             this.deleteToolStripMenuItem.Click += new System.EventHandler(this.deleteToolStripMenuItem_Click);
             // 
             // toolStripMenuItem1
             // 
             this.toolStripMenuItem1.Name = "toolStripMenuItem1";
-            this.toolStripMenuItem1.Size = new System.Drawing.Size(185, 6);
+            this.toolStripMenuItem1.Size = new System.Drawing.Size(194, 6);
             // 
             // showResidenceToolStripMenuItem
             // 
             this.showResidenceToolStripMenuItem.Image = global::Presentation_Layer.Properties.Resources.Residences;
             this.showResidenceToolStripMenuItem.Name = "showResidenceToolStripMenuItem";
-            this.showResidenceToolStripMenuItem.Size = new System.Drawing.Size(188, 38);
+            this.showResidenceToolStripMenuItem.Size = new System.Drawing.Size(197, 38);
             this.showResidenceToolStripMenuItem.Text = "رؤية بيانات الإقامة";
             this.showResidenceToolStripMenuItem.Click += new System.EventHandler(this.showResidenceToolStripMenuItem_Click);
+            // 
+            // toolStripSeparator3
+            // 
+            this.toolStripSeparator3.Name = "toolStripSeparator3";
+            this.toolStripSeparator3.Size = new System.Drawing.Size(194, 6);
+            // 
+            // editResidenceToolStripMenuItem
+            // 
+            this.editResidenceToolStripMenuItem.Image = global::Presentation_Layer.Properties.Resources.EditResidence;
+            this.editResidenceToolStripMenuItem.Name = "editResidenceToolStripMenuItem";
+            this.editResidenceToolStripMenuItem.Size = new System.Drawing.Size(197, 38);
+            this.editResidenceToolStripMenuItem.Text = "تعديل بيانات الإقامة";
+            this.editResidenceToolStripMenuItem.Click += new System.EventHandler(this.editResidenceToolStripMenuItem_Click);
             // 
             // toolStripMenuItem2
             // 
             this.toolStripMenuItem2.Name = "toolStripMenuItem2";
-            this.toolStripMenuItem2.Size = new System.Drawing.Size(185, 6);
+            this.toolStripMenuItem2.Size = new System.Drawing.Size(194, 6);
             // 
             // createResidenceToolStripMenuItem
             // 
             this.createResidenceToolStripMenuItem.Image = global::Presentation_Layer.Properties.Resources.CreateNewResidence;
             this.createResidenceToolStripMenuItem.Name = "createResidenceToolStripMenuItem";
-            this.createResidenceToolStripMenuItem.Size = new System.Drawing.Size(188, 38);
+            this.createResidenceToolStripMenuItem.Size = new System.Drawing.Size(197, 38);
             this.createResidenceToolStripMenuItem.Text = "إنشاء إقامة";
             this.createResidenceToolStripMenuItem.Click += new System.EventHandler(this.createResidenceToolStripMenuItem_Click);
             // 
@@ -332,5 +349,7 @@
         private System.Windows.Forms.ToolStripMenuItem showResidenceToolStripMenuItem;
         private System.Windows.Forms.ToolStripSeparator toolStripMenuItem2;
         private System.Windows.Forms.ToolStripMenuItem createResidenceToolStripMenuItem;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator3;
+        private System.Windows.Forms.ToolStripMenuItem editResidenceToolStripMenuItem;
     }
 }

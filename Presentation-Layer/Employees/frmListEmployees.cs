@@ -52,7 +52,6 @@ namespace Presentation_Layer.Employees
         }
         private void txtFilterValue_TextChanged(object sender, EventArgs e)
         {
-            // noting, id, name, sponsor name, job
             string FilterColumn = "";
             switch(cbFilterBy.SelectedIndex)
             {
@@ -125,25 +124,87 @@ namespace Presentation_Layer.Employees
         }
         private void deleteToolStripMenuItem_Click(object sender, EventArgs e)
         {
-
+            int EmployeeID = (int)dgvEmployees.CurrentRow.Cells[0].Value;
+            if (MessageBox.Show("هل أنت متأكد أنك تريد مسح الموظف [" + EmployeeID + "]؟",
+                "تأكيد المسح", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
+            {
+                clsResidence Residence = clsResidence.FindByEmployeeID(EmployeeID);
+                if (Residence != null)
+                {
+                    if (MessageBox.Show("الموظف المراد مسحه مربوط بإقامة رقمها [" + Residence.ResidenceID + "] فهل أنت متأكد من مسحها أيضا؟",
+                        "تأكيد المسح الكامل", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
+                    {
+                        if (Residence.DeleteResidence() && clsEmployee.DeleteEmployee(EmployeeID))
+                        {
+                            MessageBox.Show("تم الحذف الكامل للإقامة والموظف", "تمت عملية المسح", MessageBoxButtons.OK,
+                                MessageBoxIcon.Information);
+                            _RefreshEmployeeList();
+                            return;
+                        }
+                        else
+                        {
+                            MessageBox.Show("حدث خطأ أثناء عملية المسح!",
+                                "خطأ", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                            return;
+                        }
+                    }
+                    else
+                    {
+                        if (clsEmployee.DeleteEmployee(EmployeeID))
+                        {
+                            MessageBox.Show("تم حذف الموظف بنجاح", "تمت عملية المسح", MessageBoxButtons.OK,
+                                MessageBoxIcon.Information);
+                            _RefreshEmployeeList();
+                        }
+                        else
+                        {
+                            MessageBox.Show("حدث خطأ أثناء عملية المسح!",
+                                "خطأ", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        }
+                    }
+                }
+            }
         }
         private void cmsEmployees_Opening(object sender, CancelEventArgs e)
         {
-
+            if (clsResidence.FindByEmployeeID((int)dgvEmployees.CurrentRow.Cells[0].Value) == null)
+            {
+                createResidenceToolStripMenuItem.Enabled = true;
+                showResidenceToolStripMenuItem.Enabled = false;
+                editResidenceToolStripMenuItem.Enabled = false;
+            }
+            else
+            {
+                createResidenceToolStripMenuItem.Enabled = false;
+                showResidenceToolStripMenuItem.Enabled = true;
+                editResidenceToolStripMenuItem.Enabled = true;
+            }
         }
         private void showResidenceToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            frmShowResidenceInfo frm = new frmShowResidenceInfo(21);
+            frmShowResidenceInfo frm = new frmShowResidenceInfo((int)dgvEmployees.CurrentRow.Cells[0].Value);
             frm.ShowDialog();
             _RefreshEmployeeList();
         }
         private void createResidenceToolStripMenuItem_Click(object sender, EventArgs e)
         {
-
+            frmAddUpdateResidence frm = new frmAddUpdateResidence();
+            frm.ShowDialog();
+            _RefreshEmployeeList();
         }
         private void dgvEmployees_DoubleClick(object sender, EventArgs e)
         {
-
+            frmShowEmployeeInfo frm = new frmShowEmployeeInfo((int)dgvEmployees.CurrentRow.Cells[0].Value);
+            frm.ShowDialog();
+            _RefreshEmployeeList();
+        }
+        private void editResidenceToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            frmAddUpdateResidence frm = new frmAddUpdateResidence();
+            frm.EmployeeID = (int)dgvEmployees.CurrentRow.Cells[0].Value;
+            frm.Mode = frmAddUpdateResidence.enMode.CreateEmployeeResidence;
+            frm.ShowDialog();
+            _RefreshEmployeeList();
         }
     }
 }

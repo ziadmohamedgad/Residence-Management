@@ -48,10 +48,10 @@
             this.txtNotes = new System.Windows.Forms.TextBox();
             this.llRemoveResidenceImage = new System.Windows.Forms.LinkLabel();
             this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
-            this.ctrlEmployeeCardWithFilter1 = new Presentation_Layer.Employees.Controls.ctrlEmployeeCardWithFilter();
             this.txtResidenceNumber = new System.Windows.Forms.TextBox();
             this.errorProvider1 = new System.Windows.Forms.ErrorProvider(this.components);
             this.cbStatus = new System.Windows.Forms.ComboBox();
+            this.ctrlEmployeeCardWithFilter1 = new Presentation_Layer.Employees.Controls.ctrlEmployeeCardWithFilter();
             ((System.ComponentModel.ISupportInitialize)(this.pbResidenceImage)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).BeginInit();
             this.SuspendLayout();
@@ -251,26 +251,12 @@
             // 
             this.openFileDialog1.FileName = "openFileDialog1";
             // 
-            // ctrlEmployeeCardWithFilter1
-            // 
-            this.ctrlEmployeeCardWithFilter1.AutoValidate = System.Windows.Forms.AutoValidate.EnableAllowFocusChange;
-            this.ctrlEmployeeCardWithFilter1.BackColor = System.Drawing.Color.White;
-            this.ctrlEmployeeCardWithFilter1.FilterEnabled = true;
-            this.ctrlEmployeeCardWithFilter1.Font = new System.Drawing.Font("Segoe UI Semibold", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.ctrlEmployeeCardWithFilter1.Location = new System.Drawing.Point(412, 78);
-            this.ctrlEmployeeCardWithFilter1.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.ctrlEmployeeCardWithFilter1.Name = "ctrlEmployeeCardWithFilter1";
-            this.ctrlEmployeeCardWithFilter1.ShowAddEmployee = true;
-            this.ctrlEmployeeCardWithFilter1.Size = new System.Drawing.Size(543, 538);
-            this.ctrlEmployeeCardWithFilter1.TabIndex = 49;
-            // 
             // txtResidenceNumber
             // 
             this.txtResidenceNumber.Location = new System.Drawing.Point(14, 393);
             this.txtResidenceNumber.Name = "txtResidenceNumber";
             this.txtResidenceNumber.Size = new System.Drawing.Size(178, 29);
             this.txtResidenceNumber.TabIndex = 50;
-            this.txtResidenceNumber.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.txtResidenceNumber.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtResidenceNumber_KeyPress);
             this.txtResidenceNumber.Validating += new System.ComponentModel.CancelEventHandler(this.txtResidenceNumber_Validating);
             // 
@@ -291,6 +277,19 @@
             this.cbStatus.Size = new System.Drawing.Size(178, 29);
             this.cbStatus.TabIndex = 48;
             this.cbStatus.SelectedIndexChanged += new System.EventHandler(this.cbStatus_SelectedIndexChanged);
+            // 
+            // ctrlEmployeeCardWithFilter1
+            // 
+            this.ctrlEmployeeCardWithFilter1.AutoValidate = System.Windows.Forms.AutoValidate.EnableAllowFocusChange;
+            this.ctrlEmployeeCardWithFilter1.BackColor = System.Drawing.Color.White;
+            this.ctrlEmployeeCardWithFilter1.FilterEnabled = true;
+            this.ctrlEmployeeCardWithFilter1.Font = new System.Drawing.Font("Segoe UI Semibold", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.ctrlEmployeeCardWithFilter1.Location = new System.Drawing.Point(412, 78);
+            this.ctrlEmployeeCardWithFilter1.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.ctrlEmployeeCardWithFilter1.Name = "ctrlEmployeeCardWithFilter1";
+            this.ctrlEmployeeCardWithFilter1.ShowAddEmployee = true;
+            this.ctrlEmployeeCardWithFilter1.Size = new System.Drawing.Size(543, 538);
+            this.ctrlEmployeeCardWithFilter1.TabIndex = 49;
             // 
             // frmAddUpdateResidence
             // 

@@ -213,6 +213,7 @@ namespace Presentation_Layer.People
             frm.PersonID = (int)dgvPeople.CurrentRow.Cells[0].Value;
             frm.Mode = frmAddUpdateEmployee.enMode.EmployeePerson;
             frm.ShowDialog();
+            _RefreshPeopleList();
         }
         private void btnClose_Click(object sender, EventArgs e)
         {
