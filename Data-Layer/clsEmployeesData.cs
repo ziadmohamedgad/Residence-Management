@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
 using System.Diagnostics;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -11,6 +12,42 @@ namespace Data_Layer
 {
     public class clsEmployeesData
     {
+        private static void _BackupSqlDataBase()
+        {
+            string BackupFolderPath = @"C:\Residences Management\Backup Database";
+            string BackupFile = Path.Combine(BackupFolderPath, "ResidencesDB_Backup.bak");
+            if (!Directory.Exists(BackupFolderPath))
+            {
+                try
+                {
+                    Directory.CreateDirectory(BackupFolderPath);
+                }
+                catch (Exception ex)
+                {
+                    clsEventLogger.SaveLog("Application", $"{ex.Message}: failed through creating folder with path: {BackupFolderPath}.",
+                        EventLogEntryType.Warning);
+                    return;
+                }
+            }
+            try
+            {
+                using (SqlConnection Connection = new SqlConnection(clsDataAccessSettings.ConnectionString))
+                {
+                    Connection.Open();
+                    string Query = $@"BACKUP DATABASE [ResidenceDB] TO DISK = '{BackupFile}'
+                                      WITH FORMAT, INIT, NAME = 'Full Backup of ResidenceDB'";
+                    using (SqlCommand Command = new SqlCommand(Query, Connection))
+                    {
+                        Command.ExecuteNonQuery();
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                clsEventLogger.SaveLog("Application", $"{ex.Message}: failed through backup database [ResidencesDB_Backup.bak] " +
+                    $"to path: {BackupFolderPath}.", EventLogEntryType.Warning);
+            }
+        }
         public static bool GetEmployeeInfoByEmployeeID(int EmployeeID, ref int PersonID, ref string Job, ref int SponsorPersonID)
         {
             bool IsFound = false;
@@ -110,6 +147,7 @@ namespace Data_Layer
                             EmployeeID = ID;
                     }
                 }
+                _BackupSqlDataBase();
             }
             catch (SqlException ex)
             {
@@ -147,6 +185,7 @@ namespace Data_Layer
                         RowsAffected = Command.ExecuteNonQuery();
                     }
                 }
+                _BackupSqlDataBase();
             }
             catch (SqlException ex)
             {
@@ -177,6 +216,7 @@ namespace Data_Layer
                         RowsAffected = Command.ExecuteNonQuery();
                     }
                 }
+                _BackupSqlDataBase();
             }
             catch (SqlException ex)
             {

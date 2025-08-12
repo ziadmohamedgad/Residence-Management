@@ -1,17 +1,54 @@
-﻿using System;
+﻿using Shared_Layer;
+using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Data.SqlClient;
+using System.Diagnostics;
+using System.IO;
 using System.Linq;
+using System.Reflection.Emit;
 using System.Text;
 using System.Threading.Tasks;
-using System.Diagnostics;
-using Shared_Layer;
-using System.Reflection.Emit;
-using System.Data;
 namespace Data_Layer
 {
     public class clsPersonData
     {
+        private static void _BackupSqlDataBase()
+        {
+            string BackupFolderPath = @"C:\Residences Management\Backup Database";
+            string BackupFile = Path.Combine(BackupFolderPath, "ResidencesDB_Backup.bak");
+            if (!Directory.Exists(BackupFolderPath))
+            {
+                try
+                {
+                    Directory.CreateDirectory(BackupFolderPath);
+                }
+                catch (Exception ex)
+                {
+                    clsEventLogger.SaveLog("Application", $"{ex.Message}: failed through creating folder with path: {BackupFolderPath}.",
+                        EventLogEntryType.Warning);
+                    return;
+                }
+            }
+            try
+            {
+                using (SqlConnection Connection = new SqlConnection(clsDataAccessSettings.ConnectionString))
+                {
+                    Connection.Open();
+                    string Query = $@"BACKUP DATABASE [ResidenceDB] TO DISK = '{BackupFile}'
+                                      WITH FORMAT, INIT, NAME = 'Full Backup of ResidenceDB'";
+                    using (SqlCommand Command = new SqlCommand(Query, Connection))
+                    {
+                        Command.ExecuteNonQuery();
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                clsEventLogger.SaveLog("Application", $"{ex.Message}: failed through backup database [ResidencesDB_Backup.bak] " +
+                    $"to path: {BackupFolderPath}.", EventLogEntryType.Warning);
+            }
+        }
         public static bool GetPersonInfoByID(int PersonID, ref string FirstName, ref string SecondName, ref string ThirdName,
             ref string LastName, ref string Phone)
         {
@@ -121,6 +158,7 @@ namespace Data_Layer
                             PersonID = ID;
                     }
                 }
+                _BackupSqlDataBase();
             }
             catch (SqlException ex)
             {
@@ -169,6 +207,7 @@ namespace Data_Layer
                         RowsAffected = Command.ExecuteNonQuery();
                     }
                 }
+                _BackupSqlDataBase();
             }
             catch (SqlException ex)
             {
@@ -297,6 +336,7 @@ namespace Data_Layer
                         RowsAffected = Command.ExecuteNonQuery();
                     }
                 }
+                _BackupSqlDataBase();
             }
             catch (SqlException ex)
             {
