@@ -151,6 +151,7 @@
             this.txtJob.Name = "txtJob";
             this.txtJob.Size = new System.Drawing.Size(242, 29);
             this.txtJob.TabIndex = 40;
+            this.txtJob.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtJob_KeyPress);
             this.txtJob.Validating += new System.ComponentModel.CancelEventHandler(this.txtJob_Validating);
             // 
             // lblSponsorName

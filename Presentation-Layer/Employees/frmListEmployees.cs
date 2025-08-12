@@ -181,7 +181,8 @@ namespace Presentation_Layer.Employees
         }
         private void showResidenceToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            frmShowResidenceInfo frm = new frmShowResidenceInfo((int)dgvEmployees.CurrentRow.Cells[0].Value);
+            int ResidenceID = clsResidence.FindByEmployeeID((int)dgvEmployees.CurrentRow.Cells[0].Value).ResidenceID;
+            frmShowResidenceInfo frm = new frmShowResidenceInfo(ResidenceID);
             frm.ShowDialog();
             _RefreshEmployeeList();
         }

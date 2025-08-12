@@ -14,7 +14,7 @@ namespace ResidencesNotifier
             {
                 DataTable dt = clsResidence.GetResidencesExpiringSoon(15);
                 if (dt.Rows.Count == 0)
-                    return;      
+                    return;
                 string body = "الإقامات التالية ستنتهي خلال 15 يوم:\n\n";
                 foreach (DataRow row in dt.Rows)
                 {

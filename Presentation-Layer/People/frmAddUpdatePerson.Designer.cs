@@ -131,6 +131,7 @@
             this.txtSecondName.Name = "txtSecondName";
             this.txtSecondName.Size = new System.Drawing.Size(161, 29);
             this.txtSecondName.TabIndex = 1;
+            this.txtSecondName.Validating += new System.ComponentModel.CancelEventHandler(this._ValidateEmptyTextBox);
             // 
             // txtPhone
             // 
