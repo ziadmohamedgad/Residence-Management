@@ -397,7 +397,7 @@ namespace Presentation_Layer.Residences
         private void cbResidencePeriods_SelectedIndexChanged(object sender, EventArgs e)
         {
             dtpExpirationDate.Value = dtpIssueDate.Value.AddMonths((byte)GetResidencePeriod());
-            if (dtpExpirationDate.Value < DateTime.Now)
+            if (dtpExpirationDate.Value.Date < DateTime.Now)
                 cbStatus.SelectedIndex = 2;
         }
     }

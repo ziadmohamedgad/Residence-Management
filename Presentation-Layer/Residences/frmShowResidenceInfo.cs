@@ -15,10 +15,12 @@ namespace Presentation_Layer.Residences
 {
     public partial class frmShowResidenceInfo : Form
     {
+        private int _ResidenceID = -1;
         private clsResidence _Residence;
         public frmShowResidenceInfo(int ResidenceID)
         {
             InitializeComponent();
+            this._ResidenceID = ResidenceID;
             _Residence = clsResidence.FindByResidenceID(ResidenceID);
             if (_Residence == null)
             {
@@ -57,6 +59,21 @@ namespace Presentation_Layer.Residences
         private void btnClose_Click(object sender, EventArgs e)
         {
             this.Close();
+        }
+        private void lleditResidenceInfo_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+            frmAddUpdateResidence frm = new frmAddUpdateResidence(this._ResidenceID);
+            frm.ShowDialog();
+            _Residence = clsResidence.FindByResidenceID(_ResidenceID);
+            if (_Residence == null)
+            {
+                MessageBox.Show("لا يوجد إقامة بالرقم التعريفي " + _ResidenceID,
+                    "خطأ", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                this.Close();
+                return;
+            }
+            else
+                _FillData();
         }
     }
 }

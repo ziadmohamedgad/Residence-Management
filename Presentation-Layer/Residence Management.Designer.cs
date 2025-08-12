@@ -49,7 +49,7 @@
             this.msMainTabs.Location = new System.Drawing.Point(0, 0);
             this.msMainTabs.Name = "msMainTabs";
             this.msMainTabs.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
-            this.msMainTabs.Size = new System.Drawing.Size(1134, 40);
+            this.msMainTabs.Size = new System.Drawing.Size(1134, 64);
             this.msMainTabs.TabIndex = 0;
             this.msMainTabs.Text = "menuStrip1";
             // 
@@ -57,7 +57,7 @@
             // 
             this.peopleToolStripMenuItem.Image = global::Presentation_Layer.Properties.Resources.People;
             this.peopleToolStripMenuItem.Name = "peopleToolStripMenuItem";
-            this.peopleToolStripMenuItem.Size = new System.Drawing.Size(158, 36);
+            this.peopleToolStripMenuItem.Size = new System.Drawing.Size(158, 60);
             this.peopleToolStripMenuItem.Text = "الأشخاص";
             this.peopleToolStripMenuItem.Click += new System.EventHandler(this.peopleToolStripMenuItem_Click);
             // 
@@ -65,7 +65,7 @@
             // 
             this.employeesToolStripMenuItem.Image = global::Presentation_Layer.Properties.Resources.Employees;
             this.employeesToolStripMenuItem.Name = "employeesToolStripMenuItem";
-            this.employeesToolStripMenuItem.Size = new System.Drawing.Size(162, 36);
+            this.employeesToolStripMenuItem.Size = new System.Drawing.Size(162, 60);
             this.employeesToolStripMenuItem.Text = "الموظفين";
             this.employeesToolStripMenuItem.Click += new System.EventHandler(this.employeesToolStripMenuItem_Click);
             // 
@@ -73,7 +73,7 @@
             // 
             this.residencesToolStripMenuItem.Image = global::Presentation_Layer.Properties.Resources.Residences;
             this.residencesToolStripMenuItem.Name = "residencesToolStripMenuItem";
-            this.residencesToolStripMenuItem.Size = new System.Drawing.Size(146, 36);
+            this.residencesToolStripMenuItem.Size = new System.Drawing.Size(146, 60);
             this.residencesToolStripMenuItem.Text = "الإقامات";
             this.residencesToolStripMenuItem.Click += new System.EventHandler(this.residencesToolStripMenuItem_Click);
             // 

@@ -5,7 +5,7 @@ using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-
+using Business_Layer;
 namespace Presentation_Layer
 {
     internal static class Program
@@ -18,6 +18,7 @@ namespace Presentation_Layer
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
+            SendResidencesExpiryAlert();
             Application.Run(new frmMainScreen());
         }
     }

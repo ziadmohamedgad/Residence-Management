@@ -18,6 +18,32 @@ namespace Data_Layer
 {
     public class clsResidencesData
     {
+        public static DataTable GetResidencesExpiringSoon(int Days)
+        {
+            DataTable dt = new DataTable();
+            try
+            {
+                using (SqlConnection Connection = new SqlConnection(clsDataAccessSettings.ConnectionString))
+                {
+                    string Query = @" SELECT EmployeeFullName, ResidenceNumber, ExpirationDate
+                                      FROM Residences 
+                                      WHERE ExpirationDate BETWEEN GETDATE() AND DATEADD(DAY, @Days, GETDATE()) 
+                                      AND ExpirationDate >= GETDATE()";
+                    using (SqlCommand Command = new SqlCommand(Query, Connection))
+                    {
+                        Command.Parameters.AddWithValue("@Days", Days);
+                        SqlDataAdapter Adapter = new SqlDataAdapter(Command);
+                        Adapter.Fill(dt);
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                clsEventLogger.SaveLog("Application", $"{ex.Message}: failed through getting residences expire through: {Days} Days.",
+                    EventLogEntryType.Error);
+            }
+            return dt;
+        }
         private static void _BackupSqlDataBase()
         {
             string BackupFolderPath = @"C:\Residences Management\Backup Database";

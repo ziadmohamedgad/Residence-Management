@@ -57,7 +57,7 @@
             this.lblFilterBy.AutoSize = true;
             this.lblFilterBy.Font = new System.Drawing.Font("Segoe UI Semibold", 12F, System.Drawing.FontStyle.Bold);
             this.lblFilterBy.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.lblFilterBy.Location = new System.Drawing.Point(838, 279);
+            this.lblFilterBy.Location = new System.Drawing.Point(958, 277);
             this.lblFilterBy.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblFilterBy.Name = "lblFilterBy";
             this.lblFilterBy.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
@@ -85,7 +85,7 @@
             // 
             this.btnAddResidence.Image = global::Presentation_Layer.Properties.Resources.addResidencebutton;
             this.btnAddResidence.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.btnAddResidence.Location = new System.Drawing.Point(12, 260);
+            this.btnAddResidence.Location = new System.Drawing.Point(11, 260);
             this.btnAddResidence.Name = "btnAddResidence";
             this.btnAddResidence.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
             this.btnAddResidence.Size = new System.Drawing.Size(107, 54);
@@ -98,7 +98,7 @@
             this.lblRecordsCount.AutoSize = true;
             this.lblRecordsCount.Font = new System.Drawing.Font("Segoe UI Semibold", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblRecordsCount.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.lblRecordsCount.Location = new System.Drawing.Point(767, 689);
+            this.lblRecordsCount.Location = new System.Drawing.Point(887, 689);
             this.lblRecordsCount.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblRecordsCount.Name = "lblRecordsCount";
             this.lblRecordsCount.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
@@ -111,7 +111,7 @@
             this.lblRecords.AutoSize = true;
             this.lblRecords.Font = new System.Drawing.Font("Segoe UI Semibold", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblRecords.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.lblRecords.Location = new System.Drawing.Point(813, 689);
+            this.lblRecords.Location = new System.Drawing.Point(933, 689);
             this.lblRecords.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblRecords.Name = "lblRecords";
             this.lblRecords.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
@@ -123,7 +123,7 @@
             // 
             this.txtFilterValue.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.txtFilterValue.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F);
-            this.txtFilterValue.Location = new System.Drawing.Point(299, 276);
+            this.txtFilterValue.Location = new System.Drawing.Point(419, 274);
             this.txtFilterValue.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.txtFilterValue.Name = "txtFilterValue";
             this.txtFilterValue.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
@@ -138,7 +138,7 @@
             this.lblManagePeople.Font = new System.Drawing.Font("Segoe UI Semibold", 26.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblManagePeople.ForeColor = System.Drawing.Color.DarkRed;
             this.lblManagePeople.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.lblManagePeople.Location = new System.Drawing.Point(378, 204);
+            this.lblManagePeople.Location = new System.Drawing.Point(449, 206);
             this.lblManagePeople.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblManagePeople.Name = "lblManagePeople";
             this.lblManagePeople.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
@@ -150,7 +150,7 @@
             // 
             this.pictureBox1.Image = global::Presentation_Layer.Properties.Resources.Residences;
             this.pictureBox1.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.pictureBox1.Location = new System.Drawing.Point(273, 12);
+            this.pictureBox1.Location = new System.Drawing.Point(336, 14);
             this.pictureBox1.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.pictureBox1.Name = "pictureBox1";
             this.pictureBox1.Size = new System.Drawing.Size(364, 184);
@@ -170,7 +170,7 @@
             "رقم الإقامة",
             "الوظيفة",
             "المدة"});
-            this.cbFilterBy.Location = new System.Drawing.Point(579, 275);
+            this.cbFilterBy.Location = new System.Drawing.Point(699, 273);
             this.cbFilterBy.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.cbFilterBy.Name = "cbFilterBy";
             this.cbFilterBy.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
@@ -195,7 +195,7 @@
             this.dgvResidences.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
             this.dgvResidences.RowTemplate.Height = 25;
             this.dgvResidences.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgvResidences.Size = new System.Drawing.Size(895, 349);
+            this.dgvResidences.Size = new System.Drawing.Size(1018, 349);
             this.dgvResidences.TabIndex = 34;
             this.dgvResidences.TabStop = false;
             this.dgvResidences.CellMouseDown += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.dgvResidences_CellMouseDown);
@@ -214,39 +214,39 @@
             this.deleteToolStripMenuItem});
             this.cmsResidences.Name = "cmsPeople";
             this.cmsResidences.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
-            this.cmsResidences.Size = new System.Drawing.Size(197, 152);
+            this.cmsResidences.Size = new System.Drawing.Size(166, 130);
             // 
             // showDetailsToolStripMenuItem
             // 
             this.showDetailsToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("showDetailsToolStripMenuItem.Image")));
             this.showDetailsToolStripMenuItem.Name = "showDetailsToolStripMenuItem";
-            this.showDetailsToolStripMenuItem.Size = new System.Drawing.Size(196, 38);
+            this.showDetailsToolStripMenuItem.Size = new System.Drawing.Size(165, 38);
             this.showDetailsToolStripMenuItem.Text = "رؤية البيانات";
             this.showDetailsToolStripMenuItem.Click += new System.EventHandler(this.showDetailsToolStripMenuItem_Click);
             // 
             // toolStripSeparator1
             // 
             this.toolStripSeparator1.Name = "toolStripSeparator1";
-            this.toolStripSeparator1.Size = new System.Drawing.Size(193, 6);
+            this.toolStripSeparator1.Size = new System.Drawing.Size(162, 6);
             // 
             // editToolStripMenuItem
             // 
             this.editToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("editToolStripMenuItem.Image")));
             this.editToolStripMenuItem.Name = "editToolStripMenuItem";
-            this.editToolStripMenuItem.Size = new System.Drawing.Size(196, 38);
+            this.editToolStripMenuItem.Size = new System.Drawing.Size(165, 38);
             this.editToolStripMenuItem.Text = "تعديل البيانات";
             this.editToolStripMenuItem.Click += new System.EventHandler(this.editToolStripMenuItem_Click);
             // 
             // toolStripSeparator2
             // 
             this.toolStripSeparator2.Name = "toolStripSeparator2";
-            this.toolStripSeparator2.Size = new System.Drawing.Size(193, 6);
+            this.toolStripSeparator2.Size = new System.Drawing.Size(162, 6);
             // 
             // deleteToolStripMenuItem
             // 
             this.deleteToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("deleteToolStripMenuItem.Image")));
             this.deleteToolStripMenuItem.Name = "deleteToolStripMenuItem";
-            this.deleteToolStripMenuItem.Size = new System.Drawing.Size(196, 38);
+            this.deleteToolStripMenuItem.Size = new System.Drawing.Size(165, 38);
             this.deleteToolStripMenuItem.Text = "مسح";
             this.deleteToolStripMenuItem.Click += new System.EventHandler(this.deleteToolStripMenuItem_Click);
             // 
@@ -258,7 +258,7 @@
             this.cbPeriods.Items.AddRange(new object[] {
             "ثلاثة أشهر فيما أقل",
             "ستة أشهر فيما أقل"});
-            this.cbPeriods.Location = new System.Drawing.Point(366, 275);
+            this.cbPeriods.Location = new System.Drawing.Point(486, 273);
             this.cbPeriods.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.cbPeriods.Name = "cbPeriods";
             this.cbPeriods.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
@@ -275,7 +275,7 @@
             this.AutoValidate = System.Windows.Forms.AutoValidate.EnableAllowFocusChange;
             this.BackColor = System.Drawing.Color.White;
             this.CancelButton = this.btnClose;
-            this.ClientSize = new System.Drawing.Size(922, 734);
+            this.ClientSize = new System.Drawing.Size(1042, 734);
             this.Controls.Add(this.lblFilterBy);
             this.Controls.Add(this.btnClose);
             this.Controls.Add(this.btnAddResidence);

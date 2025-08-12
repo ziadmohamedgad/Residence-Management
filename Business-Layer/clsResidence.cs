@@ -155,5 +155,9 @@ namespace Business_Layer
         {
             return clsResidencesData.GetAllResidences();
         }
+        public static DataTable GetResidencesExpiringSoon(int Days)
+        {
+            return clsResidencesData.GetResidencesExpiringSoon(Days);
+        }
     }
 }

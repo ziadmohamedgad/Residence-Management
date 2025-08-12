@@ -48,6 +48,7 @@
             this.label9 = new System.Windows.Forms.Label();
             this.lblNotes = new System.Windows.Forms.Label();
             this.pbResidence = new System.Windows.Forms.PictureBox();
+            this.lleditResidenceInfo = new System.Windows.Forms.LinkLabel();
             ((System.ComponentModel.ISupportInitialize)(this.pbResidence)).BeginInit();
             this.SuspendLayout();
             // 
@@ -231,6 +232,17 @@
             this.pbResidence.TabIndex = 36;
             this.pbResidence.TabStop = false;
             // 
+            // lleditResidenceInfo
+            // 
+            this.lleditResidenceInfo.AutoSize = true;
+            this.lleditResidenceInfo.Location = new System.Drawing.Point(13, 67);
+            this.lleditResidenceInfo.Name = "lleditResidenceInfo";
+            this.lleditResidenceInfo.Size = new System.Drawing.Size(157, 21);
+            this.lleditResidenceInfo.TabIndex = 37;
+            this.lleditResidenceInfo.TabStop = true;
+            this.lleditResidenceInfo.Text = "تعديل معلومات الإقامة";
+            this.lleditResidenceInfo.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.lleditResidenceInfo_LinkClicked);
+            // 
             // frmShowResidenceInfo
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 21F);
@@ -238,6 +250,7 @@
             this.AutoValidate = System.Windows.Forms.AutoValidate.EnableAllowFocusChange;
             this.BackColor = System.Drawing.Color.White;
             this.ClientSize = new System.Drawing.Size(900, 607);
+            this.Controls.Add(this.lleditResidenceInfo);
             this.Controls.Add(this.pbResidence);
             this.Controls.Add(this.lblNotes);
             this.Controls.Add(this.lblStatus);
@@ -291,5 +304,6 @@
         private System.Windows.Forms.Label label9;
         private System.Windows.Forms.Label lblNotes;
         private System.Windows.Forms.PictureBox pbResidence;
+        private System.Windows.Forms.LinkLabel lleditResidenceInfo;
     }
 }

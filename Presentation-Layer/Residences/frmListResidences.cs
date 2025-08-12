@@ -22,11 +22,27 @@ namespace Presentation_Layer.Residences
         {
             InitializeComponent();
         }
+        private void _AddDaysRemainingColumn(DataTable table)
+        {
+            if (!table.Columns.Contains("DaysRemaining"))
+            {
+                table.Columns.Add("DaysRemaining", typeof(int));
+            }
+            foreach (DataRow row in table.Rows)
+            {            
+                    DateTime expDate = Convert.ToDateTime(row["ExpirationDate"]);
+                if (expDate > DateTime.Now)
+                    row["DaysRemaining"] = (expDate - DateTime.Today).Days;
+                else
+                    row["DaysRemaining"] = 0;     
+            }
+        }
         private void _RefreshResidencesList()
         {
             _dtAllResidences = clsResidence.GetAllResidences();
             _dtResidences = _dtAllResidences.DefaultView.ToTable(false, "ResidenceID", "EmployeeFullName",
             "Job", "ResidenceNumber", "ExpirationDate", "IsActive");
+            _AddDaysRemainingColumn(_dtResidences);
             dgvResidences.DataSource = _dtResidences;
             lblRecordsCount.Text = dgvResidences.Rows.Count.ToString();
         }
@@ -47,7 +63,9 @@ namespace Presentation_Layer.Residences
                 dgvResidences.Columns[4].HeaderText = "تاريخ الانتهاء";
                 dgvResidences.Columns[4].Width = 110;
                 dgvResidences.Columns[5].HeaderText = "حالة الإقامة";
-                dgvResidences.Columns[5].Width = 92;
+                dgvResidences.Columns[5].Width = 95;
+                dgvResidences.Columns["DaysRemaining"].HeaderText = "الأيام المتبقية";
+                dgvResidences.Columns["DaysRemaining"].Width = 120;
             }
         }
         private void txtFilterValue_TextChanged(object sender, EventArgs e)
