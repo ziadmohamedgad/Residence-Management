@@ -16,6 +16,7 @@ namespace Presentation_Layer.Employees
     {
         public delegate void DataBackEventHandler(int EmployeeID);
         public event DataBackEventHandler DataBack;
+        private int _SelectedSponsorPersonID = -1;
         public enum enMode { AddNew = 0, Update = 1, EmployeePerson = 2}
         public enMode Mode;
         private int _EmployeeID = -1;
@@ -120,6 +121,7 @@ namespace Presentation_Layer.Employees
             _Employee.SponsorPersonID = SponsorPersonID;
             _Employee.SponsorPersonInfo = clsPerson.Find(SponsorPersonID);
             lblSponsorName.Text = _Employee.SponsorPersonInfo.FullName;
+            _SelectedSponsorPersonID = SponsorPersonID;
         }
         private void btnSave_Click(object sender, EventArgs e)
         {
@@ -163,6 +165,14 @@ namespace Presentation_Layer.Employees
                     ctrlPersonCardWithFilter1.FilterEnabled = true;
                     return;
                 }
+            }
+            clsEmployee SponsorAsEmployee = clsEmployee.FindByPersonID(clsPerson.Find(_SelectedSponsorPersonID).PersonID);
+            if (SponsorAsEmployee != null && SponsorAsEmployee.SponsorPersonID == _Employee.PersonID)
+            {
+                MessageBox.Show("لا يمكن لموظفان أن يكونان كفيلان لبعضهما البعض، قم بتغيير الموظف أو الكفيل ", "خطأ",
+                    MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                ctrlPersonCardWithFilter1.FilterEnabled = true;
+                return;
             }
             if (_Employee.Save())
             {
