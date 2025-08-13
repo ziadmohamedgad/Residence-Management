@@ -152,6 +152,8 @@ namespace Presentation_Layer.Residences
         }
         private void txtNotes_KeyPress(object sender, KeyPressEventArgs e)
         {
+            if (e.KeyChar == (char)13)
+                btnSave.PerformClick();
             if (e.KeyChar == (char)Keys.Back)
             {
                 e.Handled = false;

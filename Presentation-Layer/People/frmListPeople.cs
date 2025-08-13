@@ -1,5 +1,6 @@
 ﻿using Business_Layer;
 using Presentation_Layer.Employees;
+using Presentation_Layer.Global_Classes;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -11,7 +12,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Windows.Forms.VisualStyles;
-
+using System.IO;
 namespace Presentation_Layer.People
 {
     public partial class frmListPeople : Form
@@ -150,8 +151,18 @@ namespace Presentation_Layer.People
                         if (MessageBox.Show("الشخص المراد مسحه مربوط بموظف رقمه [" + Employee.EmployeeID + "] وإقامة رقمها [" + Residence.ResidenceID + "] فهل أنت متأكد من مسحهم أيضا؟",
                             "تأكيد المسح الكامل", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
                         {
+                            string ImageName = Residence.ImageName;
                             if (Residence.DeleteResidence() && Employee.DeleteEmployee() && clsPerson.Delete(PersonID))
                             {
+                                if (ImageName != null)
+                                {
+                                    string ImagePath = clsUtility.GetDestinationImagesFolderDynamically() + '\\' + ImageName;
+                                    string BackupPath = @"C:\Residences Management\Images\" + ImageName;
+                                    if (File.Exists(ImagePath))
+                                        File.Delete(ImagePath);
+                                    if (File.Exists(BackupPath))
+                                        File.Delete(BackupPath);
+                                }
                                 MessageBox.Show("تم الحذف الكامل للإقامة والموظف والشخص", "تمت عملية المسح", MessageBoxButtons.OK,
                                     MessageBoxIcon.Information);
                                 _RefreshPeopleList();

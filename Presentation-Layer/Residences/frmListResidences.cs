@@ -1,4 +1,5 @@
 ﻿using Business_Layer;
+using Presentation_Layer.Global_Classes;
 using Presentation_Layer.People;
 using System;
 using System.Collections.Generic;
@@ -10,7 +11,7 @@ using System.Runtime.InteropServices;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-
+using System.IO;
 namespace Presentation_Layer.Residences
 {
     public partial class frmListResidences : Form
@@ -138,8 +139,19 @@ namespace Presentation_Layer.Residences
             if (MessageBox.Show("هل أنت متأكد أنك تريد مسح الإقامة الخاصة بالموظف: " +  EmployeeName + "؟", "تأكيد المسح",
                 MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
             {
-                if (clsResidence.DeleteResidence((int)dgvResidences.CurrentRow.Cells[0].Value))
+                clsResidence Residence = clsResidence.FindByResidenceID((int)dgvResidences.CurrentRow.Cells[0].Value);
+                string ImageName = Residence.ImageName;
+                if (clsResidence.DeleteResidence(Residence.ResidenceID))
                 {
+                    if (ImageName != null)
+                    {
+                        string ImagePath = clsUtility.GetDestinationImagesFolderDynamically() + '\\' + ImageName;
+                        string BackupPath = @"C:\Residences Management\Images\" + ImageName;
+                        if (File.Exists(ImagePath))
+                            File.Delete(ImagePath);
+                        if (File.Exists(BackupPath))
+                            File.Delete(BackupPath);
+                    }
                     MessageBox.Show("تم حذف الإقامة بنجاح", "تمت عملية المسح", MessageBoxButtons.OK,
                         MessageBoxIcon.Information);
                     _RefreshResidencesList();
