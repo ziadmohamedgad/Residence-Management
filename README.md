@@ -14,6 +14,21 @@ The system also sends email notifications **15 days before a residency expires**
 - **Email Alerts**: Sends notification emails 15 days before expiration.
 - **Search & Filtering**: Powerful filtering and search capabilities in multiple forms (People, Employees, Residencies).
 - **Layered Architecture**: Separated into Data Layer, Business Layer, and Presentation Layer for better maintainability.
+- **Dynamic Image Storage**: Images are stored dynamically based on the project’s root folder, ensuring portability.
+- **Automatic Backups**: Both the SQL database file and residency image files are saved:
+  - Inside the project directory.
+  - As an additional backup copy on the `C:` drive for extra safety.
+
+---
+
+## 💾 Backup & Storage
+- The application ensures data safety by maintaining **two copies** of important files:
+  1. **Primary copy**: Stored within the project’s directory.
+  2. **Backup copy**: Automatically saved to a dedicated folder on the `C:` drive after any transaction.
+- Files covered by the backup process:
+  - **SQL database file**.
+  - **Residency image files**.
+- Image paths are saved dynamically in the database (relative to the project root), so the application can be easily moved to a different location without breaking links.
 
 ---
 
@@ -53,13 +68,14 @@ The system also sends email notifications **15 days before a residency expires**
 ## 📧 Email Notification Setup
 The application automatically checks for residencies expiring within 15 days and sends email alerts.  
 To enable email notifications:
-- Configure your email sender details in the application’s email settings at:
-  (1- ResidencesNotifier Project, which is a console project and link the exe with task scheduler 2- ResidenceManagement form which is frmMainScreen => SendResidencesExpiryAlert(int Days) function).
-- Make sure the application runs daily (either manually or via Task Scheduler for automated execution).
+- Configure your email sender details in:
+  - **ResidencesNotifier Project** (console project linked with Task Scheduler).
+  - **frmMainScreen** form → `SendResidencesExpiryAlert(int Days)` function.
+- Make sure the application runs daily:
+  - Either manually.
+  - Or via Task Scheduler for automated execution.
 
 ---
-
 
 ## 📄 License
-This project is public and for educational purposes.  
----
+This project is public and for educational purposes.
