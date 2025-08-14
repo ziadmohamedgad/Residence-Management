@@ -39,17 +39,64 @@ namespace Presentation_Layer
             DataTable dt = clsResidence.GetResidencesExpiringSoon(Days);
             if (dt.Rows.Count == 0)
                 return;
-            string body = "الإقامات التالية ستنتهي خلال 15 يوم:\n\n";
+            // HTML Table
+            string body = @"
+    <html>
+    <head>
+        <meta charset='UTF-8'>
+        <style>
+            table {
+                border-collapse: collapse;
+                width: 100%;
+                font-family: Arial, sans-serif;
+            }
+            th, td {
+                border: 1px solid #ddd;
+                padding: 8px;
+                text-align: center;
+            }
+            th {
+                background-color: #4CAF50;
+                color: white;
+            }
+            tr:nth-child(even) {
+                background-color: #f2f2f2;
+            }
+        </style>
+    </head>
+    <body>
+        <h3>الإقامات التالية ستنتهي خلال " + Days + @" يوم:</h3>
+        <table>
+            <tr>
+                <th>اسم الموظف</th>
+                <th>رقم الإقامة</th>
+                <th>تاريخ الانتهاء</th>
+                <th>الأيام المتبقية</th>
+            </tr>";
+
             foreach (DataRow row in dt.Rows)
             {
-                body += $"{row["EmployeeFullName"]} - {row["ResidenceNumber"]} - {Convert.ToDateTime(row["ExpirationDate"]):yyyy-MM-dd}\n";
+                DateTime expirationDate = Convert.ToDateTime(row["ExpirationDate"]);
+                int daysLeft = (expirationDate - DateTime.Now).Days;
+
+                body += "<tr>";
+                body += $"<td>{row["EmployeeFullName"]}</td>";
+                body += $"<td>{row["ResidenceNumber"]}</td>";
+                body += $"<td>{expirationDate:yyyy-MM-dd}</td>";
+                body += $"<td>{daysLeft}</td>";
+                body += "</tr>";
             }
+            body += @"
+        </table>
+    </body>
+    </html>";
             clsEmailService.SendEmail(
-                fromEmail: "your_email@gmail.com",///////////////
-                password: "your_app_password",////////////////
-                toEmail: "recipient_email@example.com",/////////
+                fromEmail: "mrdeghidy@gmail.com",
+                password: "wijxzqzyshxxnzgq",
+                toEmail: "qasralajdad@gmail.com",
                 subject: "تنبيه: إقامات ستنتهي قريبًا",
-                body: body
+                body: body,
+                isBodyHtml: true
             );
         }
     }

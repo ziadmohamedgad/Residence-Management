@@ -25,8 +25,8 @@ namespace Data_Layer
             {
                 using (SqlConnection Connection = new SqlConnection(clsDataAccessSettings.ConnectionString))
                 {
-                    string Query = @" SELECT EmployeeFullName, ResidenceNumber, ExpirationDate
-                                      FROM Residences 
+                    string Query = @"SELECT EmployeeFullName, ResidenceNumber, ExpirationDate
+                                      FROM Residences_View 
                                       WHERE ExpirationDate BETWEEN GETDATE() AND DATEADD(DAY, @Days, GETDATE()) 
                                       AND ExpirationDate >= GETDATE()";
                     using (SqlCommand Command = new SqlCommand(Query, Connection))
