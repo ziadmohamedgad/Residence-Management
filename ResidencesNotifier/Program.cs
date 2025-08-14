@@ -67,9 +67,9 @@ namespace ResidencesNotifier
     </body>
     </html>";
                 clsEmailService.SendEmail(
-                    fromEmail: "mrdeghidy@gmail.com",
-                    password: "wijxzqzyshxxnzgq",
-                    toEmail: "qasralajdad@gmail.com",
+                    fromEmail: "sender@gmail.com",
+                    password: "pass",
+                    toEmail: "receiver@gmail.com",
                     subject: "تنبيه: إقامات ستنتهي قريبًا",
                     body: body,
                     isBodyHtml: true

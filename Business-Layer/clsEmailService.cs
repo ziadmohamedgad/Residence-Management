@@ -14,14 +14,17 @@ namespace Business_Layer
                 smtp.EnableSsl = true;
                 using (MailMessage message = new MailMessage())
                 {
-                    message.From = new MailAddress(fromEmail, "Residences Management System");
-                    message.To.Add(toEmail);
-                    message.Subject = subject;
-                    message.Body = body;
-                    message.IsBodyHtml = isBodyHtml;
-                    message.BodyEncoding = Encoding.UTF8;
-                    message.SubjectEncoding = Encoding.UTF8;
-                    smtp.Send(message);
+                    if (toEmail != "receiver@gmail.com")
+                    {
+                        message.From = new MailAddress(fromEmail, "Residences Management System");
+                        message.To.Add(toEmail);
+                        message.Subject = subject;
+                        message.Body = body;
+                        message.IsBodyHtml = isBodyHtml;
+                        message.BodyEncoding = Encoding.UTF8;
+                        message.SubjectEncoding = Encoding.UTF8;
+                        smtp.Send(message);
+                    }
                 }
             }
         }
