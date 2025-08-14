@@ -78,7 +78,6 @@ namespace Presentation_Layer
             {
                 DateTime expirationDate = Convert.ToDateTime(row["ExpirationDate"]);
                 int daysLeft = (expirationDate - DateTime.Now).Days;
-
                 body += "<tr>";
                 body += $"<td>{row["EmployeeFullName"]}</td>";
                 body += $"<td>{row["ResidenceNumber"]}</td>";

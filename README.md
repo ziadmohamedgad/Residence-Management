@@ -46,7 +46,7 @@ The system also sends email notifications (variable) days before a residency exp
 - **Data Layer**: Handles database connections, queries, and data retrieval.
 - **Business Layer**: Contains application logic, validation, and processing rules.
 - **Presentation Layer**: UI forms for interacting with the user.
-- **ResidenceNotifier**: A separate console application dedicated to sending automatic email alerts.
+- **ResidencesNotifier**: A separate console application dedicated to sending automatic email alerts.
 
 ---
 
@@ -68,7 +68,7 @@ The system also sends email notifications (variable) days before a residency exp
 ---
 
 ## 📧 Email Notification Setup
-The system includes an **independent console application** called **`ResidenceNotifier`**, specifically created to run through **Windows Task Scheduler** for automated email notifications.
+The system includes an **independent console application** called **`ResidencesNotifier`**, specifically created to run through **Windows Task Scheduler** for automated email notifications.
 
 - **Purpose**: Automatically send alerts about residencies that will expire within a set number of days (default: 30 days).
 - **Integration**:
@@ -82,7 +82,7 @@ The system includes an **independent console application** called **`ResidenceNo
   2. Build the console project.
   3. Create a Task in **Task Scheduler**:
      - Set the trigger (daily, weekly, or at startup).
-     - Point the action to the built `.exe` file of the `ResidenceNotifier`.
+     - Point the action to the built `.exe` file of the `ResidencesNotifier`.
   4. Test it manually before relying on automated scheduling.
 
 ---
