@@ -3,17 +3,33 @@
 ## 📌 Overview
 Residences Management System is a C# desktop application designed to manage and track residencies for individuals and employees.  
 It records issuance and expiration dates, residency status, and stores related images.  
-The system also sends email notifications **15 days before a residency expires**.
+The system also sends email notifications (variable) days before a residency expires** through a dedicated console application.
 
 ---
 
 ## ✨ Features
-- **Residency Management**: Add, edit, delete residency records with full details and images.
+- **Residency Management**: Add, edit, and delete residency records with full details and images.
 - **People & Employee Management**: Maintain records for both individuals and employees.
 - **Expiration Tracking**: Automatically detects residencies that are close to expiring.
 - **Email Alerts**: Sends notification emails 15 days before expiration.
 - **Search & Filtering**: Powerful filtering and search capabilities in multiple forms (People, Employees, Residencies).
 - **Layered Architecture**: Separated into Data Layer, Business Layer, and Presentation Layer for better maintainability.
+- **Dynamic Image Storage**: Images are stored dynamically based on the project’s root folder, ensuring portability.
+- **Automatic Backups**: Both the SQL database file and residency image files are saved:
+  - Inside the project directory.
+  - As an additional backup copy on the `C:` drive for extra safety.
+- **Layered Architecture**: Separated into Data Layer, Business Layer, and Presentation Layer for better maintainability.
+
+---
+
+## 💾 Backup & Storage
+- The application ensures data safety by maintaining **two copies** of important files:
+  1. **Primary copy**: Stored within the project’s directory.
+  2. **Backup copy**: Automatically saved to a dedicated folder on the `C:` drive after any transaction.
+- Files covered by the backup process:
+  - **SQL database file**.
+  - **Residency image files**.
+- Image paths are saved dynamically in the database (relative to the project root), so the application can be easily moved to a different location without breaking links.
 
 ---
 
@@ -30,6 +46,7 @@ The system also sends email notifications **15 days before a residency expires**
 - **Data Layer**: Handles database connections, queries, and data retrieval.
 - **Business Layer**: Contains application logic, validation, and processing rules.
 - **Presentation Layer**: UI forms for interacting with the user.
+- **ResidenceNotifier**: A separate console application dedicated to sending automatic email alerts.
 
 ---
 
@@ -51,15 +68,24 @@ The system also sends email notifications **15 days before a residency expires**
 ---
 
 ## 📧 Email Notification Setup
-The application automatically checks for residencies expiring within 15 days and sends email alerts.  
-To enable email notifications:
-- Configure your email sender details in the application’s email settings at:
-  (1- ResidencesNotifier Project, which is a console project and link the exe with task scheduler 2- ResidenceManagement form which is frmMainScreen => SendResidencesExpiryAlert(int Days) function).
-- Make sure the application runs daily (either manually or via Task Scheduler for automated execution).
+The system includes an **independent console application** called **`ResidenceNotifier`**, specifically created to run through **Windows Task Scheduler** for automated email notifications.
+
+- **Purpose**: Automatically send alerts about residencies that will expire within a set number of days (default: 30 days).
+- **Integration**:
+  - This console project calls the same business logic as the main app (`SendResidencesExpiryAlert(int Days)`).
+  - Can be scheduled to run **daily** or at **system startup** via Task Scheduler.
+- **Setup Steps**:
+  1. Open the `ResidencesNotifier` project and configure:
+     - Sender email.
+     - Password (App Password for Gmail).
+     - Recipient email.
+  2. Build the console project.
+  3. Create a Task in **Task Scheduler**:
+     - Set the trigger (daily, weekly, or at startup).
+     - Point the action to the built `.exe` file of the `ResidenceNotifier`.
+  4. Test it manually before relying on automated scheduling.
 
 ---
-
 
 ## 📄 License
-This project is public and for educational purposes.  
----
+This project is public and for educational purposes.
