@@ -214,6 +214,7 @@ namespace Presentation_Layer.Residences
                 txtFilterValue.Focus();
                 dgvResidences.DataSource = _dtResidences;
             }
+            lblRecordsCount.Text = dgvResidences.Rows.Count.ToString();
         }
         private void txtFilterValue_KeyPress(object sender, KeyPressEventArgs e)
         {
