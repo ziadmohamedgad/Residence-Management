@@ -25,10 +25,13 @@ namespace Data_Layer
             {
                 using (SqlConnection Connection = new SqlConnection(clsDataAccessSettings.ConnectionString))
                 {
-                    string Query = @"SELECT EmployeeFullName, ResidenceNumber, ExpirationDate
-                                      FROM Residences_View 
-                                      WHERE ExpirationDate BETWEEN GETDATE() AND DATEADD(DAY, @Days, GETDATE()) 
-                                      AND ExpirationDate >= GETDATE()";
+                    string Query = @"
+                SELECT EmployeeFullName, ResidenceNumber, ExpirationDate
+                FROM Residences_View 
+                WHERE ExpirationDate BETWEEN GETDATE() AND DATEADD(DAY, @Days, GETDATE()) 
+                  AND ExpirationDate >= GETDATE()
+                ORDER BY DATEDIFF(DAY, GETDATE(), ExpirationDate) ASC";
+
                     using (SqlCommand Command = new SqlCommand(Query, Connection))
                     {
                         Command.Parameters.AddWithValue("@Days", Days);

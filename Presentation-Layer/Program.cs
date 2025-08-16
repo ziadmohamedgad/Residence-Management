@@ -16,7 +16,7 @@ namespace Presentation_Layer
         [STAThread]
         static void Main()
         {
-            frmMainScreen.SendResidencesExpiryAlert(30);////////////////
+            //frmMainScreen.SendResidencesExpiryAlert(30);
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
             Application.Run(new frmMainScreen());
