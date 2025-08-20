@@ -89,3 +89,31 @@ The system includes an **independent console application** called **`ResidencesN
 
 ## 📄 License
 This project is public and for educational purposes.
+
+---
+
+## 📸 Screenshots
+
+Here’s an example of the main screen:
+
+![Typing Screen](Repo-Images/MainScreen.jpg)
+
+Here’s an example of people management screen:
+
+![Typing Screen](Repo-Images/People.jpg)
+
+Here’s an example of Employees management screen:
+
+![Typing Screen](Repo-Images/Employees.jpg)
+
+Here’s an example of Add New Employee screen:
+
+![Typing Screen](Repo-Images/AddNewEmployee.jpg)
+
+Here’s an example of Residences management screen:
+
+![Typing Screen](Repo-Images/Residences.jpg)
+
+Here’s an example of Add or Edit Residence screen:
+
+![Typing Screen](Repo-Images/AddEditResidence.jpg)
